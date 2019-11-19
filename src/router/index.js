@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/pages/index/index'
-import Inquiry from '@/pages/inquiry'
-import Mall from '@/pages/mall'
-import User from '@/pages/user'
-import Forum from '@/pages/forum'
+import Index from '../pages/index'
+import Inquiry from '../pages/inquiry'
+import Mall from '../pages/mall'
+import User from '../pages/user'
+import Forum from '../pages/forum'
 Vue.use(Router)
 
 export default new Router({

@@ -30,7 +30,7 @@ export default {
         },
         {
           name: "Mall",
-          icon: "&#xe639;",
+          icon: "&#xe613;",
           text: "商城"
         },
         {
