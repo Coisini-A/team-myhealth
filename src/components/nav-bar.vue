@@ -57,6 +57,7 @@ export default {
   width: 100%;
   height: 60px;
   display: flex;
+  background-color: azure;
   justify-content: space-around;
   .focus {
     color: rgb(0, 153, 255);
@@ -64,9 +65,8 @@ export default {
   .nav-bar-item{
       line-height: 30px;
     >p:nth-of-type(1){
-        font-size:24px;
+        font-size:22px;
         text-align: center;
-        font-weight: 600;
     }
     >p:nth-of-type(2){
         font-size:14px;
