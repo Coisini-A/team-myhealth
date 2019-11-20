@@ -5,6 +5,8 @@ import Inquiry from '../pages/inquiry'
 import Mall from '../pages/mall'
 import User from '../pages/user'
 import Forum from '../pages/forum'
+import Detail from '../components/mall/detail'
+import Cart from '../components/mall/cart'
 Vue.use(Router)
 
 export default new Router({
@@ -41,6 +43,16 @@ export default new Router({
       path: '/forum',
       name: 'Forum',
       component: Forum
-    }
+    },
+		 {
+		  path: '/detail',
+		  name: 'Detail',
+		  component: Detail
+		},
+		 {
+		  path: '/cart',
+		  name: 'Cart',
+		  component: Cart
+		}
   ]
 })
