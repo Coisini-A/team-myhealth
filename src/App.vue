@@ -2,7 +2,6 @@
 <div>
   <div id="app">
     <router-view />
-    <nav-bar></nav-bar>
   </div>
   <loading></loading>
 </div>
