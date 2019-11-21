@@ -1,18 +1,38 @@
 {
   "presets": [
-    ["env", {
-      "modules": false,
-      "targets": {
-        "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+    [
+      "env",
+      {
+        "modules": false,
+        "targets": {
+          "browsers": [
+            "> 1%",
+            "last 2 versions",
+            "not ie <= 8"
+          ]
+        }
       }
-    }],
+    ],
     "stage-2"
   ],
   "plugins": [
+<<<<<<< HEAD
     ["import", {
       "libraryName": "vant",
       "libraryDirectory": "es",
       "style": true
     }]
+=======
+    "transform-vue-jsx",
+    "transform-runtime",
+    [
+      "import",
+      {
+        "libraryName": "vant",
+        "libraryDirectory": "es",
+        "style": true
+      }
+    ]
+>>>>>>> 8b68ae87d0b98f96f77aaa050fb22e636612df09
   ]
 }

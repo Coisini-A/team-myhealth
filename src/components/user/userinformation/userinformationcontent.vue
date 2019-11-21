@@ -25,7 +25,7 @@
 
       <p class="UserInFormationContent-P3"></p>
     <div>
-      <van-cell is-link @click="showPopup"class="UserInFormationContent-P4">
+      <van-cell is-link @click="showPopup" class="UserInFormationContent-P4">
         <span>{{p4name}}</span>
       </van-cell>
       <van-popup
