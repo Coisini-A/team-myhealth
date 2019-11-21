@@ -4,6 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import './../static/common.css'
+import animated from 'animate.css' // 引入动画
+ 
+Vue.use(animated)
 
 Vue.config.productionTip = false
 
