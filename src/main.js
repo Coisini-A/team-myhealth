@@ -8,7 +8,6 @@ import animated from 'animate.css' // 引入动画
  
 Vue.use(animated)
 
-Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
