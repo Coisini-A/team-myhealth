@@ -17,19 +17,31 @@
 	    <div class="detail-foot">
 	    	<div class="detail-botoom">
 	    	<ul>
-	    		<li><img src="../../../static/mallimg/kefu.png"/><p>客服</p></li>
-	    		<li><img src="../../../static/mallimg/collection.png"/><p>收藏</p></li>
-	    		<li><router-link to="/cart"><img src="../../../static/mallimg/w-cart.png"/><p>购物车</p></router-link></li>
+	    		<li>
+					<router-link to="/cart">
+					<img src="../../../static/mallimg/kefu.png" style="width:0.23rem;"/><p>客服</p>
+					</router-link>
+				</li>
+	    		<li>
+					<router-link to="/cart">
+					<img src="../../../static/mallimg/collection.png" style="width:0.23rem;"/><p>收藏</p>
+					</router-link>
+				</li>
+	    		<li>
+					<router-link to="/cart">
+					<img src="../../../static/mallimg/w-cart.png" style="height:0.27rem;"/><p>购物车</p>
+					</router-link>
+				</li>
 	    	</ul>
 	    	</div>
 	    	<div class="addcart">加入购物车</div>
 	    	<div class="gobuy">立即购买</div>
 	    </div>
-		
+
 	</div>
 </template>
 <script>
-	
+
 	import detailhead from "./detail/detailhead"
 	import detailswiper from "./detail/detailswiper"
 	 export default {
@@ -43,7 +55,9 @@
 
 <style scoped>
 
-
+a{
+	color:black;
+}
 .detail-introd{
 	width:100%;
 	/* background-color:lightblue; */
@@ -90,7 +104,7 @@
 	display:inline-block;
 	width:30%;
 	text-align:center;
-	padding-top:0.05rem;
+	/* padding-top:0.05rem; */
 	box-sizing:border-box;
 }
 .addcart{
@@ -113,6 +127,9 @@
 	width:40%;
 	background-color:white;
 }
-
+/* .detail-botoom img{
+	width:0.23rem;
+	height:0.23rem;
+} */
 
 </style>

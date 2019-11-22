@@ -43,7 +43,7 @@ export default new Router({
     {
       path: '/mall',
       name: 'Mall',
-      component: Mall
+      component: Mall,
     },
     {
       path: '/forum',

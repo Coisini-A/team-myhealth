@@ -1,17 +1,20 @@
 <template>
-    <div style="display: flex;height: 2rem">
-     <div v-for="a in currentRight" class="right">
-       <router-link to="/detail">  <img :src="a.img" alt="">
-        <p>{{a.name}}</p> </router-link>
-      </div>
-	 
+  <div style="display: flex;height: 2rem">
+    <div v-for="(n,i) in items.currentRight" class="right" :key="i">
+      <router-link to="/detail" class="yaopin">  <img :src="n.img" alt="">
+        <p class="YName">{{n.name}}</p> </router-link>
     </div>
+
+  </div>
 </template>
 
 <script>
     export default {
         name: "mallRight",
-        props:["currentRight"]
+        props:["items"],
+        methods:{
+
+        }
     }
 </script>
 
@@ -24,14 +27,22 @@
   }
   .right p{
     width: 100%;
-    /* height: 17px; */
+    height: 0.3rem;
     overflow: hidden;
     text-overflow: ellipsis;
     /* display: flex; */
     white-space: nowrap;
     font-size: 14px;
+    color: black;
+    line-height: 0.3rem;
   }
   .right img{
     width: 100%;
+  }
+  .yaopin{
+    width: 100%;
+    height: 100%;
+    display: block;
+    text-decoration: none;
   }
 </style>
