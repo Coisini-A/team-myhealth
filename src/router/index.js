@@ -12,6 +12,7 @@ import UserNews from '../pages/user-news'
 import UserOrder from '../pages/user-order'
 import UserAccount from '../pages/useraccount'
 import UserConen from '../pages/user-concen'
+import Appointment from "../components/inquiry/appointment"
 Vue.use(Router)
 
 export default new Router({
@@ -87,6 +88,11 @@ export default new Router({
       path: '/UserConen',
       name: 'UserConen',
       component: UserConen
+    },
+    {
+      path: '/appointment',
+      name: 'Appointment',
+      component: Appointment
     }
 
   ]
