@@ -2,7 +2,6 @@
     <div>
       <van-address-edit
         :area-list="areaList"
-        show-postal
         show-delete
         show-set-default
         show-search-result
@@ -15,7 +14,7 @@
 
 <script>
     import { AddressEdit,Area,Toast } from 'vant';
-    import areaList from '../../../../../static/Area'
+    import areaList from '../../../../../static/Area.json'
     export default {
         name: "AddressEditorContent",
         components:{
@@ -33,11 +32,11 @@
         methods: {
             onSave() {
                 Toast('已保存');
-                this.$route.push("/addresslist");
+                this.$router.push("/addresslist");
             },
             onDelete() {
                 Toast('已删除');
-                this.$route.push("/addresslist");
+                this.$router.push("/addresslist");
             }
         }
     }

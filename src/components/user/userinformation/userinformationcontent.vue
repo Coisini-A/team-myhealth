@@ -11,7 +11,6 @@
           v-model="fileList"
           multiple
           :max-count="1"
-          :deletable="false"
         />
 
 
@@ -19,20 +18,23 @@
 
 
       </van-popup>
-
+    </div>
+    <div>
+      <p class="UserInFormationContent-set">详细信息<van-icon name="arrow"  class="color"/></p>
     </div>
 
-    <p class="UserInFormationContent-P3"></p>
+
+
     <div>
       <div class="UserInFormationContent-P4">
-        <span>{{p4name}}</span>
+        <span>{{p4name}}<van-icon name="arrow"  class="color"/></span>
       </div>
 
     </div>
 
     <div>
       <div class="UserInFormationContent-P5">
-        <span>{{p5name}}</span>
+        <span>{{p5name}}<van-icon name="arrow"  class="color-b"/></span>
       </div>
 
     </div>
@@ -64,20 +66,21 @@
 </template>
 
 <script>
-    import { Popup,cell,Rate,Uploader} from 'vant';
+    import { Popup,cell,Rate,Uploader,Icon } from 'vant';
     export default {
         name: "UserInFormationContent",
         components:{
             [Popup.name]:Popup,
             [cell.name]:cell,
             [Rate.name]:Rate,
-            [Uploader.name]:Uploader
+            [Uploader.name]:Uploader,
+            [Icon.name]:Icon
         },
         data(){
             return{
 
                 HeadSetting:"头像设置",
-                p4name:"账户与安全",
+                p4name:"修改密码",
                 p5name:"隐私",
                 p6name:"我的收获地址",
                 p8name:"问题反馈",
@@ -86,8 +89,7 @@
                 p13name:"退出登录",
                 show: false,
                 value: 3,
-                fileList: [],
-                deletable:false,
+                fileList: []
             }
         },
         methods: {
@@ -122,17 +124,9 @@
     border-bottom: 2px solid seashell;
     border-top: 2px solid seashell;
   }
-  .img{
-    position:absolute;
-    right:0.2rem;
-  }
   .UserInFormationContent-div img{
     margin-left:1.5rem;
     width:10%;
-  }
-  .UserInFormationContent-P3{
-    height:0.15rem;
-    background: darkkhaki;
   }
   .UserInFormationContent-P4{
     height:0.5rem;
@@ -232,8 +226,22 @@
   .UserInFormationContent-P13 span{
     margin-left:1.6rem;
   }
-  .van-uploader{
-    margin-left: 10px;
-    margin-top: 10px;
+  .UserInFormationContent-set{
+    height: 0.5rem;
+    line-height:0.5rem;
+    font-weight: 900;
+    font-size:14px;
+    border-bottom:2px solid seashell;
+    padding-left:0.27rem;
+  }
+  .color{
+    color:#9D9999;
+    left:2.55rem;
+    font-size:0.164rem;
+  }
+  .color-b{
+    color:#9D9999;
+    left:2.82rem;
+    font-size:0.164rem;
   }
 </style>

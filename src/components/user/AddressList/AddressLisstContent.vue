@@ -3,6 +3,7 @@
   <van-address-list
     v-model="chosenAddressId"
     :list="list"
+    columns-num
     :disabled-list="disabledList"
     disabled-text="以下地址超出配送范围"
     @add="onAdd"
