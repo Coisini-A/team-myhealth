@@ -15,20 +15,32 @@
         银行卡
       </div>
     </van-tab>
+    <van-tab title="消费记录">
+      <div>
+        <van-sidebar v-model="activeKey">
+          <van-sidebar-item title="本月消费" dot/>
+          <van-sidebar-item title="上月消费" />
+          <van-sidebar-item title="消费总单" />
+        </van-sidebar>
+      </div>
+    </van-tab>
   </van-tabs>
 </template>
 
 <script>
-    import { Tab, Tabs } from 'vant';
+    import { Tab, Tabs,Sidebar, SidebarItem} from 'vant';
     export default {
         name: "UserAccountContent",
         components:{
             [Tab.name]:Tab,
-            [Tabs.name]:Tabs
+            [Tabs.name]:Tabs,
+            [Sidebar.name]:Sidebar,
+            [SidebarItem.name]:SidebarItem
         },
         data(){
             return{
-                active: 0
+                active: 0,
+                activeKey: 0
             }
         }
     }

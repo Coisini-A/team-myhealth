@@ -1,30 +1,26 @@
 <template>
-    <van-search
-      v-model="value"
-      placeholder="请输入搜索关键词"
-      show-action
-      @search="onSearch"
-      @cancel="onCancel"
-    />
+  <van-search v-model="value" placeholder="请输入搜索关键词" show-action shape="round" @search="onSearch">
+    <div slot="action" @click="onSearch">搜索</div>
+  </van-search>
 </template>
-<script>  
+<script>
 import { Search } from "vant";
 export default {
-  components:{
-    [Search.name]:Search
+  components: {
+    [Search.name]: Search
   },
   data() {
     return {
-      value:""
-    }
+      value: ""
+    };
   },
   methods: {
-    onSearch(){
-      
-    },
-    onCancel(){
-
+    onSearch() {
+      if(this.value!=''){
+         alert(this.value);
+        this.value=''
+      }
     }
-  },
+  }
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<carthead></carthead>
-		<div class="cart-shop"  v-for="i in goodsList">
+		<div class="cart-shop"  v-for="(i,index) in goodsList" :key="index">
 			<div class="cart-shopname"><input type="checkbox" class="tui-checkbox" :checked="isCheckedAll" @click="changcheckedAll" style="margin-left:0.1rem;margin-top:0.1rem"><h4 style="margin-left:0.15rem;margin-top:0.1rem">药房名</h4></div>
       <hr>
       <div class="cart-shopitem">
@@ -25,7 +25,7 @@
 
              <span class="cartnum">{{i.count}}</span>
 
-             <span @click="add(i.id)">+</span></div>
+             <span @click="add()">+</span></div>
          </div>
          </div>
 
@@ -36,7 +36,7 @@
 			<div class="amount"  style="width: 33%;line-height: 0.5rem;">
         <input class="tui-checkbox" type="checkbox" :checked="isCheckedAll" @click="changcheckedAll" style="border: none;margin-top: 12px;margin-left: 10px;">全选</div>
 <!--        <div style="width: 40%;line-height: 0.5rem;text-align: right;">合计：￥<span>{{i.price*i.count}}</span></div>-->
-      <div style="width: 33%;line-height: 0.5rem;text-align: right;">合计:￥<span v-text="sumPrice">0</span></div>
+      <div style="width: 33%;line-height: 0.5rem;text-align: right;">合计:￥<span >{{totalPrice}}</span></div>
       <div class="gomath">去结算</div>
 		</div>
 	</div>
@@ -60,36 +60,43 @@
                       "price":4.2,
                       "standards":"0.27g*10片*3板/盒",
                       "isChecked":"",
-                      "count":1
+                      "count":1,
+                      "total":0
                   },
 
-              ]
+              ],
+              totalPrice:0
           }
 
       },
       computed:{
-	       sumPrice(){
-	           var price = 0;
-	           this.goodsList.forEach(item =>{
-	               if (item.isChecked){
-	                   price = price + item.price * item.count
-                 }
-             })
-             return price
-         },
+	       // sumPrice(){
+	       //     var price = 0;
+	       //     this.goodsList.forEach(item =>{
+	       //         if (item.isChecked){
+	       //             price = price + item.price * item.count
+         //         }
+         //     })
+         //     return price
+         // },
           isCheckedAll(){
 	           return this.goodsList.every(item=>item.isChecked)
           }
       },
 methods:{
-	       add(id){
+	       add(){
             this.goodsList.forEach((item,index)=>{
-                if (item.id == id){
-                    item.count ++
-                }
+                item.count++;
+                item.total= (item.count*item.price).toFixed(1)
             })
+             let a= 0
+             this.goodsList.forEach((item,index)=>{
+                 a+= item.total
+             })
+             this.totalPrice=parseFloat(a).toFixed(1)
+
          },
-    minus(id){
+    minus(){
         this.goodsList.forEach((item,index)=>{
             if (item.id == id){
                 item.count --
@@ -131,7 +138,6 @@ delGood(id){
 	.cart-shopname{
     width: 100%;
     height: 30px;
-
     display: flex;
 	}
 	.cart-shopitem{
@@ -166,7 +172,7 @@ delGood(id){
 		display:flex;
 		background-color:pink;
 		position:fixed;
-		bottom:0;
+    bottom: 0.6rem;
 	}
 	.amount{
 		width:40%;

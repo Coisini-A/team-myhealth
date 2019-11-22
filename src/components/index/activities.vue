@@ -14,26 +14,19 @@
       </div>
     </div>
     <div class="indexActivitiesMain">
-      <ActivitiesGoods></ActivitiesGoods>
-      <ActivitiesGoods></ActivitiesGoods>
-      <ActivitiesGoods></ActivitiesGoods>
+      <ActivitiesGoods v-for="(item, index) in ActivitiesGoods" :key="index" :data='item'></ActivitiesGoods>
     </div>
   </div>
 </template>
-
 <script>
 import { CountDown } from "vant";
 import ActivitiesGoods from "./indGoods";
 
 export default {
+  props: ['ActivitiesGoods','time'],
   components: {
     [CountDown.name]: CountDown,
     ActivitiesGoods
-  },
-  data() {
-    return {
-      time: 30 * 60 * 60 * 1000
-    };
   },
   methods: {
     goShop() {
@@ -68,7 +61,7 @@ export default {
   color: #fff;
   font-size: 0.12rem;
   text-align: center;
-  background-color:gray;
+  background-color: gray;
   border-radius: 0.05rem;
 }
 .actMuch {

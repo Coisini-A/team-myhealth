@@ -13,13 +13,15 @@
 export default {
     name:"userContent",
     methods:{
-        unpate(key){
+        unpate(key){;81
             if(key==0){
                 this.$router.push("/UserInFormation")
             }else if(key==1){
                 this.$router.push("/userorder")
             }else if(key==2){
                 this.$router.push("/UserCardPackage")
+            }else if(key==3){
+                this.$router.push("/UserConen")
             }else if(key==4){
                 this.$router.push("/UserAccount")
             }else if(key==5){

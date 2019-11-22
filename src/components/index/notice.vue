@@ -1,21 +1,15 @@
 <template>
   <div class="notice" @click="goNotice">
-    <span class="noticeNum">{{notice}}</span>
+    <span :class="(notice==0)?'noticeNum1':'noticeNum'">{{notice}}</span>
     <img class="noticeImg" src="../../../static/indexImg/notice.png">
   </div>
 </template>
 <script>
 export default {
-  components: {
-  },
-  data() {
-    return {
-      notice: 0,
-    };
-  },
+  props:['notice'],
   methods: {
     goNotice(){
-      alert("消息");
+      this.$router.push({ path: '/index/questionnaire' });
     }
   }
 };
@@ -31,6 +25,18 @@ export default {
 .noticeNum{
   background-color: red;
   display: inline-block;
+  width: 0.15rem;
+  height: 0.15rem;
+  border-radius: 50%;
+  font-size: 0.12rem;
+  position: absolute;
+  line-height: 0.15rem;
+  text-align: center;
+  right: -0.05rem;
+  top: 0.02rem;
+}
+.noticeNum1{
+  display: none;
   width: 0.15rem;
   height: 0.15rem;
   border-radius: 50%;

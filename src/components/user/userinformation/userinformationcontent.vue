@@ -1,14 +1,15 @@
 <template>
   <div class="UserInFormationContent">
-    <span class="UserInFormationContent-span"></span>
     <div>
       <van-cell is-link @click="showPopup" class="UserInFormationContent-div">
           <p class="UserInFormationContent-P1">{{HeadSetting}}</p>
       </van-cell>
       <van-popup
         v-model="show"
+        closeable
+        close-icon="close"
         position="bottom"
-        :style="{ height: '30%' }"
+        :style="{ height: '20%' }"
       />
     </div>
     <div>
@@ -23,12 +24,28 @@
     </div>
 
       <p class="UserInFormationContent-P3"></p>
-      <p class="UserInFormationContent-P4">
+    <div>
+      <van-cell is-link @click="showPopup" class="UserInFormationContent-P4">
         <span>{{p4name}}</span>
-      </p>
-      <p class="UserInFormationContent-P5">
-        <span>{{p5name}}</span>
-      </p>
+      </van-cell>
+      <van-popup
+        v-model="show"
+        position="bottom"
+        :style="{ height: '20%' }"
+      />
+    </div>
+
+      <div>
+        <van-cell is-link @click="showPopup" class="UserInFormationContent-P5">
+          <span>{{p5name}}</span>
+        </van-cell>
+        <van-popup
+          v-model="show"
+          position="bottom"
+          :style="{ height: '20%' }"
+        />
+      </div>
+
       <p class="UserInFormationContent-P6">
         <span>{{p6name}}</span>
       </p>
@@ -36,9 +53,18 @@
       <p class="UserInFormationContent-P8">
         <span>{{p8name}}</span>
       </p>
-      <p class="UserInFormationContent-P9">
-        <span>{{p9name}}</span>
-      </p>
+
+      <div>
+        <van-cell is-link @click="showPopup" class="UserInFormationContent-P9">
+          <span>{{p9name}}</span>
+        </van-cell>
+        <van-popup
+          v-model="show"
+          position="bottom"
+          :style="{ height: '20%' }"
+        />
+      </div>
+
       <p class="UserInFormationContent-P10"></p>
       <p class="UserInFormationContent-P11">
         <span>{{p11name}}</span>
@@ -51,12 +77,14 @@
 </template>
 
 <script>
-    import { Popup,cell } from 'vant';
+    import { Popup,cell,Rate,Uploader  } from 'vant';
     export default {
         name: "UserInFormationContent",
         components:{
             [Popup.name]:Popup,
-            [cell.name]:cell
+            [cell.name]:cell,
+            [Rate.name]:Rate,
+            [Uploader.name]:Uploader
         },
         data(){
             return{
@@ -69,7 +97,10 @@
                 p9name:"关于Myhealth",
                 p11name:"切换账号",
                 p13name:"退出登录",
-                show: false
+                show: false,
+                value: 3,
+                fileList: []
+
             }
         },
         methods: {
@@ -109,20 +140,13 @@
     height:0.15rem;
     background: darkkhaki;
   }
-  .UserInFormationContent-span{
-    display:block;
-    height:0.15rem;
-    background: darkkhaki;
-  }
   .UserInFormationContent-P4{
-    height:0.4rem;
-    font-size:14px;
+    height:0.5rem;
     font-weight:900;
-    line-height:0.4rem;
     border-bottom: 2px solid seashell;
   }
   .UserInFormationContent-P4 span{
-    margin-left:0.3rem;
+    margin-left:0.1rem;
   }
   .UserInFormationContent-P4 img{
     width:10%;
@@ -130,14 +154,13 @@
     right:0.2rem;
   }
   .UserInFormationContent-P5{
-    height:0.4rem;
+    height:0.5rem;
     font-size:14px;
     font-weight:900;
-    line-height:0.4rem;
     border-bottom: 2px solid seashell;
   }
   .UserInFormationContent-P5 span{
-    margin-left:0.3rem;
+    margin-left:0.1rem;
   }
   .UserInFormationContent-P5 img{
     width:10%;
@@ -178,18 +201,12 @@
     right:0.2rem;
   }
   .UserInFormationContent-P9{
-    height:0.4rem;
+    height:0.5rem;
     font-size:14px;
     font-weight:900;
-    line-height:0.4rem;
   }
   .UserInFormationContent-P9 span{
-    margin-left:0.3rem;
-  }
-  .UserInFormationContent-P9 img{
-    width:10%;
-    position:absolute;
-    right:0.2rem;
+    margin-left:0.1rem;
   }
   .UserInFormationContent-P10{
     height:0.15rem;

@@ -1,7 +1,7 @@
 <template>
   <div class="indexTop">
     <Search class="indexSearch"></Search>
-    <Notice class="indexNotice"></Notice>
+    <Notice class="indexNotice" :notice="notice"></Notice>
   </div>
 </template>
 <script>
@@ -11,16 +11,18 @@ export default {
   components: {
     Search,
     Notice
-  }
+  },
+  props:['notice'],
 };
 </script>
 <style scoped>
-.indexTop{
+.indexTop {
   width: 100%;
-  background-color: whitesmoke;
+  background-color: white;
+  border-bottom: 0.01rem solid gainsboro;
 }
 .indexSearch {
-  width: 85%;
+  width: 86%;
   float: left;
 }
 .indexNotice {
@@ -29,5 +31,6 @@ export default {
   float: left;
   margin: 0.1rem;
   box-sizing: border-box;
+  margin: 0.17rem auto;
 }
 </style>

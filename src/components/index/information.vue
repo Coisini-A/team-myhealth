@@ -7,22 +7,17 @@
       <span class="InformationTopChange iconfont" @click="change">&#xe60a;</span>
     </div>
     <div class="InformationMain">
-      <h1>{{title}}</h1>
-      <p>{{center}}</p>
+      <h1>{{information.title}}</h1>
+      <p>{{information.center}}</p>
     </div>
   </div>
 </template>
 <script>
 export default {
-  data() {
-    return {
-      title:"标题:外卖食物这样选",
-      center:"内容:啊大大大叔的啊实打实大师阿萨达萨达是打大叔大婶打算的阿萨达阿萨达as打算打萨达是打算打算大声点阿萨阿萨打算打算打算阿萨达as多大大声道阿萨阿萨"
-    }
-  },
+  props:['information'],
   methods: {
     change(){
-      alert("刷新信息")
+      this.$emit('refresh');
     }
   },
 }

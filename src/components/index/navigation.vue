@@ -78,6 +78,7 @@ export default {
   touch-action: none;
   box-sizing: border-box;
   overflow: hidden;
+  position: relative;
 }
 .swiper-slide {
   overflow: hidden;

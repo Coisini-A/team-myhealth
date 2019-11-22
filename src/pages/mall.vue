@@ -15,13 +15,12 @@
     </div>
     <navbar></navbar>
   </div>
-
 </template>
 <script>
     import {TreeSelect} from 'vant';
     import headerr from "../components/mall/headerr";
     import mallLeft from "../components/mall/mallLeft";
-    import mallRight from "../components/mall/mallRight";
+    import mallRight from "@/components/mall/mallRight";
     import navbar from "../common/nav-bar";
     export default {
         name: "mall",
@@ -80,10 +79,10 @@
                     {
                         msg: "消化不良",
                         currentRight:[
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
+                            // {
+                            //     img:"../static/mallimg/1.jpg",
+                            //     name:"健胃消食片"
+                            // },
                             {
                                 img:"../static/mallimg/1.jpg",
                                 name:"阿莫西林胶囊"

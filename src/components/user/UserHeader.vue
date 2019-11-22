@@ -3,7 +3,7 @@
       <div class="UserSettingsHeader-top">
       </div>
       <div  class="UserSettingsHeader-portrait">
-        <img :src="headportrait" alt="" @click="userfour">
+        <img :src="headportrait" alt="">
       </div>
       <span class="name">
       {{msgone}}
@@ -38,9 +38,6 @@
         methods:{
             update(){
                 this.$router.push("/usersettings")
-            },
-            userfour(){
-                this.$router.push("/userinformation")
             }
         }
     }

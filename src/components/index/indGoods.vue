@@ -1,30 +1,23 @@
 <template>
   <div class="activitiesGoods" @click="goGoods">
-    <img src="../../../static/indexImg/y.png" alt="商品图" />
-    <p class="activitiesGoodsName">{{name}}</p>
-    <del>￥{{oPrice}}</del>
-    <p class="activitiesGoodsPrice">￥{{nPrice}}</p>
-    <span class="discount">{{discount}}折</span>
+    <img :src="data.img" alt="商品图" />
+    <p class="activitiesGoodsName">{{data.name}}</p>
+    <del>￥{{data.oPrice}}</del>
+    <p class="activitiesGoodsPrice">￥{{data.nPrice}}</p>
+    <span class="discount">{{data.discount}}折</span>
     <span class="activitiesGoodsLog" @click.stop="goCart">抢</span>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      name: "商品名字",
-      oPrice: 500,
-      nPrice: 200,
-      discount: 7
-    };
-  },
+  props:['data'],
   methods: {
     goGoods() {
-      alert("跳转商品")
+      alert("跳转商品"+this.data.id)
     },
     goCart(){
-      alert("购物车")
+      alert("购物车"+this.data.id)
     }
 
   }
