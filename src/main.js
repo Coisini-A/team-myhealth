@@ -4,10 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import './../static/common.css'
-import Axios from 'axios'
-
-Vue.prototype.$axios  = Axios
-
+// import Axios from 'axios'
+// 
+// Vue.prototype.$axios  = Axios
+// 
 
 /* eslint-disable no-new */
 new Vue({

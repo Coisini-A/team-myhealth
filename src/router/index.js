@@ -12,9 +12,8 @@ import UserNews from '../pages/user-news'
 import UserOrder from '../pages/user-order'
 import UserAccount from '../pages/useraccount'
 import UserConen from '../pages/user-concen'
-import Appointment from "../components/inquiry/appointment"
-import Detail from '../components/mall/detail'
-import Cart from '../components/mall/cart'
+import AddressList from '../pages/addresslist'
+import AddressEditor from '../pages/addresseditor'
 Vue.use(Router)
 
 export default new Router({
@@ -43,19 +42,9 @@ export default new Router({
       component: Inquiry
     },
     {
-      path: '/detail',
-      name: 'Detail',
-      component: Detail
-    },
-     {
-      path: '/cart',
-      name: 'Cart',
-      component: Cart
-    },
-    {
       path: '/mall',
       name: 'Mall',
-      component: Mall,
+      component: Mall
     },
     {
       path: '/forum',
@@ -102,9 +91,14 @@ export default new Router({
       component: UserConen
     },
     {
-      path: '/appointment',
-      name: 'Appointment',
-      component: Appointment
+      path: '/addresslist',
+      name: 'AddressList',
+      component: AddressList
+    },
+    {
+      path: '/addresseditor',
+      name: 'AddressEditor',
+      component: AddressEditor
     }
 
   ]

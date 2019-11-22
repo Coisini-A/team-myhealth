@@ -13,7 +13,7 @@
 export default {
     name:"userContent",
     methods:{
-        unpate(key){;81
+        unpate(key){
             if(key==0){
                 this.$router.push("/UserInFormation")
             }else if(key==1){
