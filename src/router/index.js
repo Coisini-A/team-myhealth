@@ -4,6 +4,7 @@ import Index from '../pages/index'
 import Inquiry from '../pages/inquiry'
 import Mall from '../pages/mall'
 import User from '../pages/user'
+import UserRouterView from '../pages/user-router-view'
 import Forum from '../pages/forum'
 import UserSettings from '../pages/usersettings'
 import UserInFormation from '../pages/userinformation'
@@ -34,8 +35,49 @@ export default new Router({
     },
     {
       path: '/user',
-      name: 'User',
-      component: User
+      component: UserRouterView,
+      children: [
+        {
+          path: '/user',
+          name: 'User',
+          component: User
+        },
+        {
+          path: 'userSettings',
+          name: 'UserSettings',
+          component: UserSettings
+        },
+        {
+          path: 'UserInFormation',
+          name: 'UserInFormation',
+          component: UserInFormation
+        },
+        {
+          path: 'UserCardPackage',
+          name: 'UserCardPackage',
+          component: UserCardPackage
+        },
+        {
+          path: 'usernews',
+          name: 'UserNews',
+          component: UserNews
+        },
+        {
+          path: 'userorder',
+          name: 'UserOrder',
+          component: UserOrder
+        },
+        {
+          path: 'UserAccount',
+          name: 'UserAccount',
+          component: UserAccount
+        },
+        {
+          path: 'UserConen',
+          name: 'UserConen',
+          component: UserConen
+        },
+      ]
     },
     {
       path: '/inquiry',
@@ -47,7 +89,7 @@ export default new Router({
       name: 'Detail',
       component: Detail
     },
-     {
+    {
       path: '/cart',
       name: 'Cart',
       component: Cart
@@ -61,45 +103,6 @@ export default new Router({
       path: '/forum',
       name: 'Forum',
       component: Forum
-    },
-
-
-
-
-    {
-      path: '/userSettings',
-      name: 'UserSettings',
-      component: UserSettings
-    },
-    {
-      path: '/UserInFormation',
-      name: 'UserInFormation',
-      component: UserInFormation
-    },
-    {
-      path: '/UserCardPackage',
-      name: 'UserCardPackage',
-      component: UserCardPackage
-    },
-    {
-      path: '/usernews',
-      name: 'UserNews',
-      component: UserNews
-    },
-    {
-      path: '/userorder',
-      name: 'UserOrder',
-      component: UserOrder
-    },
-    {
-      path: '/UserAccount',
-      name: 'UserAccount',
-      component: UserAccount
-    },
-    {
-      path: '/UserConen',
-      name: 'UserConen',
-      component: UserConen
     },
     {
       path: '/appointment',
