@@ -15,6 +15,9 @@ import UserAccount from '../pages/useraccount'
 import UserConen from '../pages/user-concen'
 import AddressList from '../pages/addresslist'
 import AddressEditor from '../pages/addresseditor'
+import Detail from '../components/mall/detail'
+import Cart from '../components/mall/cart'
+import Appointment from '../components/inquiry/appointment'
 Vue.use(Router)
 
 export default new Router({
@@ -26,6 +29,11 @@ export default new Router({
       redirect: {
         name: 'Index'
       }
+    },
+    {
+      path: '/appointment',
+      name: 'Appointment',
+      component: Appointment
     },
     {
       path: '/index',
