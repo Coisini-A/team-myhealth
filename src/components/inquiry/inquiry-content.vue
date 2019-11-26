@@ -101,10 +101,9 @@
             selectConfirm(a){
                 if(a[0]!=undefined&&a[1]!=undefined){
                    if(a[0].name!=""&&a[1].name!=""){
-                       let info={
-                           "cityid":parseInt(a[1].code)
-                       }
-                       this.$axios.post(this.HOST+"/doctor/hospitals/",info)
+                       let num =parseInt(a[1].code)
+                       window.console.log(num)
+                       this.$axios.post(this.HOST+"/doctor/hospitals/",{"cityid":num})
                            .then(result=>{
                                window.console.log(result.data)
                                this.hospitalsInfo=result.data.data.hospitals
@@ -174,14 +173,13 @@
             //         .then(result=>{
             //             window.console.log(result.data)
             //             // this.hospitalsInfo=result.data.data.hospitals
-            //
             //         })
             // },
 
         },
-        // mounted() {
-        //   this.getBJHinfo()
-        // }
+        mounted() {
+          // this.getBJHinfo()
+        }
     }
 </script>
 

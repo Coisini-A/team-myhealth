@@ -15,6 +15,9 @@ import UserConen from '../pages/user-concen'
 import AddressList from '../pages/addresslist'
 import AddressEditor from '../pages/addresseditor'
 import appointment from "../components/inquiry/appointment"
+import RegisterPage from "../pages/RegisterPage"
+import LoginPage from "../pages/LoginPage"
+import Password from "../components/login/storageChgPassword"
 Vue.use(Router)
 
 export default new Router({
@@ -105,6 +108,21 @@ export default new Router({
       path: '/appointment',
       name: 'Appointment',
       component: appointment
+    },
+    {
+      path: '/RegisterPage',
+      name: 'RegisterPage',
+      component: RegisterPage
+    },
+    {
+      path: '/LoginPage',
+      name: 'LoginPage',
+      component: LoginPage
+    },
+    {
+      path: '/password',
+      name: 'password',
+      component: Password
     }
 
   ],
