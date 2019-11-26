@@ -14,6 +14,7 @@ import UserAccount from '../pages/useraccount'
 import UserConen from '../pages/user-concen'
 import AddressList from '../pages/addresslist'
 import AddressEditor from '../pages/addresseditor'
+import appointment from "../components/inquiry/appointment"
 Vue.use(Router)
 
 export default new Router({
@@ -99,7 +100,24 @@ export default new Router({
       path: '/addresseditor',
       name: 'AddressEditor',
       component: AddressEditor
+    },
+    {
+      path: '/appointment',
+      name: 'Appointment',
+      component: appointment
     }
 
-  ]
+  ],
+
+
 })
+// router.beforeEach((to,from,next)=>{
+//   //to.path/from.path 根据地址进行条件判断
+//   let data = localStorage.getItem('data');
+//   next();//先进行调用一次，否则陷入死循环
+//   if(data){
+//     next("跳转路径")//未登录
+//   }else{
+//     next("跳转路径")//跳转至主页
+//   }
+// });
