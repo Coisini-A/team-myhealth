@@ -3,7 +3,7 @@
       <div class="UserSettingsHeader-top">
       </div>
       <div  class="UserSettingsHeader-portrait">
-        <img :src="headportrait" alt="">
+        <img :src="headportrait?headportrait:newimg" type="image/jpeg" alt="">
       </div>
       <span class="name">
       {{msgone}}
@@ -32,13 +32,18 @@
                 msgone:"用户名",
                 msgtwo:"007",
                 sup:"../../../static/user-images/Set up.png",
-                headportrait:"../../../static/user-images/Default head.jpg",
+                headportrait:"",
+                newimg:"../../../static/user-images/Default head.jpg"
             }
         },
         methods:{
             update(){
                 this.$router.push("/usersettings")
-            }
+            },
+        },
+        beforeMount() {
+            var a=localStorage.getItem("img");
+            this.headportrait=a
         }
     }
 </script>
@@ -67,6 +72,7 @@
   }
   .UserSettingsHeader-portrait img{
     width:100%;
+    height:100%;
   }
   .name{
     position:absolute;
