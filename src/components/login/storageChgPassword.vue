@@ -110,6 +110,7 @@ export default {
     .box{
         display: flex;
         flex-direction: column;
+        height: 100%;
         background-image: url("../../assets/true.jpg");
         background-size: 100% 100%;
     }

@@ -4,6 +4,7 @@ import Index from '../pages/index'
 import Inquiry from '../pages/inquiry'
 import Mall from '../pages/mall'
 import User from '../pages/user'
+import UserRouterView from '../pages/user-router-view'
 import Forum from '../pages/forum'
 import UserSettings from '../pages/usersettings'
 import UserInFormation from '../pages/userinformation'
@@ -14,10 +15,12 @@ import UserAccount from '../pages/useraccount'
 import UserConen from '../pages/user-concen'
 import AddressList from '../pages/addresslist'
 import AddressEditor from '../pages/addresseditor'
-import appointment from "../components/inquiry/appointment"
 import RegisterPage from "../pages/RegisterPage"
 import LoginPage from "../pages/LoginPage"
 import Password from "../components/login/storageChgPassword"
+import Detail from '../components/mall/detail'
+import Cart from '../components/mall/cart'
+import Appointment from '../components/inquiry/appointment'
 Vue.use(Router)
 
 let router = new Router({
@@ -31,6 +34,11 @@ let router = new Router({
       }
     },
     {
+      path: '/appointment',
+      name: 'Appointment',
+      component: Appointment
+    },
+    {
       path: '/index',
       name: 'Index',
       component: Index,
@@ -41,10 +49,52 @@ let router = new Router({
     {
       path: '/user',
       name: 'User',
-      component: User,
+      component: UserRouterView,
       meta:{
         isTabBar:true
-      }
+      },
+      children: [
+        {
+          path: '/user',
+          name: 'User',
+          component: User
+        },
+        {
+          path: 'userSettings',
+          name: 'UserSettings',
+          component: UserSettings
+        },
+        {
+          path: 'UserInFormation',
+          name: 'UserInFormation',
+          component: UserInFormation
+        },
+        {
+          path: 'UserCardPackage',
+          name: 'UserCardPackage',
+          component: UserCardPackage
+        },
+        {
+          path: 'usernews',
+          name: 'UserNews',
+          component: UserNews
+        },
+        {
+          path: 'userorder',
+          name: 'UserOrder',
+          component: UserOrder
+        },
+        {
+          path: 'UserAccount',
+          name: 'UserAccount',
+          component: UserAccount
+        },
+        {
+          path: 'UserConen',
+          name: 'UserConen',
+          component: UserConen
+        },
+      ]
     },
     {
       path: '/inquiry',
@@ -53,6 +103,16 @@ let router = new Router({
       meta:{
         isTabBar:true
       }
+    },
+    {
+      path: '/detail',
+      name: 'Detail',
+      component: Detail
+    },
+    {
+      path: '/cart',
+      name: 'Cart',
+      component: Cart
     },
     {
       path: '/mall',
@@ -70,66 +130,6 @@ let router = new Router({
         isTabBar:true
       }
     },
-
-
-
-
-    {
-      path: '/userSettings',
-      name: 'UserSettings',
-      component: UserSettings,
-      meta:{
-        isTabBar:true
-      }
-    },
-    {
-      path: '/UserInFormation',
-      name: 'UserInFormation',
-      component: UserInFormation,
-      meta:{
-        isTabBar:true
-      }
-    },
-    {
-      path: '/UserCardPackage',
-      name: 'UserCardPackage',
-      component: UserCardPackage,
-      meta:{
-        isTabBar:true
-      }
-    },
-    {
-      path: '/usernews',
-      name: 'UserNews',
-      component: UserNews,
-      meta:{
-        isTabBar:true
-      }
-    },
-    {
-      path: '/userorder',
-      name: 'UserOrder',
-      component: UserOrder,
-      meta:{
-        isTabBar:true
-      }
-    },
-    {
-      path: '/UserAccount',
-      name: 'UserAccount',
-      component: UserAccount,
-      meta:{
-        isTabBar:true
-      }
-    },
-    {
-      path: '/UserConen',
-      name: 'UserConen',
-      component: UserConen,
-      meta:{
-        isTabBar:true
-      }
-    },
     {
       path: '/addresslist',
       name: 'AddressList',
@@ -142,14 +142,6 @@ let router = new Router({
       path: '/addresseditor',
       name: 'AddressEditor',
       component: AddressEditor,
-      meta:{
-        isTabBar:true
-      }
-    },
-    {
-      path: '/appointment',
-      name: 'Appointment',
-      component: appointment,
       meta:{
         isTabBar:true
       }

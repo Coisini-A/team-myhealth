@@ -1,11 +1,9 @@
 <template>
-  <div>
     <div id="app">
       <router-view />
-    </div>
     <nav-bar v-if="$route.meta.isTabBar"></nav-bar>
+    </div>
     <!-- <loading></loading> -->
-  </div>
 </template>
 
 <script>
@@ -23,6 +21,7 @@ export default {
 <style>
 #app{
   height: 100%;
+  overflow: hidden;
   width: 100%;
 }
 </style>

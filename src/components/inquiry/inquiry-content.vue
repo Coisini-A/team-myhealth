@@ -1,7 +1,7 @@
 <template>
     <div class="inquiry-content">
         <div class="inquiry-content_title">
-
+            <img src="" alt="">
         </div>
         <div class="inquiry-content_context">
             <ul>
