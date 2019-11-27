@@ -4,11 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import './../static/common.css'
-import animated from 'animate.css' // 引入动画
- 
-Vue.use(animated)
-
-Vue.config.productionTip = false
+import Axios from 'axios'
+Vue.prototype.$axios  = Axios
+Vue.prototype.HOST="http://122.112.231.109:5000"
+Vue.config.productionTip=false
+//
 
 /* eslint-disable no-new */
 new Vue({
