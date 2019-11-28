@@ -17,21 +17,23 @@
               <van-tab title="咨询问诊">
                 <div class="content_01 content_item">
                     <div class="content_01_box content_item_box">
-                        <div class="input_text">
-                          <div class="input_text_item01">
-                            <i class="iconfont" style="color:#5FFFBA;font-size: 0.3rem;
-                               border-radius: 0.1rem;background-color: #f5f5f5;margin-right: 0.05rem;
-                              ">
-                              &#xe608;</i>
-                            <div>欢迎您来咨询：）</div>
-                          </div>
-                          <div class="input_text_item02" v-for="(i,index) in infoList" :key="index">
-                            <div>{{i.title}}</div>
-                            <i class="iconfont" style="color:#5FFFBA;font-size: 0.3rem;
-                               border-radius: 0.1rem;background-color: #f5f5f5;margin-left: 0.05rem;
-                              ">&#xe720;</i>
-                          </div>
-                        </div>
+<!--                          <div class="input_text_item01" v-for="(i,index) in messageList" :key="index">-->
+<!--                            <i class="iconfont" style="color:#5FFFBA;font-size: 0.3rem;-->
+<!--                               border-radius: 0.1rem;background-color: #f5f5f5;margin-right: 0.05rem;-->
+<!--                              ">-->
+<!--                              &#xe608;</i>-->
+<!--                            <div>{{i.title}}</div>-->
+<!--                          </div>-->
+<!--                          <div class="input_text_item02" v-for="(i,index) in sendList" :key="index+100">-->
+<!--                            <div>{{i.title}}</div>-->
+<!--                            <i class="iconfont" style="color:#5FFFBA;font-size: 0.3rem;-->
+<!--                               border-radius: 0.1rem;background-color: #f5f5f5;margin-left: 0.05rem;-->
+<!--                              ">&#xe720;</i>-->
+<!--&lt;!&ndash;                          </div>&ndash;&gt;-->
+                          <ul class="input_text" ref="textBox">
+                            <li class="onMsg msg"><p>欢迎咨询</p></li>
+                          </ul>
+
                         <div class="input_box">
                           <div class="input_box_header">
                             <i class="iconfont">&#xe75a;</i>
@@ -78,9 +80,8 @@
         data(){
             return{
                 inputInfo:"",
-                info:"",
-                flag:false,
-                infoList:[]
+                sendList:[],
+                messageList:[{title:"欢迎咨询"}]
             }
         },
         components:{
@@ -90,38 +91,85 @@
             [Tab.name]:Tab,
             [Toast.name]:Toast,
         },
-        methods:{
-            onClickLeft(){
+        methods: {
+            onClickLeft() {
                 this.$router.go(-1)
             },
-            getInputInfo(){
-                if(this.inputInfo!=""){
-                    this.info=this.inputInfo
-                    let a = {}
-                    if(this.info!=""){
-                        a.title=this.info
-                    }
-                    this.infoList.push(a)
-                    this.inputInfo=""
-                    window.console.log(this.infoList);
+            getInputInfo() {
+
+                if (this.inputInfo != "") {
+                    var a = {title: this.inputInfo}
+                    window.console.log("这是我发送的消息" + this.inputInfo)
+                    this.sendMsg(this.inputInfo)
+                    //this.sendList.push(a)//插入至发送列表
+                    var msg=`<li class='sendMsg msg'><p style='text-align: right;'>${this.inputInfo}</p></li>`
+                    window.console.log(this.$refs.textBox)
+                    this.$refs.textBox.innerHTML+=msg
+                    // window.console.log(this.sendList);
+
                 }
+                this.inputInfo = ""
             },
-            showResult(){
+            showResult() {
                 let a = document.querySelector("#descInfo")
                 let b = document.querySelector("#choose_options")
-                if(a.value==""||b.value==null){
+                if (a.value == "" || b.value == null) {
                     Toast.fail('预约失败、请填写完整信息');
-                }else{
-                    setTimeout(function(){
+                } else {
+                    setTimeout(function () {
                         Toast.success('预约成功')
-                        a.value=""
-                        b.value=null
-                    },1000)
+                        a.value = ""
+                        b.value = null
+                    }, 1000)
                 }
-            }
+            },
+            //获取医生id
+            getDoctorId() {
+                let d_id = this.$route.query["id"]
+                // window.console.log(d_id)
+                return d_id
+            },
+
+
+            //-------聊天部分
+            conectWebSocket() {
+                // let websocket = new WebSocket("ws://122.112.231.109:8000/chat/")
+                this.websocket.onopen = () => {
+                    window.console.log("连接成功")
+
+                }
+            },
+
+            sendMsg(e) {
+                this.websocket.send(e)
+                this.onMsg()
+            },
+            onMsg() {
+                this.websocket.onmessage = (b) => {
+                    // this.messageList=[{title:"欢迎咨询"}]
+                    // window.console.log(JSON.parse(b.data))
+                    window.console.log("这是我收到的消息", b)
+                    window.console.log("这是我收到转换过了的消息", JSON.parse(b.data))
+                    var msg1 = JSON.parse(b.data).msg
+                    var msg2=`<li class='onMsg msg'><p style='text-align: left;'>${msg1}</p></li>`
+                    this.$refs.textBox.innerHTML+=msg2
+
+                }
+
+
+            },
+        },
+        mounted() {
+            this.getDoctorId()
+             this.conectWebSocket()
+            //根据医生id请求医生的详细信息
+            // this.getConfigResult()
+            // this.websocketToLogin()
+
         },
 
     }
+
 </script>
 
 <style scoped>
@@ -183,62 +231,69 @@
   }
   .input_text{
     width: 100%;
-    height: 3rem;
-    padding: 0.2rem 0;
+    height: 2.7rem;
     box-sizing: border-box;
-    overflow: hidden;
+    padding: 0.05rem 0;
   }
-  .input_text_item01{
-    width: 2rem;
-    display: flex;
-    float: left;
-  }
-  .input_text_item01>div{
-    width: 1.5rem;
-    background-color: #e5e5e5;
-    position: relative;
-    border-radius: 0.1rem;
-    padding: 0.05rem;
-    box-sizing: border-box;
-  }
-   .input_text_item01>div:after{
-     content: '';
-     display: inline-block;
-     width: 0;
-     height: 0;
-     border-top: 0.05rem solid transparent;
-     border-right: 0.1rem solid #e5e5e5;
-     border-bottom: 0.05rem solid transparent;
-     position: absolute;
-     top: 0.1rem;
-     left: -0.1rem;
-   }
-   .input_text_item02{
-     width: 2rem;
-     display: flex;
-     float: right;
-     margin-top: 0.05rem;
-   }
-   .input_text_item02>div{
-     width: 1.7rem;
-     background-color: #e5e5e5;
-     position: relative;
-     border-radius: 0.1rem;
-     padding: 0.05rem;
+   .input_text>li{
+     width: 100%;
+     height: 0.3rem;
      box-sizing: border-box;
+     padding: 0 0.05rem;
+     line-height: 0.3rem;
    }
-   .input_text_item02>div::after{
-     content: '';
-     display: inline-block;
-     width: 0;
-     height: 0;
-     border-top: 0.05rem solid transparent;
-     border-left: 0.1rem solid #e5e5e5;
-     border-bottom: 0.05rem solid transparent;
-     position: absolute;
-     top: 0.1rem;
-     right:  -0.1rem;
+   .input_text>li>p{
+     width: 100%;
+     height: 100%;
    }
+  /*.input_text_item01>div{*/
+  /*  width: 1.5rem;*/
+  /*  background-color: #e5e5e5;*/
+  /*  position: relative;*/
+  /*  border-radius: 0.1rem;*/
+  /*  padding: 0.05rem;*/
+  /*  box-sizing: border-box;*/
+  /*}*/
+  /* .input_text_item01>div:after{*/
+  /*   content: '';*/
+  /*   display: inline-block;*/
+  /*   width: 0;*/
+  /*   height: 0;*/
+  /*   border-top: 0.05rem solid transparent;*/
+  /*   border-right: 0.1rem solid #e5e5e5;*/
+  /*   border-bottom: 0.05rem solid transparent;*/
+  /*   position: absolute;*/
+  /*   top: 0.1rem;*/
+  /*   left: -0.1rem;*/
+  /* }*/
+  /* .input_text_item02{*/
+  /*   width:100%;*/
+  /*   display: flex;*/
+  /*   float: right;*/
+  /*   margin-top: 0.05rem;*/
+  /*   padding-left: 1.5rem;*/
+  /*   box-sizing: border-box;*/
+  /* }*/
+  /* .input_text_item02>div{*/
+  /*   width: 1.7rem;*/
+  /*   background-color: #e5e5e5;*/
+  /*   position: relative;*/
+  /*   border-radius: 0.1rem;*/
+  /*   padding: 0.05rem;*/
+  /*   box-sizing: border-box;*/
+  /* }*/
+  /* .input_text_item02>div::after{*/
+  /*   content: '';*/
+  /*   display: inline-block;*/
+  /*   width: 0;*/
+  /*   height: 0;*/
+  /*   border-top: 0.05rem solid transparent;*/
+  /*   border-left: 0.1rem solid #e5e5e5;*/
+  /*   border-bottom: 0.05rem solid transparent;*/
+  /*   position: absolute;*/
+  /*   top: 0.1rem;*/
+  /*   right:  -0.1rem;*/
+  /* }*/
    .input_box{
       width: 100%;
      position: absolute;

@@ -20,7 +20,7 @@ import LoginPage from "../pages/LoginPage"
 import Password from "../components/login/storageChgPassword"
 Vue.use(Router)
 
-export default new Router({
+let router= new Router({
   mode: 'history',
   linkActiveClass: 'focus',
   routes: [
@@ -129,13 +129,16 @@ export default new Router({
 
 
 })
+
 // router.beforeEach((to,from,next)=>{
 //   //to.path/from.path 根据地址进行条件判断
-//   let data = localStorage.getItem('data');
+//   let data = localStorage.getItem('token');
+//   window.console.log(data)
 //   next();//先进行调用一次，否则陷入死循环
 //   if(data){
-//     next("跳转路径")//未登录
+//     next()
 //   }else{
-//     next("跳转路径")//跳转至主页
+//     next("/LoginPage")//登录
 //   }
 // });
+export  default  router

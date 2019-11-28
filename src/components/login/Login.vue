@@ -25,7 +25,6 @@
         <div class="regMeg">
             <input type="checkbox" ref="agreeBox" @click="checked"/><span>《已阅读并同意以下协议》</span>
         </div>
-
 </div>
 </template>
 
@@ -86,16 +85,17 @@ export default {
                     .then(result=>{
                         // window.console.log(result.data)
                         if(result.data.status==200){//登录成功
-                            let x = result.data.data
+                            let x = result.data.data.user.id
                             let token = result.data.token
-                            localStorage.setItem("data",JSON.stringify(x))//将登录数据存至本地
+                            localStorage.setItem("user_id",JSON.stringify(x))//将登录数据存至本地
                             localStorage.setItem("token",JSON.stringify(token))
+                            this.$router.push("/")
                         }else if(result.data.status==501){//用户名或密码错误
-
+                            this.warn2="用户名或密码错误"
                         }else if(result.data.status==302){//此用户不存在
-
+                            this.warn2="此用户不存在"
                         }else{//请求参数错误。请重试
-
+                            this.warn2="请求参数错误。请重试"
                         }
                     })
             }

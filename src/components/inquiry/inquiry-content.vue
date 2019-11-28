@@ -40,7 +40,7 @@
                     </div>
                   <span>预约次数:{{n.is_order}}</span>
                   <div class="list_item_right_desc_button">
-                    <button type="button" @click="showToast(n.d_id)">关注</button>
+                    <button type="button" @click="showToast(n.d_id,i)">{{info}}</button>
                     <button type="button" @click="goNext(n.d_id)">咨询预约</button>
                   </div>
                 </div>
@@ -85,7 +85,9 @@
                 dartInfo:"",//科室信息
                 dartId:"",//科室id
                 doctorInfo:"",//医生信息,
-                flag:true
+                doctorId:"",//医生id
+                flag:true,
+                info:"关注",
             }
         },
         methods:{
@@ -105,9 +107,9 @@
                        window.console.log(num)
                        this.$axios.post(this.HOST+"/doctor/hospitals/",{"cityid":num})
                            .then(result=>{
-                               window.console.log(result.data)
+                               // window.console.log(result.data)
                                this.hospitalsInfo=result.data.data.hospitals
-                                 window.console.log(this.hospitalsInfo)
+                                 // window.console.log(this.hospitalsInfo)
                            })
                        this.show=false
                        this.selectProvince = a[0].name
@@ -119,7 +121,7 @@
             //选择医院以后获取医院id,查找科室的信息
             getHID(num){
                 this.hospitalsId=parseInt(num)
-                window.console.log(this.hospitalsId);
+                // window.console.log(this.hospitalsId);
                 this.$axios.post(this.HOST+"/doctor/rooms/",{"h_id":parseInt(this.hospitalsId)})
                     .then(result=>{
                         // window.console.log(result.data)
@@ -130,34 +132,46 @@
             //选择科室以后、获取科室id、来进行查找科室里面医生的信息
             getRID(num){
                 this.dartId=parseInt(num)
-                window.console.log(this.dartId);
+               // window.console.log(this.dartId);
                 this.$axios.post(this.HOST+"/doctor/doctors/",{"room_id":parseInt(this.dartId)})
                     .then(result=>{
                         // window.console.log(result.data)
                         this.doctorInfo=result.data.data.rooms
                         // window.console.log(this.doctorInfo)
+                        // window.console.log(this.doctorId)
                     })
             },
             //收藏成功
-            showToast(num){
+            showToast(num){//num是医生id
                 // window.console.log(num);
                 //此处localstorage获取用户id
-
+                let u_id = localStorage.getItem("user_id");
                 //收藏
                 if(this.flag==true){
-                    this.$toast({
-                        message: '关注成功',
-                        icon: 'like',
-                        color:"red"
-                    })
-                    // window.console.log(1)
-
+                    window.console.log(u_id,num)
+                    this.$axios.post(this.HOST+"/user/follow_doctor/",{"u_id":u_id,"d_id":num})
+                        .then(result=>{
+                            window.console.log(result.data)
+                            if(result.data.status==200){
+                                this.$toast({
+                                    message: '关注成功',
+                                    icon: 'like',
+                                })
+                            }
+                        })
+                    this.info="已关注"
                 }else{
-                    this.$toast({
-                        message: '取消关注成功',
-                        icon: 'success'
-                    })
-                    // window.console.log(2)
+                    this.$axios.post(this.HOST+"/user/disfollow_doctor/",{"u_id":u_id,"d_id":num})
+                        .then(result=>{
+                            // window.console.log(result.data)
+                            if(result.data.status){
+                                this.$toast({
+                                    message: '取消关注成功',
+                                    icon: 'success'
+                                })
+                            }
+                        })
+                    this.info="关注"
                 }
                 this.flag=!this.flag
 
@@ -168,19 +182,25 @@
                 this.$router.push("/appointment?id="+i)
             },
             //初始获取北京的医院信息
-            // getBJHinfo(){
-            //     this.$axios.post(this.HOST+"/doctor/hospitals/",{"cityid":110100})
-            //         .then(result=>{
-            //             window.console.log(result.data)
-            //             // this.hospitalsInfo=result.data.data.hospitals
-            //         })
-            // },
+            getBJHinfo(){
+                    // window.console.log(1)
+                    this.$axios.get(this.HOST+"/doctor/default/")
+                        .then(result=>{
+                            // window.console.log(result.data)
+                            this.doctorInfo=result.data.data.doctors
+                        })
+
+
+
+            },
 
         },
         mounted() {
-          // this.getBJHinfo()
+          this.getBJHinfo()
         }
     }
+
+
 </script>
 
 <style scoped>
