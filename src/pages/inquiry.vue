@@ -5,15 +5,17 @@
   </div>
 </template>
 <script>
-import InquiryContent from "@/components/inquiry/inquiry-content";
-import InquiryHeader from "@/components/inquiry/inquiry-header";
-export default {
-  name: "forum",
-  components: {
-    "inquiry-header": InquiryHeader,
-    "inquiry-content": InquiryContent
-  }
-};
+    // import NavBar from "../common/nav-bar"
+    import inquiryContent from "../components/inquiry/inquiry-content";
+    import inquiryHeader from "../components/inquiry/inquiry-header";
+    export default {
+        name:"inquiry.vue",
+        components:{
+            // NavBar
+           inquiryHeader,
+            inquiryContent,
+        }
+    }
 </script>
 <style lang="less" scoped>
 </style>

@@ -26,5 +26,6 @@
     font-size: 0.18rem;
     position: fixed;
     top: 0;
+    z-index: 10;
   }
 </style>

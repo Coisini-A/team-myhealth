@@ -15,12 +15,15 @@ import UserAccount from '../pages/useraccount'
 import UserConen from '../pages/user-concen'
 import AddressList from '../pages/addresslist'
 import AddressEditor from '../pages/addresseditor'
+import RegisterPage from "../pages/RegisterPage"
+import LoginPage from "../pages/LoginPage"
+import Password from "../components/login/storageChgPassword"
 import Detail from '../components/mall/detail'
 import Cart from '../components/mall/cart'
 import Appointment from '../components/inquiry/appointment'
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   mode: 'history',
   linkActiveClass: 'focus',
   routes: [
@@ -38,11 +41,18 @@ export default new Router({
     {
       path: '/index',
       name: 'Index',
-      component: Index
+      component: Index,
+      meta:{
+        isTabBar:true
+      }
     },
     {
       path: '/user',
+      name: 'User',
       component: UserRouterView,
+      meta:{
+        isTabBar:true
+      },
       children: [
         {
           path: '/user',
@@ -89,7 +99,10 @@ export default new Router({
     {
       path: '/inquiry',
       name: 'Inquiry',
-      component: Inquiry
+      component: Inquiry,
+      meta:{
+        isTabBar:true
+      }
     },
     {
       path: '/detail',
@@ -104,23 +117,74 @@ export default new Router({
     {
       path: '/mall',
       name: 'Mall',
-      component: Mall
+      component: Mall,
+      meta:{
+        isTabBar:true
+      }
     },
     {
       path: '/forum',
       name: 'Forum',
-      component: Forum
+      component: Forum,
+      meta:{
+        isTabBar:true
+      }
     },
     {
       path: '/addresslist',
       name: 'AddressList',
-      component: AddressList
+      component: AddressList,
+      meta:{
+        isTabBar:true
+      }
     },
     {
       path: '/addresseditor',
       name: 'AddressEditor',
-      component: AddressEditor
+      component: AddressEditor,
+      meta:{
+        isTabBar:true
+      }
+    },
+    {
+      path: '/RegisterPage',
+      name: 'RegisterPage',
+      component: RegisterPage,
+      meta:{
+        isTabBar:false
+      }
+    },
+    {
+      path: '/LoginPage',
+      name: 'LoginPage',
+      component: LoginPage,
+      meta:{
+        isTabBar:false
+      }
+    },
+    {
+      path: '/password',
+      name: 'password',
+      component: Password,
+      meta:{
+        isTabBar:false
+      }
     }
 
-  ]
+  ],
+
+
 })
+router.beforeEach((to, from, next) => {
+  if (to.path == '/user'||to.path == '/inquiry'||to.path == '/mall'||to.path == '/index') {
+    let data = localStorage.getItem('token');
+    if (data) {
+      next()
+    } else {
+      next("/LoginPage")
+    }
+  } else {
+    next()
+  }
+});
+export default router
