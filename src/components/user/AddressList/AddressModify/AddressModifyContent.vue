@@ -2,12 +2,13 @@
   <div>
     <van-address-edit
       :area-list="areaList"
+      show-delete
       show-set-default
       show-search-result
       :area-columns-placeholder="['请选择', '请选择', '请选择']"
       @save="onSave"
+      @delete="onDelete"
       @change-area="onChangeDetail"
-      :address-info="list"
     />
   </div>
 </template>
@@ -47,19 +48,17 @@
                 this.lala=parseInt(w[1].code)
             },
             onSave(a) {
-                this.$axios.post('http://122.112.231.109:5000/user/alter_address/',{u_id:14,a_Id:this.index,provinceid:this.dada,cityid:this.lala,detail_address:this.addressDetail,user_name:this.name,user_tel:this.tel,is_default:this.isDefault})
+
+                this.$axios.post('http://122.112.231.109:5000/user/add_address/',{u_id:14,provinceid:this.dada,cityid:this.lala,detail_address:a.addressDetail,user_name:a.name,user_tel:a.tel,is_default:a.isDefault})
                     .then(result=>{
-                        console.log(result.data)
-                        if(result.data.status==200){
+                        if(status==200){
                             this.$router.push({
                                 path:"/addresslist",
                                 query:{id:a}
                             })
-                            Toast('已修改收货地址');
-                        }else if(result.data.status==300){
-                            Toast('收货地址不存在');
+                            Toast('已保存');
                         }else{
-                            Toast("修改收货地址失败");
+                            Toast('保存失败');
                         }
                     })
                     .catch(err=>{

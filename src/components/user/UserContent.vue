@@ -1,71 +1,64 @@
 <template>
-    <div class="box">
-        <div :key="key" v-for="(u,key) in list" @click="unpate(key)">
-            <div>
-                <span><img :src="u.left" alt=""></span>
-                <p>{{u.name}}</p>
-            </div>
-            <span><img :src="u.right" alt=""></span>
-        </div>
-    </div>
+  <div class="box">
+    <router-link :key="key" v-for="(u,key) in list" :to="{name:u.path}" tag="div">
+      <div>
+        <span>
+          <img :src="u.left" alt />
+        </span>
+        <p>{{u.name}}</p>
+      </div>
+      <span>
+        <img :src="u.right" alt />
+      </span>
+    </router-link>
+  </div>
 </template>
 <script>
 export default {
-    name:"userContent",
-    methods:{
-        unpate(key){
-            if(key==0){
-                this.$router.push("/UserInFormation")
-            }else if(key==1){
-                this.$router.push("/userorder")
-            }else if(key==2){
-                this.$router.push("/UserCardPackage")
-            }else if(key==3){
-                this.$router.push("/UserConen")
-            }else if(key==4){
-                this.$router.push("/UserAccount")
-            }else if(key==5){
-                this.$router.push("/usernews")
-            }
+  name: "userContent",
+  data() {
+    return {
+      list: [
+        {
+          name: "用户信息",
+          left: "../../../static/user-images/message.png",
+          right: "../../../static/user-images/greater.png",
+          path: "UserInFormation"
+        },
+        {
+          name: "用户订单",
+          left: "../../../static/user-images/indent.png",
+          right: "../../../static/user-images/greater.png",
+          path: "UserOrder"
+        },
+        {
+          name: "用户卡包",
+          left: "../../../static/user-images/card-bag.png",
+          right: "../../../static/user-images/greater.png",
+          path: "UserCardPackage"
+        },
+        {
+          name: "用户关注",
+          left: "../../../static/user-images/attention.png",
+          right: "../../../static/user-images/greater.png",
+          path: "UserConen"
+        },
+        {
+          name: "用户账单",
+          left: "../../../static/user-images/bill.png",
+          right: "../../../static/user-images/greater.png",
+          path: "UserAccount"
+        },
+        {
+          name: "用户消息",
+          left: "../../../static/user-images/news.png",
+          right: "../../../static/user-images/greater.png",
+          path: "UserNews"
         }
-    },
-    data(){
-        return{
-            list:[
-                {
-                    name:"用户信息",
-                    left:"../../../static/user-images/message.png",
-                    right:"../../../static/user-images/greater.png"
-                },
-                {
-                    name:"用户订单",
-                    left:"../../../static/user-images/indent.png",
-                    right:"../../../static/user-images/greater.png"
-                },
-                {
-                    name:"用户卡包",
-                    left:"../../../static/user-images/card-bag.png",
-                    right:"../../../static/user-images/greater.png"
-                },
-                {
-                    name:"用户关注",
-                    left:"../../../static/user-images/attention.png",
-                    right:"../../../static/user-images/greater.png"
-                },
-                {
-                    name:"用户账单",
-                    left:"../../../static/user-images/bill.png",
-                    right:"../../../static/user-images/greater.png"
-                },
-                {
-                    name:"用户消息",
-                    left:"../../../static/user-images/news.png",
-                    right:"../../../static/user-images/greater.png"
-                }
-            ]
-        }
-    }
-}
+      ]
+    };
+  }
+};
 </script>
 <style lang="">
     .box>div{

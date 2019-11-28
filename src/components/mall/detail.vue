@@ -1,19 +1,28 @@
 <template>
 	<div>
 		 <detailhead></detailhead>
-		 <detailswiper></detailswiper>
-	    <div class="detail-introd">
-			<!-- 价格 -->
-			<p>￥<span style="font-size:0.24rem;">15</span></p>
-			<!-- 药品名 -->
-			<p style="font-weight:900;"><!-- 药名 -->皮肤用药 皮炎湿疹 仁和湿毒清片 </p>
-			<!-- 功效 -->
-			<p style="font-size:0.14rem;">功效化湿解毒皮肤瘙痒</p>
+		<div class="detail-show">
+		  <van-swipe @change="onChange" class="mall-swiper">
+		  <van-swipe-item><span><img :src="info.url"></span></van-swipe-item>
+		  <van-swipe-item><span><img :src="info.url"></span></van-swipe-item>
+		  <van-swipe-item><span><img :src="info.url"></span></van-swipe-item>
+	      <van-swipe-item><span><img :src="info.url"></span></van-swipe-item>
+		  <div class="custom-indicator" slot="indicator" ><div>
+		   {{ current + 1 }}/4
+		  </div>
+		 </div>
+		</van-swipe>
 		</div>
-		<div class="med-size">规格 请选择规格<img src="../../../static/mallimg/next.png"/></div>
+	    <div class="detail-introd">
+			<p  style="font-size:0.24rem;color:red;">￥<span>{{info.price}}</span></p>
+			<p style="font-weight:800;font-size:0.18rem">{{info.goods_name}}</p>
+			<p style="font-size:0.14rem;">{{info.detial}}</p>
+		</div>
+		<div class="med-size">{{info.standards}}</div>
+		<!-- <img src="../../../static/mallimg/next.png"/> -->
 		<div class="med-size">配送 支持物流配送</div>
-		<!-- <div class="mpharmacyname">药房名<button>进入店铺</button></div> -->
-		<div class="detailbig"><!-- 详情展示 --><img src="../../../static/mallimg/detailbig.png"/></div>
+		<div class="detailbig"><img :src="info.introduce_img"></div>
+		<!-- <img src="../../../static/mallimg/detailbig.png"/> -->
 	    <div class="detail-foot">
 	    	<div class="detail-botoom">
 	    	<ul>
@@ -23,9 +32,9 @@
 					</router-link>
 				</li>
 	    		<li>
-					<router-link to="/cart">
-					<img src="../../../static/mallimg/collection.png" style="width:0.23rem;"/><p>收藏</p>
-					</router-link>
+					<div  @click="finish" >
+					<img src="../../../static/mallimg/collection.png"style="width:0.23rem;" /><p>收藏</p>
+          </div>
 				</li>
 	    		<li>
 					<router-link to="/cart">
@@ -34,26 +43,113 @@
 				</li>
 	    	</ul>
 	    	</div>
-	    	<div class="addcart">加入购物车</div>
-	    	<div class="gobuy">立即购买</div>
+	    	<div class="addcart" @click="addCart">{{cartInfo}}</div>
+<!--	    	<div class="gobuy">立即购买</div>-->
 	    </div>
 
 	</div>
 </template>
 <script>
-
+import { Swipe, SwipeItem ,Notify,Overlay } from 'vant';
 	import detailhead from "./detail/detailhead"
-	import detailswiper from "./detail/detailswiper"
+	// import detailswiper from "./detail/detailswiper"
 	 export default {
 	   components:{
 		   detailhead,
-		   detailswiper
+		   // detailswiper
+      [Swipe.name]:Swipe,
+	    [SwipeItem.name]:SwipeItem,
+         [Notify.name]:Notify,
+             [Overlay.name]: Overlay
+	   },
+     data(){
+	     return{
+		 current: 0,
+          info:"",
+          goodsId:"",
+          cartInfo:"加入购物车",
+          flag:true
+       }
+     },
+     methods: {
+         onChange(index) {
+             this.current = index;
+         },
 
-	   }
-	}
+         getGoodsId() {//获取药品id
+             let a = this.$route.query["id"]
+             this.goodsId = a
+             console.log(a)
+             return a
+         },
+         getGoodsInfo(n) {
+             this.$axios.post(this.HOST + "/goods/goods_detail/", {"goods_id": n})
+                 .then(result => {
+                     this.info = result.data.data.goods
+                     console.log(this.info)
+                 })
+         },
+         addCart() {
+             let num = localStorage.getItem("u_id")
+             if (this.flag) {
+                 this.$axios.post(this.HOST + "/cart/addcart/", {"u_id": 10, "goods_id": parseInt(this.goodsId)})
+                     .then(result => {
+                         console.log(result.data)
+                         if (result.data.status == 200) {
+                             Notify({
+                                 message: '加入购物车成功',
+                                 duration: 1000
+                             });
+                         }
+                     })
+                 this.cartInfo = "取消购物车"
+             } else {
+                 this.$axios.post(this.HOST + "/cart/subcart/", {"u_id": 10, "goods_id": parseInt(this.goodsId)})
+                     .then(result => {
+                         console.log(result.data)
+                         if (result.data.status == 200) {
+                             Notify({
+                                 message: '取消购物车成功',
+                                 duration: 1000
+                             });
+                         }
+                     })
+                 this.cartInfo = "加入购物车"
+             }
+             this.flag = !this.flag
+         },
+         finish(){
+
+         }
+
+     },
+       mounted() {
+           let b = this.getGoodsId();
+           this.getGoodsInfo(b);
+       }
+   }
 </script>
 
 <style scoped>
+.detail-show img{
+		width:90%;
+		height:2.3rem;
+		margin-left:5%;
+	}
+.detail-show span{
+	width: 100%;
+	display: block;
+
+	}
+.custom-indicator{
+/* background-color: pink; */
+padding-left: 85%;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+height: 2.82rem;
+line-height:3;
+border-bottom:0.01rem solid #F1F1F1;
+}
 
 a{
 	color:black;
@@ -98,7 +194,7 @@ a{
 	font-size:0.14rem;
 	/* background-color:lightblue; */
 	position:fixed;
-	bottom:0;
+  bottom: 0.6rem;
 }
 .detail-foot li{
 	display:inline-block;
@@ -108,7 +204,7 @@ a{
 	box-sizing:border-box;
 }
 .addcart{
-	width:30%;
+	width:45%;
 	font-size:0.16rem;
 	background-color:#ffc523;
 	color:white;
@@ -124,12 +220,9 @@ a{
 	text-align:center;
 }
 .detail-botoom{
-	width:40%;
+	width:55%;
 	background-color:white;
 }
-/* .detail-botoom img{
-	width:0.23rem;
-	height:0.23rem;
-} */
 
 </style>
+

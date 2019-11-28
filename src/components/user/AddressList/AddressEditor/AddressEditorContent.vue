@@ -65,6 +65,10 @@
                     })
 
             },
+            onDelete() {
+                Toast('已删除');
+                this.$router.push("/addresslist");
+            },
         },
     }
 </script>
