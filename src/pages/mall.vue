@@ -1,26 +1,26 @@
 <template>
-  <div>
+  <div style="background-color: #F5F5F5">
     <headerr></headerr>
     <div style="display: flex">
-      <mall-left   :items="items" @num="num" style="width: 30%;
+      <mall-left  @num="num" :data="goodSort" style="width: 25%;
     margin-top: 50px;
     margin-bottom: 50px;"></mall-left>
-      <mall-right :items="items[i]" style="display: flex;
+      <mall-right  :data="goodInfo" style="display: flex;
     width: 75%;
     flex-wrap: wrap;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-    margin-left: 25%;
-    position: fixed;"></mall-right>
+  "></mall-right>
     </div>
     <navbar></navbar>
   </div>
+
 </template>
 <script>
     import {TreeSelect} from 'vant';
     import headerr from "../components/mall/headerr";
     import mallLeft from "../components/mall/mallLeft";
-    import mallRight from "@/components/mall/mallRight";
+    import mallRight from "../components/mall/mallRight";
     import navbar from "../common/nav-bar";
     export default {
         name: "mall",
@@ -28,434 +28,36 @@
             headerr,
             mallLeft,
             mallRight,
-            navbar
+            navbar,
+        },
+        data(){
+            return{
+               goodInfo:"",//所有商品
+                goodSort:""//所有分类
+            }
         },
         methods:{
             num(i){
                 this.i=i
-            }
-        },
-        data() {
-            return {
-                i:0,
-                items: [
-                    {
-                        msg: "家庭常备",
-                        currentRight:[
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"阿莫西林胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"止咳糖浆"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"999感冒灵"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺片"
-                            },
-                        ],
-                    },
-                    {
-                        msg: "消化不良",
-                        currentRight:[
-                            // {
-                            //     img:"../static/mallimg/1.jpg",
-                            //     name:"健胃消食片"
-                            // },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"阿莫西林胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"止咳糖浆"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"999感冒灵"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺片"
-                            },
-                        ],
-                    },
-                    {
-                        msg: "皮肤病",
-                        currentRight:[
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"阿莫西林胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"止咳糖浆"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"999感冒灵"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺片"
-                            },
-                        ],
-                    },
-                    {
-                        msg: "维矿物质",
-                        currentRight:[
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"阿莫西林胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"止咳糖浆"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"999感冒灵"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺片"
-                            },
-                        ],
-                    },
-                    {
-                        msg: "滋补保健",
-                        currentRight:[
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"阿莫西林胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"止咳糖浆"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"999感冒灵"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺片"
-                            },
-                        ],
-                    },
-                    {
-                        msg: "风湿骨病",
+            },
+            getGoodsSort(){
+                this.$axios.get(this.HOST+"/goods/goodstype/")
+                    .then(result=>{
+                        this.goodInfo=result.data.data.allgoods
+                        this.goodSort=result.data.data.goodstype
+                        // window.console.log(result.data.data)
+                        // window.console.log(this.goodInfo)
+                        // window.console.log(this.goodSort)
 
-                        currentRight:[
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"阿莫西林胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"止咳糖浆"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"999感冒灵"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺片"
-                            },
-                        ],
-                    },
-                    {
-                        msg: "中医理疗",
-                        currentRight:[
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"阿莫西林胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"止咳糖浆"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"999感冒灵"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺片"
-                            },
-                        ],
-                    },
-                    {
-                        msg: "男性健康",
-                        currentRight:[
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"阿莫西林胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"止咳糖浆"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"999感冒灵"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺片"
-                            },
-                        ],
-                    },
-                    {
-                        msg: "女性健康",
-                        currentRight:[
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"阿莫西林胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"止咳糖浆"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"999感冒灵"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺片"
-                            },
-                        ],
-                    },
-                    {
-                        msg: "医疗器械",
-                        currentRight:[
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"阿莫西林胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"止咳糖浆"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"999感冒灵"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺胶囊"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"健胃消食片"
-                            },
-                            {
-                                img:"../static/mallimg/1.jpg",
-                                name:"复方氨酚烷胺片"
-                            },
-                        ],
-                    },
-                ],
-                // currentRight:[
-                //     {
-                //         img:"../static/mallimg/1.jpg",
-                //         name:"健胃消食片"
-                //     },
-                //     {
-                //         img:"../static/mallimg/1.jpg",
-                //         name:"阿莫西林胶囊"
-                //     },
-                //     {
-                //         img:"../static/mallimg/1.jpg",
-                //         name:"止咳糖浆"
-                //     },
-                //     {
-                //         img:"../static/mallimg/1.jpg",
-                //         name:"999感冒灵"
-                //     },
-                //     {
-                //         img:"../static/mallimg/1.jpg",
-                //         name:"复方氨酚烷胺胶囊"
-                //     },
-                //     {
-                //         img:"../static/mallimg/1.jpg",
-                //         name:"健胃消食片"
-                //     },
-                //     {
-                //         img:"../static/mallimg/1.jpg",
-                //         name:"健胃消食片"
-                //     },
-                //     {
-                //         img:"../static/mallimg/1.jpg",
-                //         name:"复方氨酚烷胺片"
-                //     },
-                // ],
-                // created() {
-                //     this.currentRight = this.right[0];
-                // },
-                // methods: {
-                //     classifyChange(index) {
-                //         this.currentRight = this.right[index];
-                //         console.log(this.currentRight);
-                //     }
-                // }
-            }
-        }
+                    })
+            },
+
+
+        },
+        mounted(){
+            this.getGoodsSort()
+
+        },
     }
 </script>
 <style lang="less" scoped>

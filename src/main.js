@@ -4,16 +4,18 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import './../static/common.css'
-// import './../static/'
-import Axios from 'axios'
-
-Vue.prototype.$axios  = Axios
+import Axios from "axios"
+Vue.prototype.$axios =Axios
+Vue.prototype.HOST= "http://122.112.231.109:5000"
+Vue.config.productionTip=false
 
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  
+ 
   components: { App },
   template: '<App/>'
 })

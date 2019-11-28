@@ -4,7 +4,7 @@
 
 <script>
 	export default{
-		
+
 	}
 </script>
 
@@ -14,7 +14,6 @@
 		/* background-color:lightblue; */
 		display:flex;
 		padding-top:0.1rem;
-		padding-bottom:0.1rem;
 		box-sizing:border-box;
 	}
 	.detail-head h3{
