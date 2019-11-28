@@ -32,7 +32,7 @@
         </div>
         <div class="regBot">
             <input type="button" value="注册" @click="dbCheck()">
-            <router-link to="/">已有账号，立即登录</router-link>
+            <router-link to="/LoginPage">已有账号，立即登录</router-link>
         </div>
         <div class="agree">
             <span>注册代表阅读并同意<a href="#">《MyHealth用户协议》</a></span>
@@ -167,12 +167,12 @@ export default {
         display: block;
         background-color: #f7f8e3;
         border-radius: 0.1rem;
-        height: .4rem;
+        height: .3rem;
         border: 0;
         border-bottom: 1px solid #f6f6f6;
         padding-left: .3rem;
         /* font-size: 14px; */
-        margin: -.45rem 1.1rem .1rem;
+        margin: -.25rem 1rem .1rem;
     }
     .regInfo input::-webkit-input-placeholder{
         color: #afafaf;
@@ -180,7 +180,7 @@ export default {
     .regInfoTwo h3{
         line-height: .3rem;
         font-size: .13rem;
-        padding-left: .2rem;
+        padding-left: .25rem;
         /* width: 0.6rem; */
     }
     .regInfoTwo .warnning{
@@ -188,12 +188,13 @@ export default {
         text-align: center
     }
     .regInfoTwo button{
-        height: .4rem;
+        height: .3rem;
         display: block;
-        margin-left: 2.11rem;
+        margin-left: 2.7rem;
         position: relative;
-        top: -.51rem;
+        top: -.41rem;
         right:-.1rem;
+        font-size:0.12rem;
     }
     .regBot{
         flex: 1;

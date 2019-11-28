@@ -110,19 +110,21 @@ export default {
     .box{
         display: flex;
         flex-direction: column;
-        background-image: url("../../assets/true.jpg");
+        height: 100%;
+        /* background-image: url("../../assets/true.jpg"); */
         background-size: 100% 100%;
     }
     .boxA .back{
         width: .2rem;
         height: .25rem;
         margin-left: .05rem;
-        margin-top: .05rem;
+        margin-top: .15rem;
         float: left;
     }
     .boxA p{
         float: left;
         margin-left: 1.3rem;
+        margin-top: .2rem;
     }
     .regTop{
         width: 100%;
@@ -156,12 +158,12 @@ export default {
         display: block;
         background-color: #f7f8e3;
         border-radius: 0.1rem;
-        height: .4rem;
+        height: .3rem;
         border: 0;
         border-bottom: 1px solid #f6f6f6;
         padding-left: .15rem;
         /* font-size: 14px; */
-        margin: -.45rem 1.3rem .1rem;
+        margin: -.3rem 1.1rem .1rem;
     }
     .regInfo input::-webkit-input-placeholder{
         color: #afafaf;
@@ -177,16 +179,17 @@ export default {
         text-align: center
     }
     .regInfoTwo button{
-        height: .4rem;
+        height: .35rem;
         display: block;
         margin-left: 2.11rem;
         position: relative;
-        top: -.51rem;
+        top: -.46rem;
         right: -.15rem;
+        font-size: .12rem;
     }
     .regBot{
         flex: 1;
-    }
+    }   
     .regBot input{
         width: 2.2rem;
         height: .45rem;

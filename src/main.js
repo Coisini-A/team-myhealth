@@ -12,10 +12,16 @@ Vue.prototype.HOST="http://122.112.231.109:5000"
 Vue.config.productionTip=false
 //
 
-/* eslint-disable no-new */
+
+Vue.prototype.$axios  = Axios
+//
+
+  // eslint-disable no-new
 new Vue({
   el: '#app',
   router,
+  
+ 
   components: { App },
   template: '<App/>'
 })

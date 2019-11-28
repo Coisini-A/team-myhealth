@@ -107,9 +107,9 @@
                        window.console.log(num)
                        this.$axios.post(this.HOST+"/doctor/hospitals/",{"cityid":num})
                            .then(result=>{
-                               // window.console.log(result.data)
+                               window.console.log(result.data)
                                this.hospitalsInfo=result.data.data.hospitals
-                                 // window.console.log(this.hospitalsInfo)
+                                 window.console.log(this.hospitalsInfo)
                            })
                        this.show=false
                        this.selectProvince = a[0].name
@@ -121,7 +121,7 @@
             //选择医院以后获取医院id,查找科室的信息
             getHID(num){
                 this.hospitalsId=parseInt(num)
-                // window.console.log(this.hospitalsId);
+                window.console.log(this.hospitalsId);
                 this.$axios.post(this.HOST+"/doctor/rooms/",{"h_id":parseInt(this.hospitalsId)})
                     .then(result=>{
                         // window.console.log(result.data)

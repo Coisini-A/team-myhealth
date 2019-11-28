@@ -12,7 +12,7 @@
         name: "AddressEditorHeader",
         data(){
             return{
-                msg:"新增地址",
+                msg:"编辑地址",
                 headerimg:"../../../static/user-images/Return.png"
             }
         }

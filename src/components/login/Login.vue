@@ -80,6 +80,7 @@ export default {
                 "u_tel":a,
                 "u_password":b
             }
+            console.log(info)
             if(this.warn1==""&&this.warn2==""&&this.msg==true){
                 this.$axios.post(this.HOST+"/user/login/",info)
                     .then(result=>{
@@ -92,10 +93,10 @@ export default {
                             this.$router.push("/")
                         }else if(result.data.status==501){//用户名或密码错误
                             this.warn2="用户名或密码错误"
-                        }else if(result.data.status==302){//此用户不存在
-                            this.warn2="此用户不存在"
+                        }else if(result.data.status==300){//此用户不存在0
+                            this.warn2="此用户不存在"      
                         }else{//请求参数错误。请重试
-                            this.warn2="请求参数错误。请重试"
+                            this.warn2="请求参数错误。请重试"            
                         }
                     })
             }
@@ -123,7 +124,7 @@ export default {
         width: 100%;
         height: 2.65rem;
         padding-top: .1rem;
-        background-image: url("../../assets/logo.png");
+        /* background-image: url("../../assets/logo.png"); */
       background-repeat: no-repeat;
     }
     .regTop img{
@@ -153,12 +154,13 @@ export default {
         border-radius: 0.1rem;
         /* width: 1rem; */
         height: .4rem;
+        height: .3rem;
         border: 0;
         border-bottom: 1px solid #f6f6f6;
         padding-left: .15rem;
         font-size: .12rem;
         outline: none;
-        margin: -.45rem 1.1rem .1rem;
+        margin: -.25rem 1.1rem .1rem;
     }
     .regInfo p{
         margin-bottom: -.02rem;

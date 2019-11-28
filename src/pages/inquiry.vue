@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <nav-bar></nav-bar> -->
     <inquiry-header></inquiry-header>
     <inquiry-content></inquiry-content>
   </div>
@@ -19,5 +18,4 @@
     }
 </script>
 <style lang="less" scoped>
-
 </style>

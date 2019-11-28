@@ -28,5 +28,7 @@ export default {
 </script>
 
 <style scoped>
-
+.box{
+    height: 100%;
+}
 </style>

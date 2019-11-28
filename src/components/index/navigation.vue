@@ -1,20 +1,17 @@
 <template>
   <div class="indexNav">
-      <div class="swiper-wrapper" >
-        <div class="swiper-slide" v-for="(item,index) in navList" :key="index" v-text="item.text"></div>
-        <van-popup v-show="show"></van-popup>
-      </div>
+    <div class="swiper-wrapper">
+      <router-link tag="div" :to="{name:item.path}" class="swiper-slide" v-for="(item,index) in navList" :key="index" v-text="item.text"></router-link>
+    </div>
   </div>
 </template>
 
 <script>
 import "swiper/css/swiper.css";
 import Swiper from "swiper/js/swiper";
-import { Popup } from "vant";
 export default {
   name: "navigation",
   components: {
-    "van-popup": Popup
   },
   data() {
     return {
@@ -22,52 +19,53 @@ export default {
       navList: [
         {
           name: "Forum",
-          text: "问诊"
+          text: "感冒药",
+          path:'User'
         },
         {
           name: "Forum",
-          text: "问诊"
+          text: "常备药",
+          path:''
         },
         {
           name: "Forum",
-          text: "问诊"
+          text: "预约",
+          path:''
         },
         {
           name: "Forum",
-          text: "问诊"
+          text: "关注",
+          path:''
         },
         {
           name: "Forum",
-          text: "问诊"
+          text: "资讯",
+          path:''
         },
         {
           name: "Forum",
-          text: "问诊"
+          text: "购物车",
+          path:''
+
         },
         {
           name: "Forum",
-          text: "问诊"
+          text: "问诊",
+          path:''
         },
         {
           name: "Forum",
-          text: "问诊"
-        },
-        {
-          name: "Forum",
-          text: "问诊"
-        },
-        {
-          name: "Forum",
-          text: "问诊"
+          text: "活动",
+          path:''
         }
       ]
     };
   },
   mounted() {
     new Swiper(".indexNav", {
-      slidesPerView: 6,
+      slidesPerView:5,
       spaceBetween: 0,
-      freeMode: true,
+      freeMode: true
     });
   }
 };

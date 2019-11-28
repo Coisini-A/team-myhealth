@@ -9,8 +9,13 @@
 
         <van-uploader
           v-model="fileList"
-          multiple
           :max-count="1"
+          captrue="camera"
+          :after-read="afterRead"
+          accept="image/jpg/png/gif"
+          preview-size="100px"
+          multiple
+          class="haha"
         />
 
 
@@ -20,13 +25,13 @@
       </van-popup>
     </div>
     <div>
-      <p class="UserInFormationContent-set">详细信息<van-icon name="arrow"  class="color"/></p>
+      <p class="UserInFormationContent-set" @click="detailedinformation">编辑信息<van-icon name="arrow"  class="color"/></p>
     </div>
 
 
 
     <div>
-      <div class="UserInFormationContent-P4">
+      <div class="UserInFormationContent-P4" @click="usernewpassword">
         <span>{{p4name}}<van-icon name="arrow"  class="color"/></span>
       </div>
 
@@ -59,14 +64,14 @@
       <span>{{p11name}}</span>
     </p>
     <p class="UserInFormationContent-P12"></p>
-    <p class="UserInFormationContent-P13">
+    <p class="UserInFormationContent-P13" @click="remove">
       <span>{{p13name}}</span>
     </p>
   </div>
 </template>
 
 <script>
-    import { Popup,cell,Rate,Uploader,Icon } from 'vant';
+    import { Popup,cell,Rate,Uploader,Icon,Notify } from 'vant';
     export default {
         name: "UserInFormationContent",
         components:{
@@ -74,11 +79,11 @@
             [cell.name]:cell,
             [Rate.name]:Rate,
             [Uploader.name]:Uploader,
-            [Icon.name]:Icon
+            [Icon.name]:Icon,
+            [Notify.name]:Notify
         },
         data(){
             return{
-
                 HeadSetting:"头像设置",
                 p4name:"修改密码",
                 p5name:"隐私",
@@ -89,7 +94,9 @@
                 p13name:"退出登录",
                 show: false,
                 value: 3,
-                fileList: []
+                fileList: [],
+                multiple:false
+
             }
         },
         methods: {
@@ -103,6 +110,41 @@
             heer(){
                 this.$router.push("/addresslist");
             },
+            usernewpassword(){
+                this.$router.push("/usernewpassword");
+            },
+            detailedinformation(){
+                this.$router.push("/UserPersonalDetails");
+            },
+            afterRead(file) {
+                // 此时可以自行将文件上传至服务器
+                this.$axios.post('http://122.112.231.109:5000/user/head/',{files:file.content,u_id:6})
+                    .then(result=>{
+                        if(result.data.status==200){
+                            console.log(result.data)
+                            localStorage.setItem("img",file.content)
+                            Notify({ type: 'success', message:'更换头像成功' });
+                        }else{
+                            Notify({ type: 'danger', message: '更换头像失败' });
+                        }
+                    })
+                    .catch(err=>{
+                        console.log(err)
+                    })
+            },
+            remove(){
+                this.$axios.post('http://122.112.231.109:5000/user/logout/',{ u_tel:18149192872})
+                    .then(result=>{
+                        if(result.data.status==200){
+                            Notify({ type: 'success', message:'退出成功' });
+                            console.log(result.data)
+                            this.$router.push("/user");
+                            localStorage.clear()
+                        }else{
+                            Notify({ type: 'danger', message: '退出失败' });
+                        }
+                    })
+            }
         }
     }
 </script>
@@ -243,5 +285,9 @@
     color:#9D9999;
     left:2.82rem;
     font-size:0.164rem;
+  }
+  .haha{
+    margin-left: 10px;
+    margin-top: 10px;
   }
 </style>

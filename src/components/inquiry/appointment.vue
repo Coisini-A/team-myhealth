@@ -235,9 +235,43 @@
     box-sizing: border-box;
     padding: 0.05rem 0;
   }
-   .input_text>li{
-     width: 100%;
-     height: 0.3rem;
+  .input_text_item01{
+    width: 2rem;
+    display: flex;
+    float: left;
+  }
+  .input_text_item01>div{
+    width: 1.5rem;
+    background-color: #e5e5e5;
+    position: relative;
+    border-radius: 0.1rem;
+    padding: 0.05rem;
+    box-sizing: border-box;
+  }
+   .input_text_item01>div:after{
+     content: '';
+     display: inline-block;
+     width: 0;
+     height: 0;
+     border-top: 0.05rem solid transparent;
+     border-right: 0.1rem solid #e5e5e5;
+     border-bottom: 0.05rem solid transparent;
+     position: absolute;
+     top: 0.1rem;
+     left: -0.1rem;
+   }
+   .input_text_item02{
+     width: 2rem;
+     display: flex;
+     float: right;
+     margin-top: 0.05rem;
+   }
+   .input_text_item02>div{
+     width: 1.7rem;
+     background-color: #e5e5e5;
+     position: relative;
+     border-radius: 0.1rem;
+     padding: 0.05rem;
      box-sizing: border-box;
      padding: 0 0.05rem;
      line-height: 0.3rem;
