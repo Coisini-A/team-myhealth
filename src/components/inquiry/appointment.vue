@@ -49,7 +49,7 @@
                   <div class="content_02_box content_item_box">
                     <div class="desc_info">
                       <h2>问题描述</h2>
-                      <textarea name="" id="" cols="30" rows="10"></textarea>
+                      <textarea name="" id="descInfo" cols="30" rows="10"></textarea>
                     </div>
                     <div class="choose_time">
                       <span>请选择预约时间：</span>
@@ -60,7 +60,7 @@
                       </select>
                     </div>
                     <div class="choose_submit">
-                          <div>点击预约</div>
+                          <div @click="showResult">点击预约</div>
                     </div>
                   </div>
                 </div>
@@ -72,7 +72,7 @@
 </template>
 
 <script>
-  import {NavBar,Icon,Tabs,Tab} from "vant"
+  import {NavBar,Icon,Tabs,Tab,Toast} from "vant"
     export default {
         name: "appointment.vue",
         data(){
@@ -88,6 +88,7 @@
             [Icon.name]:Icon,
             [Tabs.name]:Tabs,
             [Tab.name]:Tab,
+            [Toast.name]:Toast,
         },
         methods:{
             onClickLeft(){
@@ -103,6 +104,19 @@
                     this.infoList.push(a)
                     this.inputInfo=""
                     window.console.log(this.infoList);
+                }
+            },
+            showResult(){
+                let a = document.querySelector("#descInfo")
+                let b = document.querySelector("#choose_options")
+                if(a.value==""||b.value==null){
+                    Toast.fail('预约失败、请填写完整信息');
+                }else{
+                    setTimeout(function(){
+                        Toast.success('预约成功')
+                        a.value=""
+                        b.value=null
+                    },1000)
                 }
             }
         },
@@ -203,7 +217,6 @@
      width: 2rem;
      display: flex;
      float: right;
-     height: 0.3rem;
      margin-top: 0.05rem;
    }
    .input_text_item02>div{
@@ -229,7 +242,7 @@
    .input_box{
       width: 100%;
      position: absolute;
-     bottom: 0;
+     bottom: 0.4rem;
      left: 0;
      height: 1.3rem;
      border-top: 1px solid #ECECEC;
