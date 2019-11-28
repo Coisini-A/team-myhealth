@@ -122,6 +122,7 @@
                     .then(result=>{
                         if(result.data.status==200){
                             console.log(result.data)
+                            localStorage.setItem("img",file.content)
                             Notify({ type: 'success', message:'更换头像成功' });
                         }else{
                             Notify({ type: 'danger', message: '更换头像失败' });
@@ -130,7 +131,6 @@
                     .catch(err=>{
                         console.log(err)
                     })
-                localStorage.setItem("img",file.content)
             },
             remove(){
                 this.$axios.post('http://122.112.231.109:5000/user/logout/',{ u_tel:18149192872})

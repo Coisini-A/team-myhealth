@@ -1,17 +1,16 @@
 <template>
-    <div>
-      <van-address-edit
-        :area-list="areaList"
-        show-delete
-        show-set-default
-        show-search-result
-        :area-columns-placeholder="['请选择', '请选择', '请选择']"
-        @save="onSave"
-        @delete="onDelete"
-        @change-area="onChangeDetail"
-        :list="list"
-      />
-    </div>
+  <div>
+    <van-address-edit
+      :area-list="areaList"
+      show-delete
+      show-set-default
+      show-search-result
+      :area-columns-placeholder="['请选择', '请选择', '请选择']"
+      @save="onSave"
+      @delete="onDelete"
+      @change-area="onChangeDetail"
+    />
+  </div>
 </template>
 
 <script>
@@ -29,14 +28,7 @@
             return {
                 areaList,
                 dada:[],
-                lala:[],
-                list:[
-                    {
-                        name: '邓楠',
-                        tel: '13679124645',
-                        address: '陕西省西安市未央区 138 号东方通信大厦 7 楼 501 室'
-                    },
-                ]
+                lala:[]
             }
         },
         methods: {
@@ -48,13 +40,6 @@
 
                 this.$axios.post('http://122.112.231.109:5000/user/add_address/',{u_id:14,provinceid:this.dada,cityid:this.lala,detail_address:a.addressDetail,user_name:a.name,user_tel:a.tel,is_default:a.isDefault})
                     .then(result=>{
-                        console.log(result.data)
-                        console.log(typeof (this.dada))
-                        console.log(typeof (this.lala))
-                        console.log(typeof(a.addressDetail))
-                        console.log(typeof(a.name))
-                        console.log(typeof(a.tel))
-                        console.log(typeof(a.isDefault))
                         if(status==200){
                             this.$router.push({
                                 path:"/addresslist",
@@ -74,10 +59,24 @@
                 Toast('已删除');
                 this.$router.push("/addresslist");
             },
+            // _newitem(){
+            //     var query=this.$route.query.newitem
+            //     console.log(query)
+            //     this.list.push({
+            //         name:query.name,
+            //         tel:query.tel,
+            //         address:query.address,
+            //     })
+            //     console.log(name)
+            // }
         },
+        // mounted() {
+        //     this._newitem()
+        // }
     }
 </script>
 
 <style scoped>
 
 </style>
+

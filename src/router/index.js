@@ -14,6 +14,7 @@ import UserAccount from '../pages/useraccount'
 import UserConen from '../pages/user-concen'
 import AddressList from '../pages/addresslist'
 import AddressEditor from '../pages/addresseditor'
+import AddressModify from '../pages/addressmodify'
 import UserNewPassword from  '../pages/usernewpassword'
 import UserPersonalDetails from  '../pages/userpersonaldetails'
 Vue.use(Router)
@@ -101,6 +102,11 @@ export default new Router({
       path: '/addresseditor',
       name: 'AddressEditor',
       component: AddressEditor
+    },
+    {
+      path: '/addressmodify',
+      name: 'AddressModify',
+      component: AddressModify
     },
     {
       path: '/usernewpassword',

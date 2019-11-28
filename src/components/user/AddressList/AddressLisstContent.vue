@@ -4,6 +4,7 @@
     <van-address-list
       v-model="chosenAddressId"
       :list="list"
+      :last="last"
       columns-num
       disabled-text="以下地址超出配送范围"
       @add="onAdd"
@@ -25,6 +26,9 @@
                 query:null,
                 chosenAddressId: '1',
                 message:"",
+                last:[
+
+                ],
                 list: [
                     {
                         name: '邓楠',
@@ -48,23 +52,53 @@
                 this.$router.push("/addresseditor")
             },
             onEdit(item, index) {
-                Toast('编辑地址:' + index);
-                this.$route.push("/addresseditor")
-                this.list.push("/addresseditor")
-            }
+                    Toast('编辑地址:' + index);
+                    this.$router.push("/addressmodify")
+                    // this.list.push("/addresseditor")
+                    this.$router.push({
+                        path:"/addressmodify",
+                        query:{ newitem:item}
+                    })
+            },
 
+            //查询地址
+            _queryaddress(){
+                var that=this
+                this.$axios.post('http://122.112.231.109:5000/user/all_address/',{ u_id:14})
+                    .then(result=>{
+                        var that=this
+                        // console.log(result.data.data.alladdr)
+                        var arr=result.data.data.alladdr
+                        console.log(arr)
+                        for ( var index in arr){
+                            console.log(arr[index])
+                            this.list.push({
+                                name:arr[index].user_name,
+                                tel:arr[index].user_tel,
+                                address:arr[index].detail_address,
+
+                            })
+                            console.log(name)
+                        }
+
+
+                    })
+                    .catch(err=>{
+                        console.log(err)
+                    })
+            },
         },
         created() {
             var query=this.$route.query
             console.log(query)
             this.query=query
-            // this.updateAddress()
+
         },
         mounted() {
             if (this.$route.query.id) {
                 this.updateAddress()
-
             }
+            this._queryaddress()
         }
     }
 </script>
