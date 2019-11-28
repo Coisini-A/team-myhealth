@@ -1,5 +1,5 @@
 <template>
-<div>
+<div >
     <div class="user-box" :key="key" v-for="(i,key) in 6">
         <div>
             <div>
@@ -55,6 +55,7 @@ export default {
     margin: 20px auto;
     background: white;
     border-radius: 10px;
+  background-image: url("../../../../static/user-images/back.jpg");
 }
 .user-box>div{
     display: flex;

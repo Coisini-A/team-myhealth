@@ -6,7 +6,7 @@
                     <span><img src="../../../../static/user-images/Return.png" alt=""></span>
                 </router-link>
 
-                <p>我的关注</p>
+                <p class="box-p">我的关注</p>
             </div>
 
 
@@ -40,6 +40,10 @@ export default {
         margin-top: 0.1rem
     }
     .user-box{
-        background: white;
+      background-image: url("../../../../static/user-images/back.jpg");
     }
+  .box-p{
+    font-weight: 900;
+    margin-left:1rem ;
+  }
 </style>

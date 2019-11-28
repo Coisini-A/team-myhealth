@@ -28,10 +28,10 @@
   .UserCardPackageHeader{
     width:100%;
     height:0.5rem;
-    background: darkgray;
     font-weight:900;
     text-align:center;
     line-height:0.5rem;
+    background-image: url("../../../../static/user-images/back.jpg");
   }
   .UserCardPackageHeader-span{
     width:10%;

@@ -1,39 +1,36 @@
 <template>
-    <div class="UserAccountHeader">
-      <img :src="headerimg" alt=""@click="headerone">
-      <div class="UserAccountHeaderText">{{msg}}</div>
-    </div>
+  <div class="AddressEditorHeader">
+    <router-link to="/addresslist">
+      <img :src="headerimg" alt="">
+    </router-link>
+    <div class="AddressEditorHeaderText">{{msg}}</div>
+  </div>
 </template>
 
 <script>
     export default {
-        name: "UserAccountHeader",
+        name: "AddressEditorHeader",
         data(){
             return{
-                msg:"用户账单",
+                msg:"编辑地址",
                 headerimg:"../../../static/user-images/Return.png"
-            }
-        },
-        methods:{
-            headerone(){
-                this.$router.push("/user")
             }
         }
     }
 </script>
 
 <style scoped>
-  .UserAccountHeader{
+  .AddressEditorHeader{
     width:100%;
     height:0.6rem;
-    background-image: url("../../../../static/user-images/back.jpg");
+    background: darkgray;
   }
-  .UserAccountHeader img{
+  .AddressEditorHeader img{
     width:7.5%;
     margin-top:0.15rem;
     margin-left:0.09rem;
   }
-  .UserAccountHeaderText{
+  .AddressEditorHeaderText{
     font-weight: 900;
     margin-left:0.5rem;
     margin-top:0.55rem;

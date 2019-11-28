@@ -91,4 +91,8 @@ export default {
         width: 80%;
         margin-top: 0.1rem
     }
+  .box{
+    background-image: url("../../../static/user-images/back.jpg");
+
+  }
 </style>

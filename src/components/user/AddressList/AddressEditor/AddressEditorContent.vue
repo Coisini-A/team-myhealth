@@ -7,9 +7,8 @@
         show-search-result
         :area-columns-placeholder="['请选择', '请选择', '请选择']"
         @save="onSave"
-        @delete="onDelete"
         @change-area="onChangeDetail"
-
+        :list="list"
       />
     </div>
 </template>
@@ -29,47 +28,44 @@
             return {
                 areaList,
                 dada:[],
-                lala:[]
+                lala:[],
+                list:[
+                    {
+                        name: '邓楠',
+                        tel: '13679124645',
+                        address: '陕西省西安市未央区 138 号东方通信大厦 7 楼 501 室'
+                    },
+                ]
             }
         },
         methods: {
             onChangeDetail(w){
-                // console.log(w)
-                this.dada=w[0].code
-                this.lala=w[1].code
-
+                this.dada=parseInt(w[0].code)
+                this.lala=parseInt(w[1].code)
             },
             onSave(a) {
-                Toast('已保存');
-                this.$axios.post('http://122.112.231.109:5000/user/add_address/',{ u_id:6,p_id:this.dada,c_id:this.lala,d_addr:a.addressDetail,u_name:a.name,u_tel:a.tel,is_default:a.isDefault})
+
+                this.$axios.post('http://122.112.231.109:5000/user/add_address/',{u_id:14,provinceid:this.dada,cityid:this.lala,detail_address:a.addressDetail,user_name:a.name,user_tel:a.tel,is_default:a.isDefault})
                     .then(result=>{
                         console.log(result.data)
-                        console.log(this.lala)
-
-                        console.log(a.addressDetail)
-
-                        console.log(a.name)
-
-                        console.log(a.tel)
-                        console.log(a.isDefault)
-
-
-
+                        if(result.data.status==200){
+                            this.$router.push({
+                                path:"/addresslist",
+                                query:{id:a}
+                            })
+                            Toast('已保存收获地址');
+                        }else if(result.data.status==300){
+                            Toast('没有此用户无法添加收获地址');
+                        }else{
+                            Toast('保存收货地址失败');
+                        }
                     })
                     .catch(err=>{
                         console.log(err)
                     })
-                this.$router.push({
-                    path:"/addresslist",
-                    query:{id:a}
-                })
-            },
-            onDelete() {
-                Toast('已删除');
-                this.$router.push("/addresslist");
-            },
 
-        }
+            },
+        },
     }
 </script>
 

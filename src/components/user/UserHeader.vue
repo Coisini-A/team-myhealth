@@ -9,7 +9,7 @@
       {{msgone}}
     </span>
       <span class="UserSettingsHeader-accountnumber">
-      用户ID:
+      性别:
       {{msgtwo}}
     </span>
       <div class="setup" @click="update">
@@ -30,7 +30,7 @@
         data(){
             return{
                 msgone:"用户名",
-                msgtwo:"007",
+                msgtwo:"男",
                 sup:"../../../static/user-images/Set up.png",
                 headportrait:"",
                 newimg:"../../../static/user-images/Default head.jpg"
@@ -53,6 +53,8 @@
     width:100%;
     height:1.9rem;
     font-size:14px;
+
+    background-image: url("../../../static/user-images/back.jpg");
   }
   .UserSettingsHeader-top{
     width:100%;

@@ -122,6 +122,7 @@
                     .then(result=>{
                         if(result.data.status==200){
                             console.log(result.data)
+                            localStorage.setItem("img",file.content)
                             Notify({ type: 'success', message:'更换头像成功' });
                         }else{
                             Notify({ type: 'danger', message: '更换头像失败' });
@@ -130,7 +131,6 @@
                     .catch(err=>{
                         console.log(err)
                     })
-                localStorage.setItem("img",file.content)
             },
             remove(){
                 this.$axios.post('http://122.112.231.109:5000/user/logout/',{ u_tel:18149192872})
@@ -150,6 +150,9 @@
 </script>
 
 <style scoped>
+  .UserInFormationContent{
+    background-image: url("../../../../static/user-images/back.jpg");
+  }
   .UserInFormationContent-P1{
     font-weight:900;
     position: absolute;
@@ -165,6 +168,8 @@
     justify-content:space-around;
     border-bottom: 2px solid seashell;
     border-top: 2px solid seashell;
+    background-image: url("../../../../static/user-images/back.jpg");
+
   }
   .UserInFormationContent-div img{
     margin-left:1.5rem;
@@ -289,5 +294,8 @@
   .haha{
     margin-left: 10px;
     margin-top: 10px;
+  }
+  .usertwocontent{
+
   }
 </style>
