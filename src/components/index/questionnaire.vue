@@ -1,7 +1,7 @@
 
 <template>
-  <div class="indexQuestionnaire" @click="goQuestionnaire">
-    问卷,这是一张图片，点击跳转
+  <div class="indexQuestionnaire">
+    <img src="../../../static/indexImg/question.png" alt="" @click="goQuestionnaire">
   </div>
 </template>
 
@@ -10,6 +10,7 @@ export default {
   methods: {
     goQuestionnaire(){
       this.$router.push({ path: '/index/questionnaire' });
+      this.$emit('show')
     }
   },
 }
@@ -24,5 +25,9 @@ export default {
   background-color: white;
   box-shadow: 0 0 0.01rem gray;
   background-color:pink; 
+}
+.indexQuestionnaire>img{
+  width: 100%;
+  height: 1.5rem;
 }
 </style>

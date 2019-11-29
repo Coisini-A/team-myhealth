@@ -21,7 +21,6 @@ export default {
 <style>
 #app{
   height: 100%;
-  /*overflow: hidden;*/
   width: 100%;
 
 }

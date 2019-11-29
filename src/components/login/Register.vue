@@ -51,7 +51,8 @@ export default {
             warn2:"",
             warn3:"",
             warn4:"",
-            num:""
+            num:"",
+            phone:""
         }
     },
     methods: {

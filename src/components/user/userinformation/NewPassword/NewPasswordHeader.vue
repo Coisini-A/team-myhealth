@@ -1,6 +1,6 @@
 <template>
   <div class="UserNewPasswordHeader">
-    <router-link to="/UserInFormation">
+    <router-link to="user/UserInFormation">
       <img :src="headerimg" alt="">
     </router-link>
     <div class="UserNewPasswordHeaderText">{{msg}}</div>

@@ -6,26 +6,16 @@
       <span class="floMuch iconfont" @click="goMy">更多&#xe63f;</span>
     </h1>
     <div class="indexFollowTop">
-      <div class="indexFollowTopLeft" @click="go()">
-        <img src="../../../static/indexImg/d.png"/>
+      <div class="indexFollowTopLeft" @click="go('D',followD?followD.d.d_id:'null')">
+        <img :src="followD?followD.d.d_head:'../../../static/indexImg/d.png'"/>
       </div>
       <div class="indexFollowRight">
-        <div @click="go()">
-          <img src="../../../static/indexImg/y.png" />
+        <div @click="go('G',followG[0]?followG[0].goods.goods_id:'null')">
+          <img :src="followG[0]?followG[0].goods.url:'../../../static/indexImg/y.png'" />
         </div>
-        <div @click="go()">
-          <img src="../../../static/indexImg/y.png" />
+        <div @click="go('G',followG[1]?followG[1].goods.goods_id:'null')">
+          <img :src="followG[1]?followG[1].goods.url:'../../../static/indexImg/y.png'" />
         </div>
-      </div>
-    </div>
-    <div class="indexFollowBottom" @click="goForum">
-      <p>【{{"话题类别"}}】{{'不想敲代码怎么办'}}</p>
-      <div class="indexFollowBottomMain">
-        <img class="indexFollowBottomImg" src="../../../static/indexImg/d.png" alt="头像" />
-        <span>{{'老王'}}</span>
-        <span class="indAddress">{{'千锋教育'}}</span>
-        <span class="indGood">点赞{{20}}</span>
-        <span class="indReader">阅读量{{10}}</span>
       </div>
     </div>
   </div>
@@ -33,19 +23,29 @@
 
 <script>
 export default {
+  props:['followD','followG'],
   components: {},
   data() {
     return {};
   },
   methods: {
     goMy() {
-      alert("条转");
+      this.$router.push({path:''})//关注页
     },
-    goForum(){
-      alert("tiaozhuang");
-    },
-    go(){
-      alert("tiao");
+    go(type,id){
+      if(type=='D'){
+        if(id!="null"){
+          this.$router.push({path:'/inquiry'})
+        }else(
+          this.$router.push({path:''})  //登录
+        )
+      }else if(type=='G'){
+        if(id!="null"){
+          this.$router.push({path:'/mall'})
+        }else{
+          this.$router.push({path:''})  //登录
+        }
+      }
     }
   }
 };

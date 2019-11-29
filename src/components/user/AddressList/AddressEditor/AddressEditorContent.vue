@@ -7,7 +7,6 @@
         show-search-result
         :area-columns-placeholder="['请选择', '请选择', '请选择']"
         @save="onSave"
-        @delete="onDelete"
         @change-area="onChangeDetail"
         :list="list"
       />
@@ -45,35 +44,26 @@
                 this.lala=parseInt(w[1].code)
             },
             onSave(a) {
-
-                this.$axios.post('http://122.112.231.109:5000/user/add_address/',{u_id:14,provinceid:this.dada,cityid:this.lala,detail_address:a.addressDetail,user_name:a.name,user_tel:a.tel,is_default:a.isDefault})
+                var userid=localStorage.getItem("user_id");
+                this.$axios.post('http://122.112.231.109:5000/user/add_address/',{u_id:userid,provinceid:this.dada,cityid:this.lala,detail_address:a.addressDetail,user_name:a.name,user_tel:a.tel,is_default:a.isDefault})
                     .then(result=>{
                         console.log(result.data)
-                        console.log(typeof (this.dada))
-                        console.log(typeof (this.lala))
-                        console.log(typeof(a.addressDetail))
-                        console.log(typeof(a.name))
-                        console.log(typeof(a.tel))
-                        console.log(typeof(a.isDefault))
-                        if(status==200){
+                        if(result.data.status==200){
                             this.$router.push({
                                 path:"/addresslist",
                                 query:{id:a}
                             })
-                            Toast('已保存');
+                            Toast('已保存收获地址');
+                        }else if(result.data.status==300){
+                            Toast('没有此用户无法添加收获地址');
                         }else{
-                            Toast('保存失败');
+                            Toast('保存收货地址失败');
                         }
                     })
                     .catch(err=>{
                         console.log(err)
                     })
-
-            },
-            onDelete() {
-                Toast('已删除');
-                this.$router.push("/addresslist");
-            },
+            }
         },
     }
 </script>

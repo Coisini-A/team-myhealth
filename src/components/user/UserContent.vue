@@ -61,27 +61,31 @@ export default {
 };
 </script>
 <style lang="">
-.box > div {
-  width: 100%;
-  border-bottom: 1px solid;
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-}
-.box > div span {
-  width: 35px;
-  height: 40px;
-  margin: 5px 5px;
-}
-.box > div > div {
-  display: flex;
-  line-height: 60px;
-}
-.box p {
-  margin-left: 0.1rem;
-}
-.box img {
-  width: 80%;
-  margin-top: 0.1rem;
-}
+    .box>div{
+        width:100%;
+        border-bottom: 1px solid;
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+    }
+    .box>div span{
+      width: 35px;
+      height: 40px;
+      margin: 5px 5px;
+    }
+    .box>div>div{
+        display: flex;
+        line-height: 60px;
+    }
+    .box p{
+      margin-left:0.1rem;
+    }
+    .box img{
+        width: 80%;
+        margin-top: 0.1rem
+    }
+  .box{
+    background-image: url("../../../static/user-images/back.jpg");
+
+  }
 </style>

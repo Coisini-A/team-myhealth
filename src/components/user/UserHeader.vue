@@ -3,15 +3,9 @@
       <div class="UserSettingsHeader-top">
       </div>
       <div  class="UserSettingsHeader-portrait">
-        <img :src="headportrait?headportrait:newimg" type="image/jpeg" alt="">
+        <img :src="headportrait?headportrait:newimg" alt="">
       </div>
-      <span class="name">
-      {{msgone}}
-    </span>
-      <span class="UserSettingsHeader-accountnumber">
-      用户ID:
-      {{msgtwo}}
-    </span>
+      <span class="name">用户ID:{{msgone?msgone:msgtwo}}</span>
       <div class="setup" @click="update">
         <img :src="sup" width="60%" alt="">
       </div>
@@ -29,21 +23,23 @@
         },
         data(){
             return{
-                msgone:"用户名",
-                msgtwo:"007",
+                msgone:"",
                 sup:"../../../static/user-images/Set up.png",
                 headportrait:"",
-                newimg:"../../../static/user-images/Default head.jpg"
+                newimg:"../../../static/user-images/Default head.jpg",
+                msgtwo:"暂无登陆"
             }
         },
         methods:{
             update(){
-                this.$router.push("/usersettings")
+                this.$router.push("user/usersettings")
             },
         },
         beforeMount() {
             var a=localStorage.getItem("img");
             this.headportrait=a
+            var b=localStorage.getItem("user_id");
+            this.msgone=b
         }
     }
 </script>
@@ -53,6 +49,8 @@
     width:100%;
     height:1.9rem;
     font-size:14px;
+
+    background-image: url("../../../static/user-images/back.jpg");
   }
   .UserSettingsHeader-top{
     width:100%;
@@ -73,11 +71,13 @@
   .UserSettingsHeader-portrait img{
     width:100%;
     height:100%;
+    border-radius:50%;
+    margin-left:1.1rem;
   }
   .name{
     position:absolute;
-    top: 0.65rem;
-    left:1.6rem;
+    top:1.5rem;
+    left:1.4rem;
     font-weight:900;
   }
   .setup{
@@ -85,11 +85,5 @@
     position: absolute;
     top:0.15rem;
     right:0.01rem;
-  }
-  .UserSettingsHeader-accountnumber{
-    position:absolute;
-    top: 1.05rem;
-    left:1.6rem;
-    font-weight:900;
   }
 </style>

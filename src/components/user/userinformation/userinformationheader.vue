@@ -26,7 +26,7 @@
   .UserInFormationHeader{
     width:100%;
     height:0.5rem;
-    background: darkgray;
+    background-image: url("../../../../static/user-images/back.jpg");
   }
   .UserInFormationHeader img{
     width:7.5%;

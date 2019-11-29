@@ -6,7 +6,6 @@
       :list="list"
       :last="last"
       columns-num
-      disabled-text="以下地址超出配送范围"
       @add="onAdd"
       @edit="onEdit"
     />
@@ -14,12 +13,13 @@
 </template>
 
 <script>
-    import { AddressList, Toast} from 'vant';
+    import { AddressList, Toast,Notify} from 'vant';
     export default {
         name: "AddressLisstContent",
         components:{
             [AddressList.name]:AddressList,
             [Toast.name]:Toast,
+            [Notify.name]:Notify
         },
         data() {
             return {
@@ -30,12 +30,12 @@
 
                 ],
                 list: [
-                    {
-                        name: '邓楠',
-                        tel: '13679124645',
-                        address: '陕西省西安市未央区 138 号东方通信大厦 7 楼 501 室'
-                    },
-
+                    // {
+                    //     name: '邓楠',
+                    //     tel: '13679124645',
+                    //     address: '未央区 138 号东方通信大厦 7 楼 501 室',
+                    //     id:''
+                    // },
                 ]
             }
         },
@@ -47,6 +47,7 @@
                   address:this.query.id.province+this.query.id.addressDetail,
               })
             },
+
             onAdd() {
                 Toast('新增地址');
                 this.$router.push("/addresseditor")
@@ -57,30 +58,32 @@
                     // this.list.push("/addresseditor")
                     this.$router.push({
                         path:"/addressmodify",
-                        query:{ newitem:item}
+                        query:{ newitem:item,index:index}
                     })
+                console.log(item)
             },
-
             //查询地址
             _queryaddress(){
-                var that=this
-                this.$axios.post('http://122.112.231.109:5000/user/all_address/',{ u_id:14})
+                var userid=localStorage.getItem("user_id");
+                this.$axios.post('http://122.112.231.109:5000/user/all_address/',{u_id:userid})
                     .then(result=>{
-                        var that=this
-                        // console.log(result.data.data.alladdr)
-                        var arr=result.data.data.alladdr
-                        console.log(arr)
-                        for ( var index in arr){
-                            console.log(arr[index])
-                            this.list.push({
-                                name:arr[index].user_name,
-                                tel:arr[index].user_tel,
-                                address:arr[index].detail_address,
-
-                            })
-                            console.log(name)
+                        console.log(result.data.data)
+                        if(result.data.status==200){
+                            var arr=result.data.data.alladdr
+                            for ( var index in arr){
+                                this.list.push({
+                                    name:arr[index].user_name,
+                                    tel:arr[index].user_tel,
+                                    address:arr[index].detail_address,
+                                    id:arr[index].a_id
+                                })
+                            }
+                            Notify({ type: 'success', message:'查询收获成功'});
+                        }else if(result.data.status==300){
+                            Notify({ type: 'success', message:'暂无收货地址'});
+                        }else {
+                            Notify({ type: 'warning', message: '请登录' });
                         }
-
 
                     })
                     .catch(err=>{
@@ -90,9 +93,7 @@
         },
         created() {
             var query=this.$route.query
-            console.log(query)
             this.query=query
-
         },
         mounted() {
             if (this.$route.query.id) {

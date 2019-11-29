@@ -1,8 +1,8 @@
 <template>
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" v-for="(item, index) in swiperImg" :key="index">
-        <img class="iSwiperImg" :src="item.url" />
+      <div class="swiper-slide" v-for="(i, index) in swiperImg" :key="index">
+        <img class="iSwiperImg" :src="i.url" />
       </div>
     </div>
     <!-- 如果需要分页器 -->
@@ -11,11 +11,10 @@
 </template>
 <script>
 import Swiper from "swiper";
-
 export default {
   props: ["swiperImg", "swiperEffect"],
-  mounted() {
-    this._swipe();
+  updated() {
+    this._swipe()
   },
   methods: {
     _swipe() {
@@ -23,6 +22,8 @@ export default {
         direction: "horizontal", // 垂直切换选项
         loop: true, // 循环模式选项
         effect: this.swiperEffect,
+        observer: true, //修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true, //修改swiper的父元素时，自动初始化swiper
         pagination: {
           el: ".swiper-pagination"
         },
@@ -32,7 +33,7 @@ export default {
           disableOnInteraction: false
         }
       });
-    }
+    },
   }
 };
 </script>

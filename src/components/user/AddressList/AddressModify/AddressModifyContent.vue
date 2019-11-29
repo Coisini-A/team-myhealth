@@ -2,12 +2,11 @@
   <div>
     <van-address-edit
       :area-list="areaList"
-      show-delete
       show-set-default
       show-search-result
       :area-columns-placeholder="['请选择', '请选择', '请选择']"
       @save="onSave"
-      @delete="onDelete"
+      :address-info="list"
       @change-area="onChangeDetail"
     />
   </div>
@@ -28,7 +27,19 @@
             return {
                 areaList,
                 dada:[],
-                lala:[]
+                lala:[],
+                list:{
+                    name:"",
+                    tel:"",
+                    province:[],
+                    city:[],
+                    addressDetail:"",
+                    areaCode:"",
+                    areaCode:"",
+                    isDefault:false,
+                    // index:[],
+                    id:[]
+                }
             }
         },
         methods: {
@@ -37,14 +48,17 @@
                 this.lala=parseInt(w[1].code)
             },
             onSave(a) {
-
-                this.$axios.post('http://122.112.231.109:5000/user/add_address/',{u_id:14,provinceid:this.dada,cityid:this.lala,detail_address:a.addressDetail,user_name:a.name,user_tel:a.tel,is_default:a.isDefault})
+                var userid=localStorage.getItem("user_id");
+                var useridd=parseInt(userid)
+                this.$axios.post('http://122.112.231.109:5000/user/alter_address/',{u_id:useridd,provinceid:this.dada,cityid:this.lala,detail_address:a.addressDetail,user_name:a.name,user_tel:a.tel,is_default:a.isDefault,a_id:a.id})
                     .then(result=>{
-                        if(status==200){
+                        console.log(result.data)
+                        if(result.data.status==200){
                             this.$router.push({
                                 path:"/addresslist",
                                 query:{id:a}
                             })
+                            this.$router.push("/addresslist")
                             Toast('已保存');
                         }else{
                             Toast('保存失败');
@@ -53,29 +67,22 @@
                     .catch(err=>{
                         console.log(err)
                     })
-
             },
-            onDelete() {
-                Toast('已删除');
-                this.$router.push("/addresslist");
+            _newitem(){
+                var query=this.$route.query.newitem
+                this.list.name=query.name
+                this.list.tel=query.tel
+                this.list.addressDetail=query.address
+                // this.list.index=query.index
+                this.list.id=query.id
+                // console.log(query)
             },
-            // _newitem(){
-            //     var query=this.$route.query.newitem
-            //     console.log(query)
-            //     this.list.push({
-            //         name:query.name,
-            //         tel:query.tel,
-            //         address:query.address,
-            //     })
-            //     console.log(name)
-            // }
         },
-        // mounted() {
-        //     this._newitem()
-        // }
+        mounted() {
+            this._newitem()
+        }
     }
 </script>
-
 <style scoped>
 
 </style>
