@@ -1,20 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Index from '../pages/index'
-// import Inquiry from '../pages/inquiry'
-// import Mall from '../pages/mall'
-// import User from '../pages/user'
-// import Forum from '../pages/forum'
-// import UserSettings from '../pages/usersettings'
-// import UserInFormation from '../pages/userinformation'
-// import UserCardPackage from "../pages/usercardpackage"
-// import UserNews from '../pages/user-news'
-// import UserOrder from '../pages/user-order'
-// import UserAccount from '../pages/useraccount'
-// import UserConen from '../pages/user-concen'
-// import Appointment from "../components/inquiry/appointment"
-// import Detail from '../components/mall/detail'
-// import Cart from '../components/mall/cart'
+import Index from '../pages/index'
+import Inquiry from '../pages/inquiry'
+import Mall from '../pages/mall'
+import User from '../pages/user'
+import UserRouterView from '../pages/user-router-view'
+import Forum from '../pages/forum'
+import UserSettings from '../pages/usersettings'
+import UserInFormation from '../pages/userinformation'
+import UserCardPackage from "../pages/usercardpackage"
+import UserNews from '../pages/user-news'
+import UserOrder from '../pages/user-order'
+import UserAccount from '../pages/useraccount'
+import UserConen from '../pages/user-concen'
+import AddressList from '../pages/addresslist'
+import AddressEditor from '../pages/addresseditor'
+import AddressModify from '../pages/addressmodify'
+import UserNewPassword from  '../pages/usernewpassword'
+import UserPersonalDetails from  '../pages/userpersonaldetails'
+import RegisterPage from "../pages/RegisterPage"
+import LoginPage from "../pages/LoginPage"
+import Password from "../components/login/storageChgPassword"
+import Detail from '../components/mall/detail'
+import Cart from '../components/mall/cart'
+import Appointment from '../components/inquiry/appointment'
 Vue.use(Router)
 
 let router = new Router({
@@ -28,33 +37,87 @@ let router = new Router({
       }
     },
     {
+      path: '/appointment',
+      name: 'Appointment',
+      component: Appointment
+    },,
+    {
+      path: '/password',
+      name: 'Password',
+      component: Password
+    },
+    {
       path: '/index',
       name: 'Index',
-      component: ()=>import ('../pages/index'),
-      children: [
-        {
-          path: 'questionnaire',
-          name: 'Questionnaire',
-          component: () => import('../components/index/indexQuestionnaire.vue'),
-        }
-      ]
+      component: Index,
+      meta:{
+        isTabBar:true
+      }
     },
     {
       path: '/user',
       name: 'User',
-      component: ()=>import ('../pages/user')
+      component: UserRouterView,
+      meta:{
+        isTabBar:true
+      },
+      children: [
+        {
+          path: '/user',
+          name: 'User',
+          component: User
+        },
+        {
+          path: 'userSettings',
+          name: 'UserSettings',
+          component: UserSettings
+        },
+        {
+          path: 'UserInFormation',
+          name: 'UserInFormation',
+          component: UserInFormation
+        },
+        {
+          path: 'UserCardPackage',
+          name: 'UserCardPackage',
+          component: UserCardPackage
+        },
+        {
+          path: 'usernews',
+          name: 'UserNews',
+          component: UserNews
+        },
+        {
+          path: 'userorder',
+          name: 'UserOrder',
+          component: UserOrder
+        },
+        {
+          path: 'UserAccount',
+          name: 'UserAccount',
+          component: UserAccount
+        },
+        {
+          path: 'UserConen',
+          name: 'UserConen',
+          component: UserConen
+        },
+      ]
     },
     {
       path: '/inquiry',
       name: 'Inquiry',
-      component: ()=>import ('../pages/inquiry')
+      component: Inquiry,
+      meta:{
+        isTabBar:true
+      }
     },
     {
       path: '/detail',
       name: 'Detail',
       component: ()=>import ('../components/mall/detail')
     },
-     {
+    {
       path: '/cart',
       name: 'Cart',
       component: ()=>import ('../components/mall/cart')
@@ -62,65 +125,85 @@ let router = new Router({
     {
       path: '/mall',
       name: 'Mall',
-      component: ()=>import ('../pages/mall'),
+      component: Mall,
+      meta:{
+        isTabBar:true
+      }
     },
     {
       path: '/forum',
       name: 'Forum',
-      component: ()=>import ('../pages/forum')
-    },
-
-    {
-      path: '/userSettings',
-      name: 'UserSettings',
-      component: ()=>import ('../pages/userSettings')
+      component: Forum,
+      meta:{
+        isTabBar:true
+      }
     },
     {
-      path: '/UserInFormation',
-      name: 'UserInFormation',
-      component: ()=>import ('../pages/UserInFormation')
+      path: '/addresslist',
+      name: 'AddressList',
+      component: AddressList,
+      meta:{
+        isTabBar:true
+      }
     },
     {
-      path: '/UserCardPackage',
-      name: 'UserCardPackage',
-      component: ()=>import ('../pages/UserCardPackage')
+      path: '/addresseditor',
+      name: 'AddressEditor',
+      component: AddressEditor,
+      meta:{
+        isTabBar:true
+      }
     },
     {
-      path: '/usernews',
-      name: 'UserNews',
-      component: ()=>import ('../pages/user-news')
+      path: '/RegisterPage',
+      name: 'RegisterPage',
+      component: RegisterPage,
+      meta:{
+        isTabBar:false
+      }
     },
     {
-      path: '/userorder',
-      name: 'UserOrder',
-      component: ()=>import ('../pages/user-order')
+      path: '/LoginPage',
+      name: 'LoginPage',
+      component: LoginPage,
+      meta:{
+        isTabBar:false
+      }
     },
     {
-      path: '/UserAccount',
-      name: 'UserAccount',
-      component: ()=>import ('../pages/Useraccount')
+      path: '/addresseditor',
+      name: 'AddressEditor',
+      component: AddressEditor
     },
     {
-      path: '/UserConen',
-      name: 'UserConen',
-      component: ()=>import ('../pages/user-concen')
+      path: '/addressmodify',
+      name: 'AddressModify',
+      component: AddressModify
     },
     {
-      path: '/appointment',
-      name: 'Appointment',
-      component: ()=>import ('../components/inquiry/appointment')
+      path: '/usernewpassword',
+      name: 'UserNewPassword',
+      component: UserNewPassword
+    },
+    {
+      path: '/UserPersonalDetails',
+      name: 'UserPersonalDetails',
+      component: UserPersonalDetails
     }
+
+
   ]
 })
 router.beforeEach((to, from, next) => {
-  next()
-  let token = localStorage.getItem('token') || sessionStorage.getItem('token')
-  if (to.name== 'Index' ||to.name== 'Mall'||to.name== 'Detail' ||to.name== 'Forum'  ) {
+  if (to.path == '/user'||to.path == '/inquiry'||to.path == '/mall'||to.path == '/index') {
+    let data = localStorage.getItem('token');
+    if (data) {
+      next()
+    } else {
+      next("/LoginPage")
+    }
+  } else {
     next()
-  } else if((to.name!= 'Index' ||to.name!= 'Mall'||to.name!= 'Detail' ||to.name!= 'Forum')&&!token) { 
-    next()   //{path:'/longin'}
-  } else{
-    next();
   }
-})
+});
 export default router

@@ -41,7 +41,7 @@ export default {
         )
       }else if(type=='G'){
         if(id!="null"){
-          this.$router.push({path:''})
+          this.$router.push({path:'/mall'})
         }else{
           this.$router.push({path:''})  //登录
         }

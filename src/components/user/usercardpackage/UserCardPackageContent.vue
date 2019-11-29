@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="aaaa">
     <van-coupon-cell
       :coupons="coupons"
       :chosen-coupon="chosenCoupon"
@@ -58,5 +58,7 @@
 </script>
 
 <style scoped>
-
+  .aaaa{
+    background-image: url("../../../../static/user-images/back.jpg");
+  }
 </style>

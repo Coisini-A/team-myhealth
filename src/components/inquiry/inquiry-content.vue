@@ -1,7 +1,7 @@
 <template>
     <div class="inquiry-content">
         <div class="inquiry-content_title">
-            <img src="" alt="">
+
         </div>
         <div class="inquiry-content_context">
             <ul>
@@ -12,32 +12,36 @@
           <van-button type="primary" @click="isShow" icon="star-o">选择</van-button>
         </div>
         <div class="select_h">
-          <span style="margin-right: 0.1rem">选择医院  : </span>
-          <select name="" id="" style="display: block; width: 1.2rem">
-            <option value="" selected>请选择</option>
-            <option value="" selected>1</option>
-            <option value="" selected>2</option>
+          <span>选择医院  : </span>
+          <select name="" v-model="select1" @change="getHID(select1)">
+            <option value="" >请选择</option>
+            <option :value="n.h_id" v-for="(n,i) in hospitalsInfo " :key="i">{{n.hname}}</option>
+          </select>
+          <span>选择科室  : </span>
+          <select name=""  v-model="select2" @change="getRID(select2)">
+            <option value="">请选择</option>
+            <option :value="n.room_id" v-for="(n,i) in dartInfo " :key="i">{{n.roomname}}</option>
           </select>
         </div>
         <div class="inquiry-content_list">
             <ul>
-              <li>
+              <li v-for="(n,i) in doctorInfo" :key="i">
                 <div class="list_item_left">
-                    <div>医生照片<img src="" alt=""></div>
-                     <p>医生名字</p>
+                    <div><img :src="n.d_head" alt=""></div>
+                     <p>{{n.d_name}}</p>
                 </div>
                 <div class="list_item_right">
                    <div class="list_item_right_title">
-                     <span>医生所属医院</span>
-                     <span>医生所属科室</span>
+                     <span>姓名：</span>
+                     <span>{{n.d_relname}}</span>
                    </div>
                     <div class="list_item_right_desc">
-                        医生的一点详细信息
-                      <span>次数</span>
+                        {{n.d_skill}}
                     </div>
+                  <span>预约次数:{{n.is_order}}</span>
                   <div class="list_item_right_desc_button">
-                    <button type="button" @click="showToast">收藏</button>
-                    <button type="button" @click="goAppointment(1)">咨询预约</button>
+                    <button type="button" @click="showToast(n.d_id,i)">{{info}}</button>
+                    <button type="button" @click="goNext(n.d_id)">咨询预约</button>
                   </div>
                 </div>
               </li>
@@ -74,6 +78,16 @@
                 show:false,
                 selectProvince:"北京市",
                 selectCity:"北京市",
+                select1:"",
+                select2:"",
+                hospitalsInfo:"",//医院信息
+                hospitalsId:"",//医院id
+                dartInfo:"",//科室信息
+                dartId:"",//科室id
+                doctorInfo:"",//医生信息,
+                doctorId:"",//医生id
+                flag:true,
+                info:"关注",
             }
         },
         methods:{
@@ -89,27 +103,104 @@
             selectConfirm(a){
                 if(a[0]!=undefined&&a[1]!=undefined){
                    if(a[0].name!=""&&a[1].name!=""){
+                       let num =parseInt(a[1].code)
+                       window.console.log(num)
+                       this.$axios.post(this.HOST+"/doctor/hospitals/",{"cityid":num})
+                           .then(result=>{
+                               window.console.log(result.data)
+                               this.hospitalsInfo=result.data.data.hospitals
+                                 window.console.log(this.hospitalsInfo)
+                           })
                        this.show=false
                        this.selectProvince = a[0].name
                        this.selectCity = a[1].name
-                       // window.console.log( this.selectProvince,this.selectCity)
                    }
                 }
 
             },
-            //收藏成功
-            showToast(){
-                this.$toast({
-                    message: '收藏成功',
-                    icon: 'like'
-                })
+            //选择医院以后获取医院id,查找科室的信息
+            getHID(num){
+                this.hospitalsId=parseInt(num)
+                window.console.log(this.hospitalsId);
+                this.$axios.post(this.HOST+"/doctor/rooms/",{"h_id":parseInt(this.hospitalsId)})
+                    .then(result=>{
+                        // window.console.log(result.data)
+                        this.dartInfo=result.data.data.rooms
+                        // window.console.log(this.dartInfo)
+                    })
             },
-            goAppointment(i){
-                this.$router.push("./appointment?id="+i)
-            }
+            //选择科室以后、获取科室id、来进行查找科室里面医生的信息
+            getRID(num){
+                this.dartId=parseInt(num)
+               // window.console.log(this.dartId);
+                this.$axios.post(this.HOST+"/doctor/doctors/",{"room_id":parseInt(this.dartId)})
+                    .then(result=>{
+                        // window.console.log(result.data)
+                        this.doctorInfo=result.data.data.rooms
+                        // window.console.log(this.doctorInfo)
+                        // window.console.log(this.doctorId)
+                    })
+            },
+            //收藏成功
+            showToast(num){//num是医生id
+                // window.console.log(num);
+                //此处localstorage获取用户id
+                let u_id = localStorage.getItem("user_id");
+                //收藏
+                if(this.flag==true){
+                    window.console.log(u_id,num)
+                    this.$axios.post(this.HOST+"/user/follow_doctor/",{"u_id":u_id,"d_id":num})
+                        .then(result=>{
+                            window.console.log(result.data)
+                            if(result.data.status==200){
+                                this.$toast({
+                                    message: '关注成功',
+                                    icon: 'like',
+                                })
+                            }
+                        })
+                    this.info="已关注"
+                }else{
+                    this.$axios.post(this.HOST+"/user/disfollow_doctor/",{"u_id":u_id,"d_id":num})
+                        .then(result=>{
+                            // window.console.log(result.data)
+                            if(result.data.status){
+                                this.$toast({
+                                    message: '取消关注成功',
+                                    icon: 'success'
+                                })
+                            }
+                        })
+                    this.info="关注"
+                }
+                this.flag=!this.flag
 
+
+            },
+            goNext(i){//跳转至预约页
+                // window.console.log(1)
+                this.$router.push("/appointment?id="+i)
+            },
+            //初始获取北京的医院信息
+            getBJHinfo(){
+                    // window.console.log(1)
+                    this.$axios.get(this.HOST+"/doctor/default/")
+                        .then(result=>{
+                            // window.console.log(result.data)
+                            this.doctorInfo=result.data.data.doctors
+                        })
+
+
+
+            },
+
+        },
+        mounted() {
+          this.getBJHinfo()
         }
     }
+
+
 </script>
 
 <style scoped>
@@ -119,8 +210,9 @@
     }
     .inquiry-content_title{
       width: 100%;
-      height:1.5rem;
-      background-color: salmon;
+      height:1.8rem;
+      background-image: url("../../../static/inquiry/bg.png");
+      background-size: 100% 100%;
     }
     .inquiry-content_context{
       width: 100%;
@@ -164,10 +256,19 @@
     display: flex;
     justify-content: center;
   }
+  .select_h>span{
+    font-size: 0.14rem;
+    margin: 0;
+  }
+  .select_h>select{
+    display: block;
+    width: 1rem
+  }
   .inquiry-content_list{
     width: 100%;
     padding-top: 0.1rem;
     border-top: 1px solid gainsboro;
+    margin-bottom: 1rem;
   }
     .inquiry-content_list>ul{
       width: 95%;
@@ -182,12 +283,14 @@
   .list_item_left{
       width: 25%;
     height: 100%;
-    background-color: #5FFFBA;
   }
     .list_item_left>div{
       width: 100%;
-      background-color: yellowgreen;
       height: 1rem;
+    }
+    .list_item_left>div>img{
+      width: 100%;
+      height: 100%;
     }
     .list_item_left>p{
       width: 100%;
@@ -196,22 +299,33 @@
     }
   .list_item_right{
     width: 73%;
-    background-color: salmon;
+    position: relative;
+  }
+  .list_item_right>span{
+    position: absolute;
+    top: 0.5rem;
+    right: 0.05rem;
+    font-size: 0.14rem;
   }
   .list_item_right_title{
     width: 100%;
     line-height: 0.3rem;
   }
   .list_item_right_desc{
-    width: 100%;
+    width:70%;
     height: 0.5rem;
     line-height: 0.5rem;
     position: relative;
+    font-size: 0.14rem;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
     .list_item_right_desc>span{
       position: absolute;
       display: block;
-      right: 0;
+      right: -0.85rem;
+      font-size: 0.14rem;
       top: 0;
     }
   .list_item_right_desc_button{

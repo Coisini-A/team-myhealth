@@ -60,15 +60,15 @@ export default {
       if (this.value != "") {
         switch (this.searchType) {
           case "doctor":
-            this.$router.push({ post: "/inquiry?d_id=" + this.searchId });
+            this.$router.push({path: "/inquiry?d_id=" + this.searchId });
             // window.console.log(this.searchType, this.searchId);
             break;
           case "goods":
-            this.$router.push({ post: "/detail?goods_id=" + this.searchId });
+            this.$router.push({path: "/detail?goods_id=" + this.searchId });
             // window.console.log(this.searchType, this.searchId);
             break;
           case "hospital":
-            this.$router.push({ post: "/detail?h_id=" + this.searchId });
+            this.$router.push({ path: "/detail?h_id=" + this.searchId });
             // window.console.log(this.searchType, this.searchId);
             break;
           case "":
@@ -76,17 +76,17 @@ export default {
             if (this.search.doctor[0] ? true : false) {
               this.searchType = "doctor";
               this.searchId = this.search.doctor[0].d_id;
-              this.$router.push({ post: "/inquiry?d_id=" + this.searchId });
+              this.$router.push({ path: "/inquiry?d_id=" + this.searchId });
               // window.console.log(this.searchType, this.searchId);
             } else if (this.search.goods[0] ? true : false) {
               this.searchType = "goods";
               this.searchId = this.search.goods[0].goods_id;
-              this.$router.push({ post: "/detail?goods_id=" + this.searchId });
+              this.$router.push({path: "/detail?goods_id=" + this.searchId });
               // window.console.log(this.searchType, this.searchId);
             } else if (this.search.hospital[0] ? true : false) {
               this.searchType = "hospital";
               this.searchId = this.search.hospital[0].h_id;
-              this.$router.push({ post: "/detail?h_id=" + this.searchId });
+              this.$router.push({ path: "/detail?h_id=" + this.searchId });
               // window.console.log(this.searchType, this.searchId);
             } else {
               alert("该关键字不存在");

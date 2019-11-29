@@ -4,14 +4,24 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import './../static/common.css'
+import websocket from "./apis/webSocket";
+Vue.prototype.websocket = websocket
 import Axios from 'axios'
+Vue.prototype.$axios  = Axios
+Vue.prototype.HOST="http://122.112.231.109:5000"
+Vue.config.productionTip=false
+//
+
 
 Vue.prototype.$axios  = Axios
+//
 
-/* eslint-disable no-new */
+  // eslint-disable no-new
 new Vue({
   el: '#app',
   router,
+  
+ 
   components: { App },
   template: '<App/>'
 })

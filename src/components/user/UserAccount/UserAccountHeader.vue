@@ -26,7 +26,7 @@
   .UserAccountHeader{
     width:100%;
     height:0.6rem;
-    background: darkgray;
+    background-image: url("../../../../static/user-images/back.jpg");
   }
   .UserAccountHeader img{
     width:7.5%;

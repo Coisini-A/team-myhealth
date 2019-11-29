@@ -9,7 +9,7 @@ export default {
   props:['notice'],
   methods: {
     goNotice(){
-      this.$router.push({ path: '/usernews' });
+      this.$router.push({ path: '/user/usernews' });
     }
   }
 };

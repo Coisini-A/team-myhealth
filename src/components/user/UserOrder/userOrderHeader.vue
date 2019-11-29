@@ -39,5 +39,7 @@ export default {
     }
     .user-box{
         background: white;
+
+      background-image: url("../../../../static/user-images/back.jpg");
     }
 </style>
