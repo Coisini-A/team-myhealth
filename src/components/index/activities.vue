@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="indexActivitiesMain">
-      <ActivitiesGoods v-for="(item, index) in ActivitiesGoods" :key="index" :data='item'></ActivitiesGoods>
+      <ActivitiesGoods v-for="(i, index) in ActivitiesGoods" :key="index" :data='i'></ActivitiesGoods>
     </div>
   </div>
 </template>
@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     goShop() {
-      alert("条转商城");
+      this.$router.push({path:'/mall'})
     }
   }
 };

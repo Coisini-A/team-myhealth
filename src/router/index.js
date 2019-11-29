@@ -136,12 +136,12 @@ let router = new Router({
     {
       path: '/detail',
       name: 'Detail',
-      component: Detail
+      component: ()=>import ('../components/mall/detail')
     },
     {
       path: '/cart',
       name: 'Cart',
-      component: Cart
+      component: ()=>import ('../components/mall/cart')
     },
     {
       path: '/mall',
