@@ -90,13 +90,14 @@ export default {
                             let token = result.data.token
                             localStorage.setItem("user_id",JSON.stringify(x))//将登录数据存至本地
                             localStorage.setItem("token",JSON.stringify(token))
+                            // localStorage.setItem("phone",phone)
                             this.$router.push("/")
                         }else if(result.data.status==501){//用户名或密码错误
                             this.warn2="用户名或密码错误"
                         }else if(result.data.status==300){//此用户不存在0
-                            this.warn2="此用户不存在"      
+                            this.warn2="此用户不存在"
                         }else{//请求参数错误。请重试
-                            this.warn2="请求参数错误。请重试"            
+                            this.warn2="请求参数错误。请重试"
                         }
                     })
             }

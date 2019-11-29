@@ -16,7 +16,7 @@
         },
         methods: {
             headerone() {
-                this.$router.push("/UserInFormation")
+                this.$router.push("user/UserInFormation")
             }
         }
     }
