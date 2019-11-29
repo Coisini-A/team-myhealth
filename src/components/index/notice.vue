@@ -9,7 +9,7 @@ export default {
   props:['notice'],
   methods: {
     goNotice(){
-      this.$router.push({ path: '/index/questionnaire' });
+      this.$router.push({ path: '/usernews' });
     }
   }
 };

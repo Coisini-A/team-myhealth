@@ -8,15 +8,11 @@
 <script>
 import { NoticeBar } from "vant";
 export default {
+  props:['message'],
   name: "",
   components: {
     "van-notice-bar": NoticeBar
   },
-  data(){
-    return {
-      message:'通知内容123123b12b3b123b12b31b23b123b12b32b'
-    }
-  }
 };
 </script>
 <style lang="less" scoped>

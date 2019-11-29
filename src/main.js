@@ -8,7 +8,6 @@ import Axios from 'axios'
 
 Vue.prototype.$axios  = Axios
 
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
