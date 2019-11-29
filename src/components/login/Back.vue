@@ -30,28 +30,29 @@ export default {
 </script>
 
 <style scoped>
-.back{
-    width: 100%;
-    position: fixed;
-}
-.out{
-    width: 100%;
-    height: 0.5rem;
-    box-sizing: border-box;
-    padding: 0 .125rem;
-}
-.back img{
-    width: 100%;
-    position: absolute;
-    left: 0.1rem;
-    top: .15rem;
-    display: block;
-}
-.back p{
-    margin: 0.15rem auto;
-    font-size:0.2rem;
-    color: #262626;
-    text-align: center;
-}
+/*.back{*/
+/*    width: 100%;*/
+/*    !*position: fixed;*!*/
+/*}*/
+/*.out{*/
+/*    width: 100%;*/
+/*    !*height: 0.5rem;*!*/
+/*    box-sizing: border-box;*/
+/*    padding: 0 .125rem;*/
+/*}*/
+/*.back img{*/
+/*    width: 100%;*/
+/*    position: absolute;*/
+/*    left: 0.1rem;*/
+/*  top: .15rem;*/
+/*    display: block;*/
+/*}*/
+/*.back p{*/
+/*    margin: 0.15rem auto;*/
+/*    font-size:0.2rem;*/
+/*    color: #262626;*/
+/*    text-align: center;*/
+/*  line-height: 0.5rem;*/
+/*}*/
 
 </style>
