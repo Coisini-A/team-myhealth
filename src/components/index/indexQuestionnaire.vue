@@ -6,8 +6,8 @@
     </p>
     <p>
       <span>性别：</span>
-      <input type="radio" v-model="sex" name="sex" value=true /> 男
-      <input type="radio" v-model="sex" name="sex" value=false />女
+      <input type="radio" v-model="sex" name="sex" value=1 /> 男
+      <input type="radio" v-model="sex" name="sex" value=0 />女
     </p>
     <p>
       <span>身高：</span>
@@ -21,6 +21,7 @@
     <p class="button">
       <button @click="_post">确认提交</button>
     </p>
+    <p class="Qback"><button  @click="back">返回首页</button></p>
   </div>
 </template>
 
@@ -38,6 +39,10 @@ export default {
     };
   },
   methods: {
+    back(){
+      Bus.$emit('flageChange');
+      this.$router.push({path:'/index'})
+    },
     _post() {
       this.tips =''
       this.id =
@@ -97,5 +102,11 @@ export default {
 }
 .button > button {
   background: white;
+}
+.Qback{
+  text-align: center;
+}
+.Qback>button{
+   background: white;
 }
 </style>

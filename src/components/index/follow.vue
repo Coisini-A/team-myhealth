@@ -30,20 +30,20 @@ export default {
   },
   methods: {
     goMy() {
-      this.$router.push({path:''})//关注页
+      this.$router.push({path:'user/UserConen'})//关注页
     },
     go(type,id){
       if(type=='D'){
         if(id!="null"){
-          this.$router.push({path:'/inquiry'})
+          this.$router.push({path:'/inquiry?id'+id})
         }else(
-          this.$router.push({path:''})  //登录
+          alert("还没有关注")
         )
       }else if(type=='G'){
         if(id!="null"){
-          this.$router.push({path:'/mall'})
+          this.$router.push({path:'/detail?id='+id})
         }else{
-          this.$router.push({path:''})  //登录
+          alert("还没有关注")
         }
       }
     }

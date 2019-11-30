@@ -14,10 +14,10 @@ export default {
   props:['data'],
   methods: {
     goGoods() {
-      this.$router.push({path:'/mall?goods_id='+this.data.goods.goods_id})
+      this.$router.push({path:'/detail?id='+this.data.goods.goods_id})
     },
     goCart(){
-      this.$router.push({path:'/mall?goods_id?='+this.data.goods.goods_id})
+      this.$router.push({path:'/detail?id='+this.data.goods.goods_id})
     }
 
   }

@@ -8,7 +8,7 @@
       <Activities :ActivitiesGoods="ActivitiesGoods" :time="time"></Activities>
       <Questionnaire @show="show"></Questionnaire>
       <Information :information="information" @refresh="refresh"></Information>
-      <Follow :followD='followD' :followG='followG'></Follow>
+      <Follow :followD="followD" :followG="followG"></Follow>
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@ import Hotspot from "../components/index/hotspot";
 import Questionnaire from "../components/index/questionnaire";
 import Information from "../components/index/information";
 import Activities from "../components/index/activities";
-import Bus from '../router/Bus';
+import Bus from "../router/Bus";
 import {
   SWIPERIMGURL,
   ACTITIVE,
@@ -51,16 +51,17 @@ export default {
       notice: 0, //消息数量
       swiperImg: "",
       swiperEffect: "", //轮播特效
-      followD:'',
-      followDdata:'',
-      followG:'',
-      followGdata:'',
+      followD: "",
+      followDdata: "",
+      followG: "",
+      followGdata: "",
       ActivitiesGoods: "",
       ActivitiesGoodsData: "",
       time: 30 * 60 * 60 * 1000, //倒计时时间
       stastTime: "",
       information: "", //资讯
-      informationData: ""
+      informationData: "",
+      inforTime: null
     };
   },
   watch: {
@@ -122,9 +123,9 @@ export default {
         sessionStorage.getItem("user_id") || localStorage.getItem("user_id");
       if (token) {
         this.$axios
-          .post(FOLLOWD,{'u_id':token})
-          .then((res)=>{
-            this.followDdata = res.data.data.followed_doctors[0]
+          .post(FOLLOWD, { u_id: token })
+          .then(res => {
+            this.followDdata = res.data.data.followed_doctors[0];
           })
           .catch(function(error) {});
       }
@@ -134,9 +135,9 @@ export default {
         sessionStorage.getItem("user_id") || localStorage.getItem("user_id");
       if (token) {
         this.$axios
-          .post(FOLLOWG,{'u_id':token})
-          .then((res)=>{
-            this.followGdata = res.data.data.followed_goods
+          .post(FOLLOWG, { u_id: token })
+          .then(res => {
+            this.followGdata = res.data.data.followed_goods;
           })
           .catch(function(error) {});
       }
@@ -157,24 +158,27 @@ export default {
         })
         .catch(function(error) {});
     },
-    _post(data){
-      // window.console.log(111,data)
-      this.$axios.post(HEALTHY,data).then((res)=>{
-          window.console.log(res);
-        })
+    _post(data) {
+      window.console.log(HEALTHY,data)
+      this.$axios.post(HEALTHY, data).then(res => {
+        window.console.log(res);
+      });
     }
   },
   mounted() {
+    let that = this;
     this._getSwiperImg();
     this._getInformation();
     this._getActitive();
     this._getFollowD();
     this._getFollowG();
-    let that = this;
-    Bus.$on("post",(data)=>{
-      that._post(data)
+    Bus.$on("post", data => {
+      that._post(data);
       // window.console.log(222,data)
-    })
+    });
+    Bus.$on("flageChange", () => {
+      this.flage = false;
+    });
   },
   updated() {}
 };
@@ -190,7 +194,7 @@ export default {
   z-index: 3;
 }
 .indexMain {
-  padding: 0.60rem 0 0.6rem;
+  padding: 0.6rem 0 0.6rem;
   background-color: ghostwhite;
 }
 </style>
