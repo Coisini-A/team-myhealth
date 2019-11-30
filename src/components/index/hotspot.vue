@@ -18,7 +18,7 @@
                 message:"",
             };
         },
-        mounted(){
+        created(){
             this.$axios.get("http://122.112.231.109:5000/home/notice/")
                 .then(res=>{
                     console.log(res);
