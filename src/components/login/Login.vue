@@ -75,6 +75,8 @@ export default {
             }
         },
         dbCheck() {
+            let nameId = document.getElementById("nameId");
+            let nameVal = nameId.value;
             let a = document.querySelector("#nameId").value;
             let b = document.querySelector("#pwdId").value;
             let info={
@@ -91,7 +93,7 @@ export default {
                             let token = result.data.token
                             localStorage.setItem("user_id",JSON.stringify(x))//将登录数据存至本地
                             localStorage.setItem("token",JSON.stringify(token))
-                            // localStorage.setItem("phone",phone)
+                            localStorage.setItem("phone",nameVal)
                             this.$router.push("/")
                         }else if(result.data.status==500){//用户名或密码错误
                             this.warn2="用户名或密码错误"

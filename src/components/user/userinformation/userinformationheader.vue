@@ -1,6 +1,6 @@
 <template>
   <div class="UserInFormationHeader">
-    <img :src="headerimg" alt=""@click="headerone">
+    <img :src="headerimg" alt="" @click="headerone">
     <div class="UserInFormationHeaderText">{{msg}}</div>
   </div>
 </template>
