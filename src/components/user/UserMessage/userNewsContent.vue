@@ -1,77 +1,59 @@
 <template>
+  
   <div>
-    <div class="user-box" :key="key" v-for="(i,key) in 6">
-      <div class="haha">
-        <div class="photo">
-          <img src="../../../../static/user-images/Default head.jpg" alt="">
-        </div>
-
-        <div class="lala">
-          <div>12:23</div>
-          <h3>就是脚手架Jakarta看</h3>
-          <p>萨达撒多所阿达萨达萨达萨达萨达阿萨德阿斯顿撒阿达阿达萨达萨达撒多阿萨德萨达撒的的撒大萨达撒大萨达萨达萨达阿萨德萨达萨达阿萨德萨达撒大</p>
-        </div>
+    <div :key="i" v-for="(q,i) in list" class="news">
+        <van-panel :title="q.un_titile" :status="q.un_time" class="newsone">
+          <div class="haha">{{q.un_text}}</div>
+        </van-panel>  
       </div>
-    </div>
   </div>
+
+  
 
 </template>
 
 <script>
+import { Panel } from 'vant';
     export default {
         name:"userNewsContent",
         data(){
             return{
-                list:[
-                    {
-
-                    }
-                ]
+                list:""
             }
+        },
+        components:{
+            [Panel.name]:Panel
+        },
+        methods:{
+          news(){
+            var userid=localStorage.getItem("user_id");
+              this.$axios.post('http://122.112.231.109:5000/user/all_notice/',{u_id:userid})
+                  .then(result=>{
+                          // console.log(result.data.data.messages)
+                          this.list=result.data.data.messages
+                          console.log(this.list)
+                  })
+                  .catch(err=>{
+                      console.log(err)
+                  });
+          }
+        },
+        mounted(){
+          this.news()
         }
     }
 </script>
 
 <style scoped>
-  .user-box{
-    border: 1px solid gray;
-    width: 90%;
-    margin: 20px auto;
-    height: 100px;
-    background: white;
-    border-radius: 10px;
-
-    background-image: url("../../../../static/user-images/back.jpg");
+  .news{
+    padding: 10px;
   }
-  .photo{
-    width: 100px;
-    height: 100px;
+  .newsone{
+    border-radius: 40px;
+    padding: 20px;
   }
-  .photo>img{
-    width: 100%;
-    border-radius: 50%;
-  }
-  /* .user-box>div{
-      display: flex
-  } */
-  .haha{
-    display: flex;
-  }
-  .haha>div>p{
-    display: block;
-    width: 276px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-  .haha>div>h3{
-    font-size: 20px;
-    font-weight: 900;
-  }
-  .haha>div>div{
-    text-align: right;
-  }
-  .lala{
-    line-height: 30px;
+  .van-cell{
+    font-size: 17px;
+    font-weight: bold;
   }
 </style>

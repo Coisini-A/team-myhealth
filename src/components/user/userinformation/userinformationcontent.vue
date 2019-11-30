@@ -60,7 +60,7 @@
     </div>
 
     <p class="UserInFormationContent-P10"></p>
-    <p class="UserInFormationContent-P11">
+    <p class="UserInFormationContent-P11" @click="Land">
       <span>{{p11name}}</span>
     </p>
     <p class="UserInFormationContent-P12"></p>
@@ -72,6 +72,7 @@
 
 <script>
     import { Popup,cell,Rate,Uploader,Icon,Notify } from 'vant';
+    import user from "../../../pages/user";
     export default {
         name: "UserInFormationContent",
         components:{
@@ -100,6 +101,10 @@
             }
         },
         methods: {
+            Land(){
+              this.$router.push("/LoginPage")
+                localStorage.clear()
+            },
             showPopup() {
                 this.show = true;
             },
@@ -118,7 +123,8 @@
             },
             afterRead(file) {
                 // 此时可以自行将文件上传至服务器
-                this.$axios.post('http://122.112.231.109:5000/user/head/',{files:file.content,u_id:6})
+                var userid=localStorage.getItem("user_id");
+                this.$axios.post('http://122.112.231.109:5000/user/head/',{files:file.content,u_id:userid})
                     .then(result=>{
                         if(result.data.status==200){
                             console.log(result.data)
@@ -133,12 +139,15 @@
                     })
             },
             remove(){
-                this.$axios.post('http://122.112.231.109:5000/user/logout/',{ u_tel:18149192872})
+                var haha=localStorage.getItem("user_id")
+                console.log(haha)
+                this.$axios.post('http://122.112.231.109:5000/user/logout/',{ u_id:haha})
                     .then(result=>{
+                      
                         if(result.data.status==200){
                             Notify({ type: 'success', message:'退出成功' });
                             console.log(result.data)
-                            this.$router.push("/user");
+                            this.$router.push("/LoginPage");
                             localStorage.clear()
                         }else{
                             Notify({ type: 'danger', message: '退出失败' });
@@ -150,9 +159,6 @@
 </script>
 
 <style scoped>
-  .UserInFormationContent{
-    background-image: url("../../../../static/user-images/back.jpg");
-  }
   .UserInFormationContent-P1{
     font-weight:900;
     position: absolute;
@@ -168,8 +174,6 @@
     justify-content:space-around;
     border-bottom: 2px solid seashell;
     border-top: 2px solid seashell;
-    background-image: url("../../../../static/user-images/back.jpg");
-
   }
   .UserInFormationContent-div img{
     margin-left:1.5rem;

@@ -1,5 +1,5 @@
 <template>
-  <van-tabs v-model="active" class="box">
+  <van-tabs v-model="active">
     <van-tab title="余额">
         <div class="balance-one">
           余额

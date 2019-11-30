@@ -1,6 +1,6 @@
 <template>
 
-    <van-tabs v-model="active" class="box">
+    <van-tabs v-model="active">
   <van-tab title="关注商品">
       <van-card
       :key="key" v-for="(q,key) in list"
@@ -10,7 +10,6 @@
       :title="q.goods.goods_name"
       :thumb="q.goods.url"
       >
-
       <div slot="tags">
         <van-tag plain type="danger">{{q.goods.goods_name}}</van-tag>
       </div>
@@ -35,6 +34,7 @@
 </template>
 <script>
 import { Tab, Tabs,Card,Tag,Button,Switch,Notify} from 'vant';
+import user from "../../../pages/user";
 export default {
     name:"userContentContent",
     data() {
@@ -57,10 +57,11 @@ export default {
     methods:{
         //所有商品
         concen(){
-            this.$axios.post('http://122.112.231.109:5000/user/follow_allgoods/',{ u_id:6})
+            var userid=localStorage.getItem("user_id");
+            this.$axios.post('http://122.112.231.109:5000/user/follow_allgoods/',{ u_id:userid})
                 .then(result=>{
                     this.list=result.data.data.followed_goods
-                    console.log(this.list)
+                    // console.log(this.list)
                 })
                 .catch(err=>{
                     console.log(err)
@@ -68,10 +69,10 @@ export default {
         },
         //所有医生
         user(){
-            this.$axios.post('http://122.112.231.109:5000/user/follow_alldoctors/',{ u_id:6})
+            var userid=localStorage.getItem("user_id");
+            this.$axios.post('http://122.112.231.109:5000/user/follow_alldoctors/',{ u_id:userid})
                 .then(result=>{
                     this.last=result.data.data.followed_doctors
-                    console.log(result.data)
                 })
                 .catch(err=>{
                     console.log(err)
@@ -79,9 +80,10 @@ export default {
         },
         //删除商品
         remove(key,id){
-            this.$axios.post('http://122.112.231.109:5000/user/disfollow_goods/',{ u_id:6,goods_id:id})
+            var userid=localStorage.getItem("user_id");
+            this.$axios.post('http://122.112.231.109:5000/user/disfollow_goods/',{ u_id:userid,goods_id:id})
                 .then(result=>{
-                    console.log(result.data.status)
+                    // console.log(result.data.status)
                     if(result.data.status==200){
                         this.list.splice(key,1);
                         Notify({ type: 'success', message:'删除成功'});
@@ -95,8 +97,9 @@ export default {
         },
         //取消关注医生
         dadadada(i,z){
-            this.$axios.post('http://122.112.231.109:5000/user/disfollow_doctor/',{ u_id:6,d_id:z})
-                // console.log(z)
+            var userid=localStorage.getItem("user_id");
+            this.$axios.post('http://122.112.231.109:5000/user/disfollow_doctor/',{ u_id:userid,d_id:z})
+                // console.log(i)
                 .then(result=>{
                     console.log(result.data.status)
                     if(result.data.status==200){
@@ -105,6 +108,7 @@ export default {
                     }else{
                         Notify({ type: 'success', message:'取消关注失败'});
                     }
+                    
                 })
                 .catch(err=>{
                     console.log(err)
@@ -138,6 +142,7 @@ export default {
 }
 .user-right>div>div>img{
   width: 100%;
+  height: 100%;
   border-radius: 50%;
 }
 .user-right>div{

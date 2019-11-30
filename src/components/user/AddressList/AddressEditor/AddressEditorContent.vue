@@ -44,8 +44,8 @@
                 this.lala=parseInt(w[1].code)
             },
             onSave(a) {
-
-                this.$axios.post('http://122.112.231.109:5000/user/add_address/',{u_id:14,provinceid:this.dada,cityid:this.lala,detail_address:a.addressDetail,user_name:a.name,user_tel:a.tel,is_default:a.isDefault})
+                var userid=localStorage.getItem("user_id");
+                this.$axios.post('http://122.112.231.109:5000/user/add_address/',{u_id:userid,provinceid:this.dada,cityid:this.lala,detail_address:a.addressDetail,user_name:a.name,user_tel:a.tel,is_default:a.isDefault})
                     .then(result=>{
                         console.log(result.data)
                         if(result.data.status==200){
@@ -63,12 +63,7 @@
                     .catch(err=>{
                         console.log(err)
                     })
-
-            },
-            onDelete() {
-                Toast('已删除');
-                this.$router.push("/addresslist");
-            },
+            }
         },
     }
 </script>

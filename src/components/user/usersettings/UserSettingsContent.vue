@@ -61,10 +61,6 @@
     left:2.2rem;
     top:0.1rem;
   }
-  .usertwocontent{
-
-    background-image: url("../../../../static/user-images/back.jpg");
-  }
   .usertwocontent-z{
     left:2.3rem;
     top:0.1rem;

@@ -1,6 +1,6 @@
 <template>
   <div class="UserPersonalDetailsHeader">
-    <img :src="headerimg" alt=""@click="headerone">
+    <img :src="headerimg" alt="" @click="headerone">
     <div class="UserPersonalDetailsHeaderText">{{msg}}</div>
   </div>
 </template>
@@ -16,7 +16,7 @@
         },
         methods: {
             headerone() {
-                this.$router.push("/UserInFormation")
+                this.$router.push("user/UserInFormation")
             }
         }
     }

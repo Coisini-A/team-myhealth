@@ -1,9 +1,9 @@
 <template>
 <div >
-    <div class="user-box" :key="key" v-for="(i,key) in 6">
+    <div class="user-box" :key="key" v-for="(i,key) in list">
         <div>
             <div>
-                <h5>欧诺个话</h5>
+                <h5>{{i.goods.product_name}}</h5>
                 <p class="order">订单号kkjhshgayw26dg276</p>
             </div>
             <div>
@@ -12,21 +12,18 @@
         </div>
         <div>
             <div class="photo">
-                <img src="../../../../static/user-images/Default head.jpg" alt="">
+                <img :src="i.goods.url" alt="">
             </div>
             <div>
-                <p>五千多群多气温气温</p>
-                <p>嗯嗯嗯</p>
+                <p>{{i.goods.goods_name}}</p>
+                <p>{{i.goods.standards}}</p>
             </div>
             <div>
-                <h4>价格</h4>
+                <h4> <span>￥</span> {{i.goods.price}} </h4>
             </div>
         </div>
         <div>
-            <p>共<span>1</span>件商品</p><h3>订单金额￥<span>234.56</span></h3>
-        </div>
-        <div>
-            评价
+            <p>共<span>{{i.goods_num}}</span>件商品</p><h3>订单金额￥<span>{{i.goods.price*i.goods_num}}</span></h3>
         </div>
     </div>
 </div>
@@ -38,12 +35,30 @@ export default {
     name:"userOrderContent",
     data(){
         return{
-            list:[
-                {
-
-                }
-            ]
+            list:[]
         }
+    },
+    methods:{
+        lalala(){
+            var userid=localStorage.getItem("user_id");
+            this.$axios.post('http://122.112.231.109:5000/cart/all_order/',{ u_id:userid})
+                .then(result=>{
+                    // console.log(result.data.data)
+                    var arr=result.data.data
+                    for( var index in arr){
+                        // console.log(arr[index])
+                        this.list=arr[index].order_detail
+                        return this.list
+                    }
+                    // console.log(this.list)
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
+        }
+    },
+    mounted() {
+        this.lalala()
     }
 }
 </script>
@@ -51,16 +66,15 @@ export default {
 <style scoped>
 .user-box{
     border: 1px solid gray;
-    width: 90%;
-    margin: 20px auto;
+    width: 99%;
+    margin: 22px auto;
     background: white;
-    border-radius: 10px;
-  background-image: url("../../../../static/user-images/back.jpg");
+    border-radius: 30px;
 }
 .user-box>div{
     display: flex;
     justify-content: space-between;
-    line-height: 25px;
+    line-height: 20px;
     padding: 10px;
 }
 .order{
@@ -68,19 +82,12 @@ export default {
     color: gray;
 }
 .photo{
-    width: 50px;
-    height: 50px;
+        width: 57px;
+    height: 40px;
+    margin-left: 20px;
 }
 .photo>img{
     width: 100%;
 }
-.user-box>:nth-child(4){
-    border: 1px solid;
-    width: 90%;
-    height: 30px;
-    line-height: 35px;
-    justify-content: center;
-    border-radius: 15px;
-    margin: 10px auto;
-}
+
 </style>
