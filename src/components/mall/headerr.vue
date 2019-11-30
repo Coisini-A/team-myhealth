@@ -1,9 +1,9 @@
 <template>
     <div class="header">
       <router-link to="/index">
-        <span class="img"></span>
+        <span class="iconfont">&#xe612;</span>
       </router-link>
-      <p>商品分类</p>
+      <p style="color: white">商品分类</p>
     </div>
 </template>
 
@@ -25,6 +25,10 @@
     width: 15%;
     height: 0.5rem;
     display: block;
+    line-height: 0.5rem;
+    /* padding-left: 20px; */
+    text-align: center;
+    color: white;
   }
   .img{
     width: 15%;
@@ -37,5 +41,8 @@
     width: 75%;
     line-height: 0.5rem;
     font-size: 0.22rem;
+  }
+  .iconfont{
+    font-size: 0.24rem;
   }
 </style>

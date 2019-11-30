@@ -1,13 +1,13 @@
 <template>
     <div class="appointment_box">
-        <div class="appointment_box_title">
-            <div class="appointment_box_title_return" @click="onClickLeft">
-              <van-icon name="arrow-left" size="0.28rem"/>
-              <span class="iconfont">&#xe61c;</span>
+        <div class="appointment_box_title" style="background-color: #00ba73;">
+            <div class="appointment_box_title_return" @click="onClickLeft" style="height: 0.5rem">
+<!--              <van-icon name="arrow-left" size="0.28rem"/>-->
+              <span class="iconfont" style="color: white">&#xe612;</span>
             </div>
-            <div class="appointment_box_title_title">咨询预约</div>
-            <div class="appointment_box_title_msg">
-              <van-icon name="chat-o" size="0.28rem" info="0"/>
+            <div class="appointment_box_title_title" style="color: white">咨询预约</div>
+            <div class="appointment_box_title_msg" style="line-height: 0.65rem;">
+              <van-icon name="chat-o" size="0.28rem" info="0" color="gainsboro"/>
             </div>
         </div>
         <div class="appointment_box_content">
@@ -19,23 +19,11 @@
             <van-tabs>
               <van-tab title="咨询问诊">
                 <div class="content_01 content_item">
-                  <ul class="input_text" ref="textBox">
-                    <li class="onMsg msg"><p>欢迎咨询</p></li>
-                  </ul>
+                    <p class="onMsg msg">欢迎咨询</p>
                     <div class="content_01_box content_item_box">
-<!--                          <div class="input_text_item01" v-for="(i,index) in messageList" :key="index">-->
-<!--                            <i class="iconfont" style="color:#5FFFBA;font-size: 0.3rem;-->
-<!--                               border-radius: 0.1rem;background-color: #f5f5f5;margin-right: 0.05rem;-->
-<!--                              ">-->
-<!--                              &#xe608;</i>-->
-<!--                            <div>{{i.title}}</div>-->
-<!--                          </div>-->
-<!--                          <div class="input_text_item02" v-for="(i,index) in sendList" :key="index+100">-->
-<!--                            <div>{{i.title}}</div>-->
-<!--                            <i class="iconfont" style="color:#5FFFBA;font-size: 0.3rem;-->
-<!--                               border-radius: 0.1rem;background-color: #f5f5f5;margin-left: 0.05rem;-->
-<!--                              ">&#xe720;</i>-->
-<!--&lt;!&ndash;                          </div>&ndash;&gt;-->
+                      <ul class="input_text" ref="textBox" style="line-height: 0.3rem;">
+<!--                        <li style="height:0.2rem"></li>-->
+                      </ul>
 
 
                         <div class="input_box">
@@ -52,9 +40,10 @@
               </van-tab>
               <van-tab title="预约挂号">
                 <div class="content_02 content_item">
+                  <h2 class="quistion">问题描述</h2>
                   <div class="content_02_box content_item_box">
                     <div class="desc_info">
-                      <h2>问题描述</h2>
+
                       <textarea name="" id="descInfo" cols="30" rows="10"></textarea>
                     </div>
                     <div class="choose_time">
@@ -177,6 +166,17 @@
 </script>
 
 <style scoped>
+  .quistion{
+    width: 100px;
+    height: 40px;
+    /* background-color: red; */
+    margin: 0 auto;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    font-family: cursive;
+    font-weight: bold;
+  }
    .appointment_box{
         width: 100%;
     }
@@ -193,24 +193,28 @@
     display: flex;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 0.1rem;
+    /* padding: 0.1rem; */
     background-color: white;
   }
   .appointment_box_title_return{
-      height: 100%;
-    display: flex;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    /* display: flex; */
+    width: 15%;
+    text-align: center;
+    line-height: 0.5rem;
   }
   .appointment_box_title_title{
-    width: 60%;
-    margin: 0 0.25rem;
     text-align: center;
-    line-height: 0.3rem;
-    font-weight: 900;
+    width: 75%;
+    line-height: 0.5rem;
+    font-size: 0.22rem;
   }
   .appointment_box_title_return>span{
-    display: inline-block;
-    height: 100%;
-    line-height: 0.3rem;
+    width: 100%;
+    text-align: center;
+    display: block;
   }
   .appointment_box_content{
     width: 100%;
@@ -230,7 +234,7 @@
      width: 95%;
      margin: 0 auto;
      height: 4.3rem;
-     border: 1px solid gainsboro;
+      border: 1px solid gainsboro;
      border-radius: 0.05rem;
    }
   .content_01{
@@ -285,58 +289,10 @@
      width: 100%;
      height: 100%;
    }
-  /*.input_text_item01>div{*/
-  /*  width: 1.5rem;*/
-  /*  background-color: #e5e5e5;*/
-  /*  position: relative;*/
-  /*  border-radius: 0.1rem;*/
-  /*  padding: 0.05rem;*/
-  /*  box-sizing: border-box;*/
-  /*}*/
-  /* .input_text_item01>div:after{*/
-  /*   content: '';*/
-  /*   display: inline-block;*/
-  /*   width: 0;*/
-  /*   height: 0;*/
-  /*   border-top: 0.05rem solid transparent;*/
-  /*   border-right: 0.1rem solid #e5e5e5;*/
-  /*   border-bottom: 0.05rem solid transparent;*/
-  /*   position: absolute;*/
-  /*   top: 0.1rem;*/
-  /*   left: -0.1rem;*/
-  /* }*/
-  /* .input_text_item02{*/
-  /*   width:100%;*/
-  /*   display: flex;*/
-  /*   float: right;*/
-  /*   margin-top: 0.05rem;*/
-  /*   padding-left: 1.5rem;*/
-  /*   box-sizing: border-box;*/
-  /* }*/
-  /* .input_text_item02>div{*/
-  /*   width: 1.7rem;*/
-  /*   background-color: #e5e5e5;*/
-  /*   position: relative;*/
-  /*   border-radius: 0.1rem;*/
-  /*   padding: 0.05rem;*/
-  /*   box-sizing: border-box;*/
-  /* }*/
-  /* .input_text_item02>div::after{*/
-  /*   content: '';*/
-  /*   display: inline-block;*/
-  /*   width: 0;*/
-  /*   height: 0;*/
-  /*   border-top: 0.05rem solid transparent;*/
-  /*   border-left: 0.1rem solid #e5e5e5;*/
-  /*   border-bottom: 0.05rem solid transparent;*/
-  /*   position: absolute;*/
-  /*   top: 0.1rem;*/
-  /*   right:  -0.1rem;*/
-  /* }*/
    .input_box{
-      width: 100%;
+     width: 100%;
      position: absolute;
-     bottom: 0.4rem;
+     bottom: 0;
      left: 0;
      height: 1.3rem;
      border-top: 1px solid #ECECEC;
@@ -381,26 +337,32 @@
   }
    .desc_info{
      width: 100%;
-     padding: 0.1rem 0;
+     /*padding: 0.1rem 0;*/
      box-sizing: border-box;
-     height: 2rem;
    }
   .desc_info>h2{
     width: 100%;
     line-height: 0.3rem;
-    background-color: #fff;
+    /* background-color: #fff; */
     text-align: center;
-    border: 1px solid gainsboro;
-    border-radius: 0.1rem;
+    /* border: 1px solid gainsboro; */
+    /* border-radius: 0.1rem; */
+    font-family: cursive;
+    font-size: 0.2rem;
+    font-weight: bold;
+    color: green;
   }
    .desc_info>textarea{
-     width: 100%;
+     width: 98%;
      border: none;
+     /* background-color: red; */
+     border-radius: 10px;
+     display: block;
+     margin: 0 auto;
    }
   .choose_time{
     width: 100%;
     display: flex;
-    margin-top: 0.2rem;
     padding: 0.1rem 0;
     border-bottom: 1px solid gainsboro;
   }
@@ -414,6 +376,7 @@
      height: 0.3rem;
      line-height: 0.3rem;
      border: none;
+     outline: none;
    }
    #option_item{
      width: 0.2rem;
@@ -424,16 +387,16 @@
    }
   .choose_submit{
     width: 100%;
-    margin-top: 0.7rem;
     padding: 0.1rem 0;
   }
   .choose_submit>div{
-    width: 70%;
-    line-height: 0.3rem;
+    width: 35%;
+    line-height: 0.35rem;
     text-align: center;
-    margin: 0  auto;
-    background-color: #5FFFBA;
+    margin: 0 auto;
+    background-color: #00ba73;
     border-radius: 0.1rem;
+    height: 35px;
   }
   .onMsg{
     width: 100px;
@@ -445,5 +408,8 @@
     font-size: 20px;
     font-family: cursive;
     font-weight: bold;
+  }
+  .iconfont{
+    font-size: 0.24rem;
   }
 </style>

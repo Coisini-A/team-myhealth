@@ -1,5 +1,10 @@
 <template>
-	<div><div class="detail-head"><router-link to="/mall"><img src="../../../../static/mallimg/back.png"/></router-link><h3>商品详情</h3></div></div>
+  <div class="header">
+    <router-link to="/index">
+      <span class="iconfont">&#xe612;</span>
+    </router-link>
+    <p style="color: white">商品详情</p>
+  </div>
 </template>
 
 <script>
@@ -9,23 +14,36 @@
 </script>
 
 <style scoped>
-	.detail-head{
-		width:100%;
-		/* background-color:lightblue; */
-		display:flex;
-		padding-top:0.1rem;
-		box-sizing:border-box;
-	}
-	.detail-head h3{
-		margin-top:0.1rem;
-		margin-bottom:0.1rem;
-		margin-left:35%;
-	}
-	.detail-head img{
-		margin-left:0.1rem;
-		margin-top:0.1rem;
-		margin-bottom:0.1rem;
-		width:0.2rem;
-		height:0.2rem;
-	}
+  .header{
+    width: 100%;
+    display: flex;
+    /*background-color: aquamarine;*/
+    background-color: #00ba73;
+    position: fixed;
+    z-index: 30;
+  }
+  a{
+    width: 15%;
+    height: 0.5rem;
+    display: block;
+    line-height: 0.5rem;
+    /* padding-left: 20px; */
+    text-align: center;
+    color: white;
+  }
+  .img{
+    width: 15%;
+    margin-top: 0.1rem;
+    display: block;
+    margin-left: 0.1rem;
+  }
+  p{
+    text-align: center;
+    width: 75%;
+    line-height: 0.5rem;
+    font-size: 0.22rem;
+  }
+  .iconfont{
+    font-size: 0.24rem;
+  }
 </style>

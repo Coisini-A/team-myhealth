@@ -44,15 +44,16 @@
                     </div>
 
                   <div class="list_item_right_desc_button">
-                    <button style="width: 0.65rem;height: 0.3rem;
-                    border: 1px solid darkgrey;background-color: white;border-radius: 10%;"
-                            type="button" @click="showToast(n,i)"  ref="xx">{{info}}</button>
-                    <button style="width: 100px;
+                    <button style="width: 0.65rem;height: 0.3rem;border: none; background-color: white;border-radius: 10%;"
+                            type="button" @click="showToast(n,i)"  ref="xx">+关注</button>
+                    <button style="width: 80px;
     height: 0.3rem;
-    border: 1px solid darkgreen;
-    background-color: cornflowerblue;
-margin-left: 0.1rem;
-border-radius: 10%;" type="button" @click="goNext(n.d_id)">咨询预约</button>
+    border: 1px solid #00ba73;
+    background-color: #00ba73;
+    margin-left: 0.1rem;
+    border-radius: 10%;
+    color: white;
+    font-size: 14px;" type="button" @click="goNext(n.d_id)">咨询预约</button>
                   </div>
                 </div>
               </li>
@@ -98,7 +99,6 @@ border-radius: 10%;" type="button" @click="goNext(n.d_id)">咨询预约</button>
                 doctorInfo:"",//医生信息,
                 doctorId:"",//医生id
                 flag:true,
-                info:"关注",
                 flag1:true
             }
         },
@@ -155,33 +155,38 @@ border-radius: 10%;" type="button" @click="goNext(n.d_id)">咨询预约</button>
             showToast(num,i){//num是医生id
                 let u_id = localStorage.getItem("user_id");
                 //收藏
-
+                // console.log(num)
                 if(this.flag==true){
                     this.$axios.post(this.HOST+"/user/follow_doctor/",{"u_id":u_id,"d_id":num.d_id})
                         .then(result=>{
                             // console.log(result.data)
-                            this.$refs.xx[i].style.background="red"
+                            this.$refs.xx[i].style.background="#00ba73"
                             this.$refs.xx[i].style.color="#fff"
                             if(result.data.status==200){
                                 this.$toast({
                                     message: '关注成功',
                                     icon: 'like',
                                 })
+                            }else {
+                                this.$toast({
+                                    message: '已经关注',
+                                    icon: 'success'
+                                })
                             }
                         })
 
-                        // this.info="已关注"
                 }else{
                     this.$axios.post(this.HOST+"/user/disfollow_doctor/",{"u_id":u_id,"d_id":num})
                         .then(result=>{
-                            // window.console.log(result.data)
-                            this.$refs.xx[i].style.background="#fff"
-                            this.$refs.xx[i].style.color="#333"
+                           // window.console.log(result.data)
+
                             if(result.data.status){
                                 this.$toast({
                                     message: '取消关注成功',
                                     icon: 'success'
                                 })
+                                this.$refs.xx[i].style.background="#fff"
+                                this.$refs.xx[i].style.color="#333"
                             }
                         })
 
@@ -243,14 +248,15 @@ border-radius: 10%;" type="button" @click="goNext(n.d_id)">咨询预约</button>
     line-height: 0.45rem;
   }
     .inquiry-content_context>ul>li:nth-child(1){
-        width: 35%;
+      width: 45%;
       margin-right: 0.05rem;
     }
     .inquiry-content_context>ul>li:nth-child(1)>span{
       display: inline-block;
       height: 0.4rem;
       line-height: 0.4rem;
-      color: #5FFFBA;
+      color: #00ba73;
+      font-size: 0.24rem;
     }
   .addressItem{
     box-sizing: border-box;
@@ -313,6 +319,7 @@ border-radius: 10%;" type="button" @click="goNext(n.d_id)">咨询预约</button>
       margin: 0px auto;
       display: block;
       padding-top: 12px;
+      border-radius: 50%;
     }
     .list_item_left>p{
       width: 100%;

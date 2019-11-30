@@ -60,7 +60,7 @@ overflow-y: auto;
 height: 555px;
 }
 .hov:hover{
-  color: #E36B14;
+  color: #00ba73;
   font-size: 16px;
   background-color: rgb(245, 245, 245);
 }

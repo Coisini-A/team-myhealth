@@ -1,7 +1,10 @@
 <template>
-    <div class="inquiry_header">
-       <h1>问诊</h1>
-    </div>
+  <div class="header">
+    <router-link to="/index">
+      <span class="iconfont">&#xe612;</span>
+    </router-link>
+    <p style="color: white">问诊</p>
+  </div>
 </template>
 
 <script>
@@ -11,25 +14,46 @@
 </script>
 
 <style scoped>
-  .inquiry_header{
+  .header{
+    top: 0;
     width: 100%;
-    height: 0.5rem;
-    padding: 0.1rem 0.15rem;
+    background-color: #00ba73;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    /* padding-top: 0.1rem; */
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    text-align: center;
-    line-height: 0.3rem;
-    border-bottom: 1px solid gainsboro;
-    /* background-image: url(/static/img/bpic13733.c1b62c5.jpg); */
-    background-repeat: no-repeat;
-    background-size: cover;
-    font-weight: 900;
-    font-size: 0.18rem;
     position: fixed;
-    top: 0;
-     z-index: 10;
-    background-color: #00ba73;
+    z-index: 2;
+    height: 0.5rem;
+    color: white;
     font-size: 22px;
-    font-weight: 400;
+    line-height: 22px;
+    text-align: center;
+  }
+  a{
+    width: 15%;
+    height: 0.5rem;
+    display: block;
+    line-height: 0.5rem;
+    /* padding-left: 20px; */
+    text-align: center;
+    color: white;
+  }
+  .img{
+    width: 15%;
+    margin-top: 0.1rem;
+    display: block;
+    margin-left: 0.1rem;
+  }
+  p{
+    text-align: center;
+    width: 75%;
+    line-height: 0.5rem;
+    font-size: 0.22rem;
+  }
+  .iconfont{
+    font-size: 0.24rem;
   }
 </style>

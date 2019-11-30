@@ -1,9 +1,9 @@
 <template>
   <div class="indexFollow">
     <h1 class="indexFollowTitle">
-      <i class="iconfont My">&#xe67b;</i>My
-      <i class="iconfont My">&#xe67b;</i>
-      <span class="floMuch iconfont" @click="goMy">更多&#xe63f;</span>
+      <i class="iconfont My"></i>My
+      <i class="iconfont My"></i>
+      <span class="floMuch iconfont" @click="goMy">更多<span class="small">&#xe63f;</span></span>
     </h1>
     <div class="indexFollowTop">
       <div class="indexFollowTopLeft" @click="go('D',followD?followD.d.d_id:'null')">
@@ -64,15 +64,22 @@ export default {
   text-align: center;
   position: relative;
   padding: 0 0 0.05rem;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+
 }
 .My {
   color: red;
 }
 .floMuch {
   position: absolute;
-  display: inline-block;
-  right: 0.2rem;
-  font-size: 0.12rem;
+  /* display: inline-block; */
+  font-size: 16px;
+  top: 0;
+  right: 10px;
+  /* width: 84px; */
+  display: flex;
 }
 .indexFollowTop {
   display: flex;
@@ -135,4 +142,12 @@ export default {
 .indAddress {
   color: gray;
 }
+  .small{
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: bold;
+    color: green;
+    /* margin-top: 23px; */
+    display: block;
+  }
 </style>

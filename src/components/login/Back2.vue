@@ -1,50 +1,31 @@
-<!--
- * @Author: CoolWind
- * @Date: 2019-11-07 19:38:40
- * @LastEditors: CoolWind
- * @LastEditTime: 2019-11-12 09:08:06
- * @Description: 返回上一页组件
- -->
 <template>
-    <div class="back">
-         <div class="out">
-            <img src="../../assets/logo.png">
-<!--            <p>{{title}}</p>-->
-        </div>
+  <div class="back2 login-back2">
+    <div class="out2 login-out2">
+      <img src="../../assets/logo.png">
     </div>
+  </div>
 </template>
 
 <script>
-export default {
-    name: 'Back',
-    data (){
-        return {
-            title: "登录"
-        }
-    },
-}
+    export default {
+        name: 'Back',
+        data (){
+            return {
+                // title: "登录"
+            }
+        },
+    }
 </script>
 
 <style scoped>
- .back{
-   width: 100%;
-   margin-bottom: 20px;
-}
-.out{
-    width: 100%;
-}
- .out img{
-   width: .7rem;
-   height: .7rem;
-   margin: 0 auto;
-   display: block;
-   padding-top: 120px;
-}
-.back p{
-    height: .5rem;
-    margin: 0.15rem auto;
-    font-size: .17rem;
-    color: #262626;
-    text-align: center;
-}
+  .login-back2{
+    width:100%;
+    padding-top:15%;
+    box-sizing:border-box;
+  }
+  .login-out2{
+    width: 30%;
+    margin-left: 36%;
+    margin-bottom: 0.2rem;
+  }
 </style>

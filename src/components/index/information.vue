@@ -4,11 +4,13 @@
     <div class="InformationTop">
       <span class="InformationTopStyle"></span>
       <span class="InformationTopText">资讯</span>
-      <span class="InformationTopChange iconfont" @click="change">&#xe60a;</span>
+      <span class="InformationTopChange iconfont" @click="change">&#xe611;</span>
     </div>
     <div class="InformationMain" @click="changeDiv" ref="text">
       <h1>{{information.titile}}</h1>
-      <p class="InformationMainText">{{information.content}}</p>
+      <p class="InformationMainText">{{information.content}}
+      <span class="shou">点击收起</span>
+      </p>
     </div>
   </div>
 </template>
@@ -60,6 +62,7 @@ export default {
   text-align: center;
   line-height: 0.3rem;
   position: relative;
+  margin-bottom: 0.1rem;
 }
 .InformationTopText {
   background-color: white;
@@ -84,7 +87,8 @@ export default {
 .InformationTopChange {
   position: absolute;
   right: 0.1rem;
-  color: red;
+  color: #00ba73;
+  font-size: 24px;
 }
 .InformationMain > h1 {
   font-size: 0.16rem;
@@ -104,4 +108,11 @@ export default {
   text-overflow: ellipsis;
   text-indent: 0.3rem;
 }
+  .shou{
+    text-align: end;
+    display: block;
+    height: 0.3rem;
+    line-height: 0.3rem;
+    color: gray;
+  }
 </style>

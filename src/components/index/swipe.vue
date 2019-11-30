@@ -47,7 +47,7 @@ export default {
   text-align: center;
 }
 .iSwiperImg {
-  widows: 100%;
+ width: 100%;
   height: 100%;
   display: inline-block;
 }

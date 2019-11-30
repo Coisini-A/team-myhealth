@@ -133,6 +133,7 @@
   .detail-show span{
     width: 100%;
     display: block;
+    margin-top: 0.6rem;
   }
   .custom-indicator{
     padding-left: 85%;

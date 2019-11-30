@@ -227,16 +227,16 @@ let router = new Router({
 
   ]
 })
-// router.beforeEach((to, from, next) => {
-//   if (to.path == '/user'||to.path == '/inquiry'||to.path == '/mall'||to.path == '/index') {
-//     let data = localStorage.getItem('token');
-//     if (data) {
-//       next()
-//     } else {
-//       next("/LoginPage")
-//     }
-//   } else {
-//     next()
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  if (to.path == '/user'||to.path == '/inquiry'||to.path == '/mall'||to.path == '/index') {
+    let data = localStorage.getItem('token');
+    if (data) {
+      next()
+    } else {
+      next("/LoginPage")
+    }
+  } else {
+    next()
+  }
+});
 export default router

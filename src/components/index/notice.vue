@@ -1,7 +1,7 @@
 <template>
   <div class="notice" @click="goNotice">
     <span :class="(notice==0)?'noticeNum1':'noticeNum'">{{notice}}</span>
-    <img class="noticeImg" src="../../../static/indexImg/notice.png">
+    <span class="iconfont">&#xe628;</span>
   </div>
 </template>
 <script>
@@ -47,4 +47,8 @@ export default {
   right: -0.05rem;
   top: 0.02rem;
 }
+  .iconfont{
+    font-size: 0.24rem;
+    color: gainsboro;
+  }
 </style>

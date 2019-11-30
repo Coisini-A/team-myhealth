@@ -4,11 +4,13 @@
       v-model="value"
       placeholder="请输入搜索关键词"
       show-action
+      background="#00ba73"
       shape="round"
       @search="onSearch"
       @input="get()"
+
     >
-      <div slot="action" @click="onSearch">搜索</div>
+      <div slot="action" @click="onSearch" style="font-size: 16px;">搜索</div>
     </van-search>
     <ul class="tips" v-if="search">
       <li v-if="search.doctor">
@@ -118,7 +120,7 @@ export default {
 .tips {
   position: absolute;
   border-bottom: none;
-  top: 70%;
+  top: 80%;
   left: 8%;
   background-color: white;
 }
@@ -128,8 +130,12 @@ export default {
   text-overflow: ellipsis;
   padding: 0.02rem 0.1rem;
   font-size: 0.12rem;
-  border-radius: 0.1rem;
+  /* border-radius: 0.1rem; */
   background-color: rgb(247, 248, 250);
   margin: 0.01rem 0;
+  height: 30px;
+  border-bottom: 0.5px solid gray;
+  line-height: 30px;
+  color: gray;
 }
 </style>
