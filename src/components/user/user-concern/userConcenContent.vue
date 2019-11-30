@@ -99,7 +99,7 @@ export default {
         dadadada(i,z){
             var userid=localStorage.getItem("user_id");
             this.$axios.post('http://122.112.231.109:5000/user/disfollow_doctor/',{ u_id:userid,d_id:z})
-                // console.log(i)
+                // console.log(z)
                 .then(result=>{
                     console.log(result.data.status)
                     if(result.data.status==200){

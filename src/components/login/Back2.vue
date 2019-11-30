@@ -9,7 +9,7 @@
     <div class="back">
          <div class="out">
             <img src="../../assets/logo.png">
-            <p>{{title}}</p>
+<!--            <p>{{title}}</p>-->
         </div>
     </div>
 </template>
@@ -27,21 +27,18 @@ export default {
 
 <style scoped>
  .back{
-    width: 100%;
-    position: fixed;
+   width: 100%;
+   margin-bottom: 20px;
 }
 .out{
     width: 100%;
-    height: 2.7rem;
-    position: relative;
 }
  .out img{
-    width:.7rem;
-    height:.7rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+   width: .7rem;
+   height: .7rem;
+   margin: 0 auto;
+   display: block;
+   padding-top: 120px;
 }
 .back p{
     height: .5rem;

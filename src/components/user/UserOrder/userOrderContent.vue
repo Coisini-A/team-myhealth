@@ -25,6 +25,9 @@
         <div>
             <p>共<span>{{i.goods_num}}</span>件商品</p><h3>订单金额￥<span>{{i.goods.price*i.goods_num}}</span></h3>
         </div>
+        <div>
+            评价
+        </div>
     </div>
 </div>
 
@@ -65,8 +68,8 @@ export default {
 
 <style scoped>
 .user-box{
-    border: 1px solid gray;
-    width: 99%;
+        border: 1px solid gray;
+    width: 100%;
     margin: 22px auto;
     background: white;
     border-radius: 30px;
@@ -89,5 +92,15 @@ export default {
 .photo>img{
     width: 100%;
 }
-
+.user-box>:nth-child(4){
+        border: 1px solid;
+    width: 50%;
+    height: 10px;
+    line-height: 10px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border-radius: 15px;
+    margin: 10px auto;
+}
 </style>

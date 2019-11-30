@@ -16,14 +16,15 @@ import UserConen from '../pages/user-concen'
 import AddressList from '../pages/addresslist'
 import AddressEditor from '../pages/addresseditor'
 import AddressModify from '../pages/addressmodify'
-import UserNewPassword from  '../pages/usernewpassword'
-import UserPersonalDetails from  '../pages/userpersonaldetails'
+import UserNewPassword from '../pages/usernewpassword'
+import UserPersonalDetails from '../pages/userpersonaldetails'
 import RegisterPage from "../pages/RegisterPage"
 import LoginPage from "../pages/LoginPage"
 import Password from "../components/login/storageChgPassword"
 import Detail from '../components/mall/detail'
 import Cart from '../components/mall/cart'
 import Appointment from '../components/inquiry/appointment'
+import Quest from '../components/index/indexQuestionnaire.vue'
 Vue.use(Router)
 
 let router = new Router({
@@ -40,7 +41,7 @@ let router = new Router({
       path: '/appointment',
       name: 'Appointment',
       component: Appointment
-    },,
+    }, ,
     {
       path: '/password',
       name: 'Password',
@@ -50,16 +51,23 @@ let router = new Router({
       path: '/index',
       name: 'Index',
       component: Index,
-      meta:{
-        isTabBar:true
-      }
+      meta: {
+        isTabBar: true
+      },
+      children: [
+        {
+          path: 'questionnaire',
+          name: 'Questionnaire',
+          component: Quest
+        },
+      ]
     },
     {
       path: '/user',
       name: 'User',
       component: UserRouterView,
-      meta:{
-        isTabBar:true
+      meta: {
+        isTabBar: true
       },
       children: [
         {
@@ -129,66 +137,66 @@ let router = new Router({
       path: '/inquiry',
       name: 'Inquiry',
       component: Inquiry,
-      meta:{
-        isTabBar:true
+      meta: {
+        isTabBar: true
       }
     },
     {
       path: '/detail',
       name: 'Detail',
-      component: Detail
+      component: () => import('../components/mall/detail')
     },
     {
       path: '/cart',
       name: 'Cart',
-      component: Cart
+      component: () => import('../components/mall/cart')
     },
     {
       path: '/mall',
       name: 'Mall',
       component: Mall,
-      meta:{
-        isTabBar:true
+      meta: {
+        isTabBar: true
       }
     },
     {
       path: '/forum',
       name: 'Forum',
       component: Forum,
-      meta:{
-        isTabBar:true
+      meta: {
+        isTabBar: true
       }
     },
     {
       path: '/addresslist',
       name: 'AddressList',
       component: AddressList,
-      meta:{
-        isTabBar:false
+      meta: {
+        isTabBar: true
       }
     },
     {
       path: '/addresseditor',
       name: 'AddressEditor',
       component: AddressEditor,
-      meta:{
-        isTabBar:false
+      meta: {
+        isTabBar: true
       }
     },
     {
       path: '/RegisterPage',
       name: 'RegisterPage',
       component: RegisterPage,
-      meta:{
-        isTabBar:false
+      meta: {
+        isTabBar: false
       }
     },
     {
       path: '/LoginPage',
       name: 'LoginPage',
       component: LoginPage,
-      meta:{
-        isTabBar:false
+      meta: {
+        isTabBar: false
       }
     },
     {
@@ -227,16 +235,16 @@ let router = new Router({
 
   ]
 })
-// router.beforeEach((to, from, next) => {
-//   if (to.path == '/user'||to.path == '/inquiry'||to.path == '/mall'||to.path == '/index') {
-//     let data = localStorage.getItem('token');
-//     if (data) {
-//       next()
-//     } else {
-//       next("/LoginPage")
-//     }
-//   } else {
-//     next()
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  if (to.path == '/user' || to.path == '/inquiry' || to.path == '/mall' || to.path == '/index') {
+    let data = localStorage.getItem('token');
+    if (data) {
+      next()
+    } else {
+      next("/LoginPage")
+    }
+  } else {
+    next()
+  }
+});
 export default router

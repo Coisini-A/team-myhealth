@@ -1,8 +1,7 @@
 <template>
     <div class="header">
       <router-link to="/index">
-        <span class="img"><img src="../../../static/mallimg/back.png" alt="" style="width: 25px;
-    margin-top: 5px;"></span>
+        <span class="img"></span>
       </router-link>
       <p>商品分类</p>
     </div>
@@ -18,7 +17,8 @@
   .header{
     width: 100%;
     display: flex;
-    background-color: aquamarine;
+    /*background-color: aquamarine;*/
+    background-color: #00ba73;
     position: fixed;
   }
   a{

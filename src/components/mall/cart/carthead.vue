@@ -1,14 +1,20 @@
 <template>
-	<div>
-    <div class="detail-head"><router-link to="/mall">
-    <img src="../../../../static/mallimg/back.png"/></router-link><h3>购物车</h3></div></div>
+  <div><div class="detail-head"  @click="gobeforepage">
+    <img src="../../../../static/mallimg/back.png"/><h3>购物车</h3></div></div>
 </template>
 
 <script>
-	export default{
+    export default{
 
-	}
+        methods:{
+            //返回上一页
+            gobeforepage(){
+                this.$router.go(-1)
+            }
+        }
+    }
 </script>
+
 
 <style scoped>
 	.detail-head{

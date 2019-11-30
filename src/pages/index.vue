@@ -1,14 +1,14 @@
 <template>
   <div class="index animated bounceInDown">
-    <Top class="indexTop" :notice="notice"></Top>
-    <div class="indexMain">
-      <Nav></Nav>
+    <Top class="indexTop" :notice="notice" :search="search" @get="get" @clear="clear"></Top>
+    <router-view class="indexMain" v-if="flage"></router-view>
+    <div class="indexMain" v-else>
+      <Hotspot :message="message"></Hotspot>
       <Swiper :swiperImg="swiperImg" :swiperEffect="swiperEffect"></Swiper>
-      <Hotspot></Hotspot>
-      <Questionnaire></Questionnaire>
-      <Follow></Follow>
-      <Information :information='information' @refresh='refresh'></Information>
       <Activities :ActivitiesGoods="ActivitiesGoods" :time="time"></Activities>
+      <Questionnaire @show="show"></Questionnaire>
+      <Information :information="information" @refresh="refresh"></Information>
+      <Follow :followD="followD" :followG="followG"></Follow>
     </div>
   </div>
 </template>
@@ -17,10 +17,20 @@ import Swiper from "../components/index/swipe";
 import Top from "../components/index/top";
 import Follow from "../components/index/follow";
 import Hotspot from "../components/index/hotspot";
-import Nav from "../components/index/navigation";
 import Questionnaire from "../components/index/questionnaire";
 import Information from "../components/index/information";
 import Activities from "../components/index/activities";
+import Bus from "../router/Bus";
+import {
+  SWIPERIMGURL,
+  ACTITIVE,
+  INFORMATION,
+  SEARCH,
+  INDEX,
+  FOLLOWD,
+  FOLLOWG,
+  HEALTHY
+} from "../apis/indexApi";
 
 export default {
   components: {
@@ -28,83 +38,149 @@ export default {
     Swiper,
     Hotspot,
     Follow,
-    Nav,
     Questionnaire,
     Information,
     Activities
   },
   data() {
     return {
-      notice: 1, //消息数量
-      swiperImg: [
-        //轮播图
-        { id: 1, url: "../../../static/indexImg/d.png" },
-        { id: 2, url: "../../../static/indexImg/y.png" },
-        { id: 3, url: "../../../static/indexImg/y.png" }
-      ],
-      swiperEffect: "coverflow", //轮播特效
-      //默认为"slide"（位移切换），
-      // 可设置为'slide'（普通切换、默认）,
-      // "fade"（淡入）
-      //"cube"（方块）
-      // "coverflow"（3d流）
-      // "flip"（3d翻转）
-      // 如果需要分页器
-      follow: [
-        //关注
-        { img: "", id: 1 },
-        { img: "", id: 2 },
-        { img: "", id: 3 },
-        {
-          type: "",
-          name: 3,
-          doctorImg: "",
-          doctername: "",
-          yiyuan: "",
-          reader: 0,
-          good: 0
-        }
-      ],
-      ActivitiesGoods: [
-        //活动商品
-        {
-          id: 1,
-          name: "商品名字",
-          oPrice: 500,
-          nPrice: 200,
-          discount: 7,
-          img: "../../../static/indexImg/y.png"
-        },
-        {
-          id: 2,
-          name: "商品名字",
-          oPrice: 500,
-          nPrice: 200,
-          discount: 7,
-          img: "../../../static/indexImg/y.png"
-        },
-        {
-          id: 3,
-          name: "商品名字",
-          oPrice: 500,
-          nPrice: 200,
-          discount: 7,
-          img: "../../../static/indexImg/y.png"
-        }
-      ],
+      flage: false,
+      search: "",
+      searchData: "",
+      message: "通知内容123123b12b3b123b12b31b23b123b12b32b", //热推
+      notice: 0, //消息数量
+      swiperImg: "",
+      swiperEffect: "", //轮播特效
+      followD: "",
+      followDdata: "",
+      followG: "",
+      followGdata: "",
+      ActivitiesGoods: "",
+      ActivitiesGoodsData: "",
       time: 30 * 60 * 60 * 1000, //倒计时时间
-      information: {
-        title: "标题:外卖食物这样选",
-        center:
-          "内容:啊大大大叔的啊实打实大师阿萨达萨达是打大叔大婶打算的阿萨达阿萨达as打算打萨达是打算打算大声点阿萨阿萨打算打算打算阿萨达as多大大声道阿萨阿萨"
-      } //资讯
+      stastTime: "",
+      information: "", //资讯
+      informationData: "",
+      inforTime: null
     };
   },
-  methods: {
-    refresh(){
-      alert("刷")
+  watch: {
+    followDdata: function(newVal) {
+      this.followD = newVal;
+      // window.console.log('d',this.followD.d.d_head)
+    },
+    followGdata: function(newVal) {
+      this.followG = newVal;
+      // window.console.log('g',this.followG[0].goods.url)
+      //  window.console.log('g',this.followG[1].goods.url)
+    },
+    informationData: function(newVal) {
+      this.information = newVal;
+    },
+    ActivitiesGoodsData: function(newVal) {
+      this.ActivitiesGoods = newVal;
+    },
+    searchData: function(newVal) {
+      this.search = newVal;
     }
-  }
+  },
+  methods: {
+    clear() {
+      this.search = "";
+    },
+    get(val) {
+      // window.console.log(val);
+      this._getSearch(val);
+    },
+    refresh() {
+      this._getInformation();
+    },
+    show() {
+      this.flage = true;
+    },
+    _getSearch(val) {
+      if (val != "") {
+        this.$axios
+          .post(SEARCH, { search: val })
+          .then(res => {
+            this.searchData = res.data.data;
+          })
+          .catch(function(error) {});
+      }
+    },
+    _getSwiperImg() {
+      let that = this;
+      this.$axios
+        .get(SWIPERIMGURL)
+        .then(function(res) {
+          that.swiperImg = res.data.data.urls;
+          that.swiperEffect = res.data.data.state;
+        })
+        .catch(function(error) {});
+    },
+    _getFollowD() {
+      let token =
+        sessionStorage.getItem("user_id") || localStorage.getItem("user_id");
+      if (token) {
+        this.$axios
+          .post(FOLLOWD, { u_id: token })
+          .then(res => {
+            this.followDdata = res.data.data.followed_doctors[0];
+          })
+          .catch(function(error) {});
+      }
+    },
+    _getFollowG() {
+      let token =
+        sessionStorage.getItem("user_id") || localStorage.getItem("user_id");
+      if (token) {
+        this.$axios
+          .post(FOLLOWG, { u_id: token })
+          .then(res => {
+            this.followGdata = res.data.data.followed_goods;
+          })
+          .catch(function(error) {});
+      }
+    },
+    _getActitive() {
+      this.$axios
+        .get(ACTITIVE)
+        .then(res => {
+          this.ActivitiesGoodsData = res.data.data.goods;
+        })
+        .catch(function(error) {});
+    },
+    _getInformation() {
+      this.$axios
+        .get(INFORMATION)
+        .then(res => {
+          this.informationData = res.data.data.info;
+        })
+        .catch(function(error) {});
+    },
+    _post(data) {
+      window.console.log(HEALTHY,data)
+      this.$axios.post(HEALTHY, data).then(res => {
+        window.console.log(res);
+      });
+    }
+  },
+  mounted() {
+    let that = this;
+    this._getSwiperImg();
+    this._getInformation();
+    this._getActitive();
+    this._getFollowD();
+    this._getFollowG();
+    Bus.$on("post", data => {
+      that._post(data);
+      // window.console.log(222,data)
+    });
+    Bus.$on("flageChange", () => {
+      this.flage = false;
+    });
+  },
+  updated() {}
 };
 </script>
 <style lang="less" scoped>
@@ -118,7 +194,7 @@ export default {
   z-index: 3;
 }
 .indexMain {
-  padding: 0.65rem 0 0.6rem;
+  padding: 0.6rem 0 0.6rem;
   background-color: ghostwhite;
 }
 </style>

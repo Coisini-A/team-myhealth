@@ -299,7 +299,4 @@
     margin-left: 10px;
     margin-top: 10px;
   }
-  .usertwocontent{
-
-  }
 </style>

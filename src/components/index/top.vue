@@ -1,7 +1,7 @@
 <template>
   <div class="indexTop">
-    <Search class="indexSearch"></Search>
-    <Notice class="indexNotice" :notice="notice"></Notice>
+    <Search class="indexSearch" :search='search' @get="get" @clear="clear"></Search>
+    <Notice class="indexNotice" :notice="notice" ></Notice>
   </div>
 </template>
 <script>
@@ -12,13 +12,21 @@ export default {
     Search,
     Notice
   },
-  props:['notice'],
+  props:['notice','search'],
+  methods:{
+    get(val){
+      this.$emit('get',val)
+    },
+    clear(){
+      this.$emit("clear");
+    }
+  }
 };
 </script>
 <style scoped>
 .indexTop {
   width: 100%;
-  background-color: white;
+  background-color: #2fbaef;
   border-bottom: 0.01rem solid gainsboro;
 }
 .indexSearch {

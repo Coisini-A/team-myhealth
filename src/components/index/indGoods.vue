@@ -1,9 +1,9 @@
 <template>
   <div class="activitiesGoods" @click="goGoods">
-    <img :src="data.img" alt="商品图" />
-    <p class="activitiesGoodsName">{{data.name}}</p>
-    <del>￥{{data.oPrice}}</del>
-    <p class="activitiesGoodsPrice">￥{{data.nPrice}}</p>
+    <img :src="data.goods.url" alt="商品图" />
+    <p class="activitiesGoodsName">{{data.goods.goods_name}}</p>
+    <del>￥{{data.goods.price}}</del>
+    <p class="activitiesGoodsPrice">￥{{data.new_price}}</p>
     <span class="discount">{{data.discount}}折</span>
     <span class="activitiesGoodsLog" @click.stop="goCart">抢</span>
   </div>
@@ -14,10 +14,10 @@ export default {
   props:['data'],
   methods: {
     goGoods() {
-      alert("跳转商品"+this.data.id)
+      this.$router.push({path:'/detail?id='+this.data.goods.goods_id})
     },
     goCart(){
-      alert("购物车"+this.data.id)
+      this.$router.push({path:'/detail?id='+this.data.goods.goods_id})
     }
 
   }
@@ -32,6 +32,7 @@ export default {
 .activitiesGoods > img {
   width: 100%;
   border-radius: 0.05rem;
+  height: 1rem;
 }
 .activitiesGoods > del {
   font-size: 0.12rem;

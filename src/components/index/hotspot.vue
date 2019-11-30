@@ -8,14 +8,22 @@
 <script>
 import { NoticeBar } from "vant";
 export default {
+  // props:['message'],
   name: "",
   components: {
     "van-notice-bar": NoticeBar
   },
   data(){
-    return {
-      message:'通知内容123123b12b3b123b12b31b23b123b12b32b'
-    }
+    return{
+      message:"",
+    };
+  },
+  mounted(){
+    this.$axios.get("http://122.112.231.109:5000/home/notice/")
+    .then(res=>{
+      console.log(res);
+      this.message=res.data.data.n_text;
+    })
   }
 };
 </script>

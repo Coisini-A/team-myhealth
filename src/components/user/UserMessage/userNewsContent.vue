@@ -45,8 +45,38 @@ import { Panel } from 'vant';
 </script>
 
 <style scoped>
-  .news{
-    padding: 10px;
+  .user-box{
+    border: 1px solid gray;
+    width: 90%;
+    margin: 20px auto;
+    height: 100px;
+    background: white;
+    border-radius: 10px;
+  }
+  .photo{
+    width: 100px;
+    height: 100px;
+  }
+  .photo>img{
+    width: 100%;
+    border-radius: 50%;
+  }
+  /* .user-box>div{
+      display: flex
+  } */
+  .haha{
+    display: flex;
+  }
+  .haha>div>p{
+    display: block;
+    width: 276px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .haha>div>h3{
+    font-size: 20px;
+    font-weight: 900;
   }
   .newsone{
     border-radius: 40px;

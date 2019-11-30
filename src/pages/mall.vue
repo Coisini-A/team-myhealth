@@ -4,13 +4,13 @@
     <div style="display: flex">
       <mall-left  @num="num" :data="goodSort" style="width: 25%;
     margin-top: 50px;
-    margin-bottom: 50px;"></mall-left>
+    margin-bottom: 50px"></mall-left>
       <mall-right  :data="goodInfo" style="display: flex;
     width: 75%;
     flex-wrap: wrap;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-  "></mall-right>
+  margin-left: 0.95rem;"></mall-right>
     </div>
     <navbar></navbar>
   </div>
