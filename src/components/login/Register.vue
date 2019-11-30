@@ -156,7 +156,7 @@
     height: 0.3rem;
     border-radius: 0.13rem;
     border: none;
-    background-color: #ff6600;
+    background-color: #00a2ff;
     color: white;
     width: 1rem;
   }
@@ -171,7 +171,7 @@
     border: none;
     outline: none;
     border-radius: 0.17rem;
-    background-color: #ff6600;
+    background-color: #00a2ff;
     color: white;
   }
   .regBot a{

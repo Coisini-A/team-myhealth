@@ -148,6 +148,7 @@
 <style scoped>
   .box1{
     width:100%;
+    /* line-height: .2rem; */
   }
   .login-Ban{
     width: 100%;
@@ -205,7 +206,7 @@
     border: none;
     outline: none;
     border-radius: 0.17rem;
-    background-color: #ff6600;
+    background-color: #00a2ff;
     color: white;
   }
   .login-Bot a{
