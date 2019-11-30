@@ -60,7 +60,7 @@ export default {
   }
 };
 </script>
-<style lang="">
+<style lang="less" scopde>
     .box>div{
         width:100%;
         border-bottom: 1px solid;

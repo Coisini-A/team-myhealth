@@ -1,14 +1,17 @@
 <template>
-  <div class="index animated bounceInDown">
-    <Top class="indexTop" :notice="notice" :search="search" @get="get" @clear="clear"></Top>
-    <router-view class="indexMain" v-if="flage"></router-view>
-    <div class="indexMain" v-else>
-      <Hotspot :message="message"></Hotspot>
-      <Swiper :swiperImg="swiperImg" :swiperEffect="swiperEffect"></Swiper>
-      <Activities :ActivitiesGoods="ActivitiesGoods" :time="time"></Activities>
-      <Questionnaire @show="show"></Questionnaire>
-      <Information :information="information" @refresh="refresh"></Information>
-      <Follow :followD="followD" :followG="followG"></Follow>
+  <div>
+    <Londing @over="over" v-if="londFlage"></Londing>
+    <div v-show="indexFlage" class="index animated bounceInDown">
+      <Top class="indexTop" :notice="notice" :search="search" @get="get" @clear="clear"></Top>
+      <router-view class="indexMain" v-if="flage"></router-view>
+      <div class="indexMain" v-else>
+        <Hotspot :message="message"></Hotspot>
+        <Swiper :swiperImg="swiperImg" :swiperEffect="swiperEffect"></Swiper>
+        <Activities :ActivitiesGoods="ActivitiesGoods" :time="time"></Activities>
+        <Questionnaire @show="show"></Questionnaire>
+        <Information :information="information" @refresh="refresh"></Information>
+        <Follow :followD="followD" :followG="followG"></Follow>
+      </div>
     </div>
   </div>
 </template>
@@ -21,6 +24,7 @@ import Questionnaire from "../components/index/questionnaire";
 import Information from "../components/index/information";
 import Activities from "../components/index/activities";
 import Bus from "../router/Bus";
+import Londing from "../components/index/londing";
 import {
   SWIPERIMGURL,
   ACTITIVE,
@@ -40,7 +44,8 @@ export default {
     Follow,
     Questionnaire,
     Information,
-    Activities
+    Activities,
+    Londing
   },
   data() {
     return {
@@ -61,7 +66,9 @@ export default {
       stastTime: "",
       information: "", //资讯
       informationData: "",
-      inforTime: null
+      inforTime: null,
+      indexFlage: false,
+      londFlage: true
     };
   },
   watch: {
@@ -107,6 +114,11 @@ export default {
           })
           .catch(function(error) {});
       }
+    },
+    over() {
+      // window.console.log(this.londingFlage)
+      this.indexFlage = true;
+      // window.console.log(this.londingFlage)
     },
     _getSwiperImg() {
       let that = this;
@@ -159,13 +171,17 @@ export default {
         .catch(function(error) {});
     },
     _post(data) {
-      window.console.log(HEALTHY,data)
+      window.console.log(HEALTHY, data);
       this.$axios.post(HEALTHY, data).then(res => {
         window.console.log(res);
       });
     }
   },
   mounted() {
+    if (sessionStorage.getItem('londFlage')) {
+      this.londFlage = false;
+      this.indexFlage = true;
+    }
     let that = this;
     this._getSwiperImg();
     this._getInformation();
