@@ -20,6 +20,8 @@
     /*background-color: aquamarine;*/
     background-color: #00ba73;
     position: fixed;
+    top:0;
+    z-index: 10;
   }
   a{
     width: 15%;

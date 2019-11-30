@@ -22,7 +22,7 @@
                 let a=parseInt(u)
                 this.$axios.post(this.HOST+"/goods/choicetype/",{"typenum":a})
                     .then(result=>{
-                        console.log(result.data)
+                        // console.log(result.data)
                         eventBus.$emit("clickInfo",result.data.data.goods)
                     })
             },
@@ -57,7 +57,7 @@ margin-bottom: 50px;
 position: fixed;
 left: 0;
 overflow-y: auto;
-height: 555px;
+height: 6.25rem;;
 }
 .hov:hover{
   color: #00ba73;

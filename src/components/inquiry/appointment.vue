@@ -141,8 +141,8 @@
                 this.websocket.onmessage = (b) => {
                     // this.messageList=[{title:"欢迎咨询"}]
                     // window.console.log(JSON.parse(b.data))
-                    window.console.log("这是我收到的消息", b)
-                    window.console.log("这是我收到转换过了的消息", JSON.parse(b.data))
+                   // window.console.log("这是我收到的消息", b)
+                    //window.console.log("这是我收到转换过了的消息", JSON.parse(b.data))
                     var msg1 = JSON.parse(b.data).msg
                     var msg2=`<li class='onMsg msg'><p style='text-align: left;'>${msg1}</p></li>`
                     this.$refs.textBox.innerHTML+=msg2
@@ -233,7 +233,7 @@
      position: relative;
      width: 95%;
      margin: 0 auto;
-     height: 4.3rem;
+      height: 3.55rem;
       border: 1px solid gainsboro;
      border-radius: 0.05rem;
    }
@@ -243,6 +243,8 @@
   .input_text{
     width: 100%;
     box-sizing: border-box;
+    height: 2.3rem;
+    overflow-y: auto
   }
   .input_text_item01{
     width: 2rem;
@@ -292,7 +294,7 @@
    .input_box{
      width: 100%;
      position: absolute;
-     bottom: 0;
+     bottom:0rem;
      left: 0;
      height: 1.3rem;
      border-top: 1px solid #ECECEC;

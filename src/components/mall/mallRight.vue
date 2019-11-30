@@ -25,12 +25,12 @@
         methods:{
             getClickInfo(){
                 eventBus.$on("clickInfo",(msg)=>{
-                    console.log("1.0")
+                    // console.log("1.0")
                     this.info=msg
                     if(this.info!=""){
                         this.flag=false
                     }
-                    console.log(this.info)
+                    // console.log(this.info)
                 })
             },
             goDetail(n){
