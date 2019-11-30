@@ -26,7 +26,7 @@ export default {
 <style scoped>
 .indexTop {
   width: 100%;
-  background-color: white;
+  background-color: #2fbaef;
   border-bottom: 0.01rem solid gainsboro;
 }
 .indexSearch {

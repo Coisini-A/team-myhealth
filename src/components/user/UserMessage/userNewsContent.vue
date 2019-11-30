@@ -40,8 +40,6 @@
     height: 100px;
     background: white;
     border-radius: 10px;
-
-    background-image: url("../../../../static/user-images/back.jpg");
   }
   .photo{
     width: 100px;

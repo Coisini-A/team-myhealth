@@ -24,14 +24,10 @@
                 <span class="warnning">{{warn2}}</span>
             </div>
             <div class="regInfoTwo">
-                <h3>确认新密码：</h3><input type="password" placeholder="请再次输入密码" id="pwdId02" @blur="fontCheck03()">
-                <span class="warnning">{{warn3}}</span>
-            </div>
-            <div class="regInfoTwo">
                 <h3>验证码：</h3>
-                <input type="text" placeholder="请输入验证码" id="codeId"  @blur="fontCheck04()">
-                <span class="warnning">{{warn4}}</span>
-                <button>获取验证码</button>
+                <input type="text" placeholder="请输入验证码" id="codeId" >
+                <button @click="sendCode">获取验证码</button>
+              <span class="warnning">{{warn3}}</span>
             </div>
         </div>
         <div class="regBot">
@@ -51,7 +47,6 @@ export default {
             warn1:"",
             warn2:"",
             warn3:"",
-            warn4:"",
         }
     },
     methods: {
@@ -84,21 +79,37 @@ export default {
                 }
             }
         },
-        fontCheck03() {
-            let pwdId = document.getElementById("pwdId");
-            let pwdVal = pwdId.value;
-            let pwdId02 = document.getElementById("pwdId02");
-            let pwdVal02 = pwdId02.value;
-            if(pwdVal==pwdVal02){
-                this.warn3 = "✔";
-                return true;
-            }else{
-                this.warn3 = "两次输入的密码不一致";
-                return;
-            }
-        },
         dbCheck() {
-
+            let tel =document.querySelector("#phoneId").value
+            let pwd =document.querySelector("#pwdId").value
+            let code=document.querySelector("#codeId").value
+            let info={
+                'u_tel':tel,
+                'u_password':pwd,
+                'u_code':code,
+            }
+            //console.log(info)
+            this.$axios.post(this.HOST+"/user/forget_pwd/",info)
+                .then(result=>{
+                    //console.log(result.data)
+                    if(result.data.status==200){//登录成功
+                        this.$router.push("/LoginPage")
+                    }else if(result.data.status==400){//用户名或密码错误
+                        this.warn3="验证码错误或请求参数错误"
+                    }else if(result.data.status==300){//此用户不存在0
+                        this.warn3="验证码已过期或手机号未注册"
+                    }else{//请求参数错误。请重试
+                        this.warn3="请重试"
+                    }
+                })
+        },
+        //获取验证码
+        sendCode(){
+            let tel =document.querySelector("#phoneId").value
+            this.$axios.post(this.HOST+"/user/phone/",{"u_tel":tel})
+                .then(res=>{
+                    //console.log(res.data)
+                })
         },
         skip(){
             this.$router.go(-1)
@@ -107,116 +118,116 @@ export default {
 }
 </script>
 <style scoped>
-    .box{
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        /* background-image: url("../../assets/true.jpg"); */
-        background-size: 100% 100%;
-    }
-    .boxA .back{
-        width: .2rem;
-        height: .25rem;
-        margin-left: .05rem;
-        margin-top: .15rem;
-        float: left;
-    }
-    .boxA p{
-        float: left;
-        margin-left: 1.3rem;
-        margin-top: .2rem;
-    }
-    .regTop{
-        width: 100%;
-        height: 2.3rem;
-        position: relative;
-    }
-    .regTop img{
-        width: .7rem;
-        height:.7rem;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-    }
-    .regTop .back{
-        color: green;
-    }
-    .regTop p{
-        width: 100%;
-        font-size: .14rem;
-        color: #4d4d4d;
-        text-align: center;
-    }
-    .regInfo{
-        width: 100%;
-        display: block;
-        justify-content: center;
-    }
+    /*.box{*/
+    /*    display: flex;*/
+    /*    flex-direction: column;*/
+    /*    height: 100%;*/
+    /*    !* background-image: url("../../assets/true.jpg"); *!*/
+    /*    background-size: 100% 100%;*/
+    /*}*/
+    /*.boxA .back{*/
+    /*    width: .2rem;*/
+    /*    height: .25rem;*/
+    /*    margin-left: .05rem;*/
+    /*    margin-top: .15rem;*/
+    /*    float: left;*/
+    /*}*/
+    /*.boxA p{*/
+    /*    float: left;*/
+    /*    margin-left: 1.3rem;*/
+    /*    margin-top: .2rem;*/
+    /*}*/
+    /*.regTop{*/
+    /*    width: 100%;*/
+    /*    height: 2.3rem;*/
+    /*    position: relative;*/
+    /*}*/
+    /*.regTop img{*/
+    /*    width: .7rem;*/
+    /*    height:.7rem;*/
+    /*    position: absolute;*/
+    /*    top: 50%;*/
+    /*    left: 50%;*/
+    /*    transform: translate(-50%,-50%);*/
+    /*}*/
+    /*.regTop .back{*/
+    /*    color: green;*/
+    /*}*/
+    /*.regTop p{*/
+    /*    width: 100%;*/
+    /*    font-size: .14rem;*/
+    /*    color: #4d4d4d;*/
+    /*    text-align: center;*/
+    /*}*/
+    /*.regInfo{*/
+    /*    width: 100%;*/
+    /*    display: block;*/
+    /*    justify-content: center;*/
+    /*}*/
 
-    .regInfoTwo input{
-        display: block;
-        background-color: #f7f8e3;
-        border-radius: 0.1rem;
-        height: .3rem;
-        border: 0;
-        border-bottom: 1px solid #f6f6f6;
-        padding-left: .15rem;
-        /* font-size: 14px; */
-        margin: -.3rem 1.1rem .1rem;
-    }
-    .regInfo input::-webkit-input-placeholder{
-        color: #afafaf;
-    }
-    .regInfoTwo h3{
-        line-height: .3rem;
-        font-size: .13rem;
-        padding-left: .4rem;
-        /* width: 0.6rem; */
-    }
-    .regInfoTwo .warnning{
-        color: red;
-        text-align: center
-    }
-    .regInfoTwo button{
-        height: .35rem;
-        display: block;
-        margin-left: 2.11rem;
-        position: relative;
-        top: -.46rem;
-        right: -.15rem;
-        font-size: .12rem;
-    }
-    .regBot{
-        flex: 1;
-    }   
-    .regBot input{
-        width: 2.2rem;
-        height: .45rem;
-        border-radius: .5rem;
-        background:#fe5656;
-        font-size: .15rem;
-        color: white;
-        display: block;
-        margin-left: .8rem;
-        border: 0;
-        outline: none;
-        margin-bottom: .57rem;
-    }
-    .regBot input:hover{
-        background: #fb2626;
-    }
-    .regBot a{
-        font-size: .12rem;
-        color: #afafaf;
-        display: block;
-        width: 100%;
-        text-align: center;
-        padding-top: .1rem;
-    }
-    .warnning{
-        display: block;
-        font-size: 0.12rem
-    }
+    /*.regInfoTwo input{*/
+    /*    display: block;*/
+    /*    background-color: #f7f8e3;*/
+    /*    border-radius: 0.1rem;*/
+    /*    height: .3rem;*/
+    /*    border: 0;*/
+    /*    border-bottom: 1px solid #f6f6f6;*/
+    /*    padding-left: .15rem;*/
+    /*    !* font-size: 14px; *!*/
+    /*    margin: -.3rem 1.1rem .1rem;*/
+    /*}*/
+    /*.regInfo input::-webkit-input-placeholder{*/
+    /*    color: #afafaf;*/
+    /*}*/
+    /*.regInfoTwo h3{*/
+    /*    line-height: .3rem;*/
+    /*    font-size: .13rem;*/
+    /*    padding-left: .4rem;*/
+    /*    !* width: 0.6rem; *!*/
+    /*}*/
+    /*.regInfoTwo .warnning{*/
+    /*    color: red;*/
+    /*    text-align: center*/
+    /*}*/
+    /*.regInfoTwo button{*/
+    /*    height: .35rem;*/
+    /*    display: block;*/
+    /*    margin-left: 2.11rem;*/
+    /*    position: relative;*/
+    /*    top: -.46rem;*/
+    /*    right: -.15rem;*/
+    /*    font-size: .12rem;*/
+    /*}*/
+    /*.regBot{*/
+    /*    flex: 1;*/
+    /*}   */
+    /*.regBot input{*/
+    /*    width: 2.2rem;*/
+    /*    height: .45rem;*/
+    /*    border-radius: .5rem;*/
+    /*    background:#fe5656;*/
+    /*    font-size: .15rem;*/
+    /*    color: white;*/
+    /*    display: block;*/
+    /*    margin-left: .8rem;*/
+    /*    border: 0;*/
+    /*    outline: none;*/
+    /*    margin-bottom: .57rem;*/
+    /*}*/
+    /*.regBot input:hover{*/
+    /*    background: #fb2626;*/
+    /*}*/
+    /*.regBot a{*/
+    /*    font-size: .12rem;*/
+    /*    color: #afafaf;*/
+    /*    display: block;*/
+    /*    width: 100%;*/
+    /*    text-align: center;*/
+    /*    padding-top: .1rem;*/
+    /*}*/
+    /*.warnning{*/
+    /*    display: block;*/
+    /*    font-size: 0.12rem*/
+    /*}*/
 
 </style>

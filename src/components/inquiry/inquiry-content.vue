@@ -9,7 +9,10 @@
               <li class="addressItem">{{selectProvince}}</li>
               <li class="addressItem">{{selectCity}}</li>
             </ul>
-          <van-button type="primary" @click="isShow" icon="star-o">选择</van-button>
+          <van-button type="primary" @click="isShow" icon="star-o" style="width: 85px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;">选择</van-button>
         </div>
         <div class="select_h">
           <span>选择医院  : </span>
@@ -28,20 +31,28 @@
               <li v-for="(n,i) in doctorInfo" :key="i">
                 <div class="list_item_left">
                     <div><img :src="n.d_head" alt=""></div>
-                     <p>{{n.d_name}}</p>
+<!--                     <p>{{n.d_name}}</p>-->
                 </div>
                 <div class="list_item_right">
                    <div class="list_item_right_title">
-                     <span>姓名：</span>
-                     <span>{{n.d_relname}}</span>
+                     <span style="font-weight: bold;font-size: 18px;">{{n.d_relname}}&nbsp;&nbsp;<span style="font-size: 16px;font-weight: 400;color: grey;">主治医师</span></span>
+                     <span style="margin-left: 0.35rem;">已关注:{{n.is_order}}人</span>
                    </div>
+
                     <div class="list_item_right_desc">
-                        {{n.d_skill}}
+                     主治&nbsp;:&nbsp;&nbsp;{{n.d_skill}}
                     </div>
-                  <span>预约次数:{{n.is_order}}</span>
+
                   <div class="list_item_right_desc_button">
-                    <button type="button" @click="showToast(n.d_id,i)">{{info}}</button>
-                    <button type="button" @click="goNext(n.d_id)">咨询预约</button>
+                    <button style="width: 0.65rem;height: 0.3rem;
+                    border: 1px solid darkgrey;background-color: white;border-radius: 10%;"
+                            type="button" @click="showToast(n,i)"  ref="xx">{{info}}</button>
+                    <button style="width: 100px;
+    height: 0.3rem;
+    border: 1px solid darkgreen;
+    background-color: cornflowerblue;
+margin-left: 0.1rem;
+border-radius: 10%;" type="button" @click="goNext(n.d_id)">咨询预约</button>
                   </div>
                 </div>
               </li>
@@ -88,6 +99,7 @@
                 doctorId:"",//医生id
                 flag:true,
                 info:"关注",
+                flag1:true
             }
         },
         methods:{
@@ -107,21 +119,21 @@
                        window.console.log(num)
                        this.$axios.post(this.HOST+"/doctor/hospitals/",{"cityid":num})
                            .then(result=>{
-                               window.console.log(result.data)
+                               // window.console.log(result.data)
                                this.hospitalsInfo=result.data.data.hospitals
-                                 window.console.log(this.hospitalsInfo)
+                                 // window.console.log(this.hospitalsInfo)
                            })
                        this.show=false
                        this.selectProvince = a[0].name
                        this.selectCity = a[1].name
+
                    }
                 }
-
             },
             //选择医院以后获取医院id,查找科室的信息
             getHID(num){
                 this.hospitalsId=parseInt(num)
-                window.console.log(this.hospitalsId);
+                // window.console.log(this.hospitalsId);
                 this.$axios.post(this.HOST+"/doctor/rooms/",{"h_id":parseInt(this.hospitalsId)})
                     .then(result=>{
                         // window.console.log(result.data)
@@ -135,23 +147,21 @@
                // window.console.log(this.dartId);
                 this.$axios.post(this.HOST+"/doctor/doctors/",{"room_id":parseInt(this.dartId)})
                     .then(result=>{
-                        // window.console.log(result.data)
-                        this.doctorInfo=result.data.data.rooms
-                        // window.console.log(this.doctorInfo)
-                        // window.console.log(this.doctorId)
+                        // console.log(result.data)
+                        this.doctorInfo=result.data.data.doctors
                     })
             },
             //收藏成功
-            showToast(num){//num是医生id
-                // window.console.log(num);
-                //此处localstorage获取用户id
+            showToast(num,i){//num是医生id
                 let u_id = localStorage.getItem("user_id");
                 //收藏
+
                 if(this.flag==true){
-                    window.console.log(u_id,num)
-                    this.$axios.post(this.HOST+"/user/follow_doctor/",{"u_id":u_id,"d_id":num})
+                    this.$axios.post(this.HOST+"/user/follow_doctor/",{"u_id":u_id,"d_id":num.d_id})
                         .then(result=>{
-                            window.console.log(result.data)
+                            // console.log(result.data)
+                            this.$refs.xx[i].style.background="red"
+                            this.$refs.xx[i].style.color="#fff"
                             if(result.data.status==200){
                                 this.$toast({
                                     message: '关注成功',
@@ -159,11 +169,14 @@
                                 })
                             }
                         })
-                    this.info="已关注"
+
+                        // this.info="已关注"
                 }else{
                     this.$axios.post(this.HOST+"/user/disfollow_doctor/",{"u_id":u_id,"d_id":num})
                         .then(result=>{
                             // window.console.log(result.data)
+                            this.$refs.xx[i].style.background="#fff"
+                            this.$refs.xx[i].style.color="#333"
                             if(result.data.status){
                                 this.$toast({
                                     message: '取消关注成功',
@@ -171,7 +184,8 @@
                                 })
                             }
                         })
-                    this.info="关注"
+
+                    // this.info="关注"
                 }
                 this.flag=!this.flag
 
@@ -189,9 +203,6 @@
                             // window.console.log(result.data)
                             this.doctorInfo=result.data.data.doctors
                         })
-
-
-
             },
 
         },
@@ -250,19 +261,21 @@
   }
   .select_h{
     width: 100%;
-    height: 0.3rem;
-    line-height: 0.3rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
     text-align: center;
     display: flex;
     justify-content: center;
   }
   .select_h>span{
-    font-size: 0.14rem;
+   font-size: 16px;
     margin: 0;
+    color: gray;
   }
   .select_h>select{
     display: block;
-    width: 1rem
+    width: 1rem;
+    outline: none;
   }
   .inquiry-content_list{
     width: 100%;
@@ -275,10 +288,16 @@
       margin: 0 auto;
     }
     .inquiry-content_list>ul>li{
+      height: 120px;
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
       width: 100%;
       margin: 0.05rem 0;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
       justify-content: space-between;
+      border-bottom: 0.5px solid gainsboro;
     }
   .list_item_left{
       width: 25%;
@@ -289,8 +308,11 @@
       height: 1rem;
     }
     .list_item_left>div>img{
-      width: 100%;
-      height: 100%;
+      width: 80%;
+      height: 75%;
+      margin: 0px auto;
+      display: block;
+      padding-top: 12px;
     }
     .list_item_left>p{
       width: 100%;
@@ -312,12 +334,12 @@
     line-height: 0.3rem;
   }
   .list_item_right_desc{
-    width:70%;
-    height: 0.5rem;
-    line-height: 0.5rem;
+    width: 100%;
+    height:0.3rem;
+    line-height: 0.3rem;
     position: relative;
     font-size: 0.14rem;
-    white-space:nowrap;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -329,8 +351,9 @@
       top: 0;
     }
   .list_item_right_desc_button{
+    margin-top: 0.1rem;
     width: 100%;
     display: flex;
-    height: 0.5rem;
+    justify-content: flex-end;
   }
 </style>

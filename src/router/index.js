@@ -78,37 +78,58 @@ let router = new Router({
         {
           path: 'userSettings',
           name: 'UserSettings',
-          component: UserSettings
+          component: UserSettings,
+          meta:{
+            isTabBar:false
+          },
         },
         {
           path: 'UserInFormation',
           name: 'UserInFormation',
-          component: UserInFormation
+          component: UserInFormation,
+          meta:{
+            isTabBar:false
+          },
         },
         {
           path: 'UserCardPackage',
           name: 'UserCardPackage',
-          component: UserCardPackage
+          component: UserCardPackage,
+          meta:{
+            isTabBar:false
+          },
         },
         {
           path: 'usernews',
           name: 'UserNews',
-          component: UserNews
+          component: UserNews,
+          meta:{
+            isTabBar:false
+          },
         },
         {
           path: 'userorder',
           name: 'UserOrder',
-          component: UserOrder
+          component: UserOrder,
+          meta:{
+            isTabBar:false
+          },
         },
         {
           path: 'UserAccount',
           name: 'UserAccount',
-          component: UserAccount
+          component: UserAccount,
+          meta:{
+            isTabBar:false
+          },
         },
         {
           path: 'UserConen',
           name: 'UserConen',
-          component: UserConen
+          component: UserConen,
+          meta:{
+            isTabBar:false
+          },
         },
       ]
     },
@@ -181,22 +202,34 @@ let router = new Router({
     {
       path: '/addresseditor',
       name: 'AddressEditor',
-      component: AddressEditor
+      component: AddressEditor,
+      meta:{
+        isTabBar:false
+      },
     },
     {
       path: '/addressmodify',
       name: 'AddressModify',
-      component: AddressModify
+      component: AddressModify,
+      meta:{
+        isTabBar:false
+      },
     },
     {
       path: '/usernewpassword',
       name: 'UserNewPassword',
-      component: UserNewPassword
+      component: UserNewPassword,
+      meta:{
+        isTabBar:false
+      },
     },
     {
       path: '/UserPersonalDetails',
       name: 'UserPersonalDetails',
-      component: UserPersonalDetails
+      component: UserPersonalDetails,
+      meta:{
+        isTabBar:false
+      },
     }
 
 

@@ -26,8 +26,8 @@
             <div class="regInfoTwo">
                 <h3>验证码：</h3>
                 <input type="text" placeholder="请输入验证码" id="codeId">
-                <span class="warnning">{{warn4}}</span>
                 <button @click="getNum">获取验证码</button>
+              <span class="warnning">{{warn4}}</span>
             </div>
         </div>
         <div class="regBot">
@@ -51,17 +51,18 @@ export default {
             warn2:"",
             warn3:"",
             warn4:"",
-            num:""
+            num:"",
+            phone:""
         }
     },
     methods: {
         getNum(){
             let a =document.querySelector("#phoneId").value;
-            window.console.log(a);
-            window.console.log(typeof a);
+            //window.console.log(a);
+            //window.console.log(typeof a);
             this.$axios.post(this.HOST+"/user/phone/",{"u_tel":a})
                 .then(result=>{
-                    window.console.log(result.data)
+                    //window.console.log(result.data)
                 })
         },
         fontCheck01() {
@@ -105,9 +106,6 @@ export default {
             }
         },
         dbCheck() {
-            window.console.log(this.warn1);
-            window.console.log(this.warn2);
-            window.console.log(this.warn3);
 
             if(this.warn1==""&&this.warn2==""&&this.warn3==""){
                 let a =document.querySelector("#phoneId").value;
@@ -120,7 +118,20 @@ export default {
                 }
                 this.$axios.post(this.HOST+"/user/register/",info)
                     .then(result=>{
-                        window.console.log(result.data)
+                        // window.console.log(result.data)
+                        if(result.data.status==200){//登录成功
+                            let x = result.data.data.user.id
+                            let token = result.data.token
+                            localStorage.setItem("user_id",JSON.stringify(x))//将登录数据存至本地
+                            localStorage.setItem("token",JSON.stringify(token))
+                            this.$router.push("/")
+                        }else if(result.data.status==400){//用户名或密码错误
+                            this.warn4="验证码错误或请求参数错误"
+                        }else if(result.data.status==300){//此用户不存在0
+                            this.warn4="验证码已过期或手机号已存在"
+                        }else{//请求参数错误。请重试
+                            this.warn4="请重试"
+                        }
                     })
             }else {
                 window.console.log(0)
@@ -130,112 +141,112 @@ export default {
 }
 </script>
 <style scoped>
-    .box{
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        background-image: url("../../assets/true.jpg");
-        background-size: 100% 100%;
-    }
-    .regTop{
-        width: 100%;
-        height: 2.5rem;
-        position: relative;
-    }
-    .regTop img{
-        width: .7rem;
-        height:.7rem;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-    }
-    .regTop p{
-        width: 100%;
-        font-size: .14rem;
-        color: #4d4d4d;
-        text-align: center;
-    }
-    .regInfo{
-        width: 100%;
-        display: block;
-        justify-content: center;
-    }
+    /*.box{*/
+    /*    width: 100%;*/
+    /*    height: 100%;*/
+    /*    !*display: flex;*!*/
+    /*    !*flex-direction: column;*!*/
+    /*    background-image: url("../../assets/true.jpg");*/
+    /*    background-size: 100% 100%;*/
+    /*}*/
+    /*.regTop{*/
+    /*    width: 100%;*/
+    /*    height: 2.5rem;*/
+    /*    position: relative;*/
+    /*}*/
+    /*.regTop img{*/
+    /*    width: .7rem;*/
+    /*    height:.7rem;*/
+    /*    position: absolute;*/
+    /*    top: 50%;*/
+    /*    left: 50%;*/
+    /*    transform: translate(-50%,-50%);*/
+    /*}*/
+    /*.regTop p{*/
+    /*    width: 100%;*/
+    /*    font-size: .14rem;*/
+    /*    color: #4d4d4d;*/
+    /*    text-align: center;*/
+    /*}*/
+    /*.regInfo{*/
+    /*    width: 100%;*/
+    /*    display: block;*/
+    /*    justify-content: center;*/
+    /*}*/
 
-    .regInfoTwo input{
-        display: block;
-        background-color: #f7f8e3;
-        border-radius: 0.1rem;
-        height: .3rem;
-        border: 0;
-        border-bottom: 1px solid #f6f6f6;
-        padding-left: .3rem;
-        /* font-size: 14px; */
-        margin: -.25rem 1rem .1rem;
-    }
-    .regInfo input::-webkit-input-placeholder{
-        color: #afafaf;
-    }
-    .regInfoTwo h3{
-        line-height: .3rem;
-        font-size: .13rem;
-        padding-left: .25rem;
-        /* width: 0.6rem; */
-    }
-    .regInfoTwo .warnning{
-        color: red;
-        text-align: center
-    }
-    .regInfoTwo button{
-        height: .3rem;
-        display: block;
-        margin-left: 2.7rem;
-        position: relative;
-        top: -.41rem;
-        right:-.1rem;
-        font-size:0.12rem;
-    }
-    .regBot{
-        flex: 1;
-    }
-    .regBot input{
-        width: 3.15rem;
-        height: .45rem;
-        border-radius: .5rem;
-        background:#fe5656;
-        font-size: .15rem;
-        color: white;
-        display: block;
-        margin-left: .3rem;
-        border: 0;
-        margin-top: .2rem;
-        outline: none;
-        margin-bottom: .1rem;
-    }
-    .regBot input:hover{
-        background: #bdbbbb;
-    }
-    .regBot a{
-        font-size: .12rem;
-        color: #afafaf;
-        display: block;
-        width: 100%;
-        text-align: center;
-        padding-top: .1rem;
-        margin-bottom: .1rem;
-    }
-    .warnning{
-        display: block;
-        font-size: 0.12rem
-    }
+    /*.regInfoTwo input{*/
+    /*    display: block;*/
+    /*    background-color: #f7f8e3;*/
+    /*    border-radius: 0.1rem;*/
+    /*    height: .3rem;*/
+    /*    border: 0;*/
+    /*    border-bottom: 1px solid #f6f6f6;*/
+    /*    padding-left: .3rem;*/
+    /*    !* font-size: 14px; *!*/
+    /*    margin: -.25rem 1rem .1rem;*/
+    /*}*/
+    /*.regInfo input::-webkit-input-placeholder{*/
+    /*    color: #afafaf;*/
+    /*}*/
+    /*.regInfoTwo h3{*/
+    /*    line-height: .3rem;*/
+    /*    font-size: .13rem;*/
+    /*    padding-left: .25rem;*/
+    /*    !* width: 0.6rem; *!*/
+    /*}*/
+    /*.regInfoTwo .warnning{*/
+    /*    color: red;*/
+    /*    text-align: center*/
+    /*}*/
+    /*.regInfoTwo button{*/
+    /*    height: .3rem;*/
+    /*    display: block;*/
+    /*    margin-left: 2.7rem;*/
+    /*    position: relative;*/
+    /*    top: -.41rem;*/
+    /*    right:-.1rem;*/
+    /*    font-size:0.12rem;*/
+    /*}*/
+    /*.regBot{*/
+    /*    flex: 1;*/
+    /*}*/
+    /*.regBot input{*/
+    /*    width: 3.15rem;*/
+    /*    height: .45rem;*/
+    /*    border-radius: .5rem;*/
+    /*    background:#fe5656;*/
+    /*    font-size: .15rem;*/
+    /*    color: white;*/
+    /*    display: block;*/
+    /*    margin-left: .3rem;*/
+    /*    border: 0;*/
+    /*    margin-top: .2rem;*/
+    /*    outline: none;*/
+    /*    margin-bottom: .1rem;*/
+    /*}*/
+    /*.regBot input:hover{*/
+    /*    background: #bdbbbb;*/
+    /*}*/
+    /*.regBot a{*/
+    /*    font-size: .12rem;*/
+    /*    color: #afafaf;*/
+    /*    display: block;*/
+    /*    width: 100%;*/
+    /*    text-align: center;*/
+    /*    padding-top: .1rem;*/
+    /*    margin-bottom: .1rem;*/
+    /*}*/
+    /*.warnning{*/
+    /*    display: block;*/
+    /*    font-size: 0.12rem*/
+    /*}*/
 
-    .agree span{
-        font-size: .12rem;
-        padding-left: .4rem;
-    }
-    .agree a{
-        text-decoration: none;
-        color: green;
-    }
+    /*.agree span{*/
+    /*    font-size: .12rem;*/
+    /*    padding-left: .4rem;*/
+    /*}*/
+    /*.agree a{*/
+    /*    text-decoration: none;*/
+    /*    color: green;*/
+    /*}*/
 </style>

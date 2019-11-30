@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="hui">
     <inquiry-header></inquiry-header>
     <inquiry-content></inquiry-content>
   </div>
@@ -18,4 +18,5 @@
     }
 </script>
 <style lang="less" scoped>
+
 </style>

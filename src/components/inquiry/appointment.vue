@@ -3,7 +3,7 @@
         <div class="appointment_box_title">
             <div class="appointment_box_title_return" @click="onClickLeft">
               <van-icon name="arrow-left" size="0.28rem"/>
-              <span>返回</span>
+              <span class="iconfont">&#xe61c;</span>
             </div>
             <div class="appointment_box_title_title">咨询预约</div>
             <div class="appointment_box_title_msg">
@@ -11,11 +11,17 @@
             </div>
         </div>
         <div class="appointment_box_content">
-          <div class="appointment_box_content_desc"></div>
+          <div class="appointment_box_content_desc">
+            <img src="../../../static/inquiry/tu.jpg" alt="" style="width: 100%;
+    height: 100%;">
+          </div>
           <div class="appointment_box_content_list">
             <van-tabs>
               <van-tab title="咨询问诊">
                 <div class="content_01 content_item">
+                  <ul class="input_text" ref="textBox">
+                    <li class="onMsg msg"><p>欢迎咨询</p></li>
+                  </ul>
                     <div class="content_01_box content_item_box">
 <!--                          <div class="input_text_item01" v-for="(i,index) in messageList" :key="index">-->
 <!--                            <i class="iconfont" style="color:#5FFFBA;font-size: 0.3rem;-->
@@ -30,9 +36,7 @@
 <!--                               border-radius: 0.1rem;background-color: #f5f5f5;margin-left: 0.05rem;-->
 <!--                              ">&#xe720;</i>-->
 <!--&lt;!&ndash;                          </div>&ndash;&gt;-->
-                          <ul class="input_text" ref="textBox">
-                            <li class="onMsg msg"><p>欢迎咨询</p></li>
-                          </ul>
+
 
                         <div class="input_box">
                           <div class="input_box_header">
@@ -179,14 +183,18 @@
   .appointment_box_title{
     width: 100%;
     height: 0.5rem;
-    background-image: url("../../../static/inquiry/bpic13733.jpg");
+    /* background-image: url(/static/img/bpic13733.c1b62c5.jpg); */
     background-repeat: no-repeat;
     background-size: cover;
     position: fixed;
     top: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 0.1rem ;
+    padding: 0.1rem;
+    background-color: white;
   }
   .appointment_box_title_return{
       height: 100%;
@@ -210,8 +218,7 @@
   }
   .appointment_box_content_desc{
     width: 100%;
-    height: 1.2rem;
-    background-color: #5FFFBA;
+    height: 180px;
   }
   .content_item{
     width: 100%;
@@ -231,9 +238,7 @@
   }
   .input_text{
     width: 100%;
-    height: 2.7rem;
     box-sizing: border-box;
-    padding: 0.05rem 0;
   }
   .input_text_item01{
     width: 2rem;
@@ -429,5 +434,16 @@
     margin: 0  auto;
     background-color: #5FFFBA;
     border-radius: 0.1rem;
+  }
+  .onMsg{
+    width: 100px;
+    height: 40px;
+    /* background-color: red; */
+    margin: 0 auto;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    font-family: cursive;
+    font-weight: bold;
   }
 </style>

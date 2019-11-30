@@ -1,6 +1,6 @@
 <template>
   <div class="AddressListHeader">
-      <router-link to="/UserInFormation">
+      <router-link to="user/UserInFormation">
         <img :src="headerimg" alt="">
       </router-link>
       <div class="AddressListHeaderText">{{msg}}</div>
