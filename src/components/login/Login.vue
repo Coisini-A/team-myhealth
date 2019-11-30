@@ -1,36 +1,4 @@
 <template>
-  <div class="back2 login-back2">
-    <div class="out2 login-out2">
-      <img src="../../assets/logo.png">
-    </div>
-  </div>
-</template>
-
-<script>
-    export default {
-        name: 'Back',
-        data (){
-            return {
-                // title: "登录"
-            }
-        },
-    }
-</script>
-
-<style scoped>
-  .login-back2{
-    width:100%;
-    padding-top:15%;
-    box-sizing:border-box;
-  }
-  .login-out2{
-    width: 30%;
-    margin-left: 36%;
-    margin-bottom: 0.2rem;
-  }
-</style>
-吴佳蓉 18:01:26
-<template>
   <div class="box1">
     <div class="login-Ban">
       <p>MyHealth账号登录</p>
@@ -135,6 +103,43 @@
             bbb(){
                 this.$router.push("/password")
             }
+        },
+        dbCheck() {
+            let nameId = document.getElementById("nameId");
+            let nameVal = nameId.value;
+            let a = document.querySelector("#nameId").value;
+            let b = document.querySelector("#pwdId").value;
+            let info={
+                "u_tel":a,
+                "u_password":b
+            }
+            // console.log(info)
+            if(this.warn1==""&&this.warn2==""&&this.msg==true){
+                this.$axios.post(this.HOST+"/user/login/",info)
+                    .then(result=>{
+                        // window.console.log(result.data)
+                        if(result.data.status==200){//登录成功
+                            let x = result.data.data.user.id
+                            let token = result.data.token
+                            localStorage.setItem("user_id",JSON.stringify(x))//将登录数据存至本地
+                            localStorage.setItem("token",JSON.stringify(token))
+                            localStorage.setItem("phone",nameVal)
+                            this.$router.push("/")
+                        }else if(result.data.status==500){//用户名或密码错误
+                            this.warn2="用户名或密码错误"
+                        }else if(result.data.status==300){//此用户不存在0
+                            this.warn2="此用户不存在"
+                        }else{//请求参数错误。请重试
+                            this.warn2="请重试"
+                        }
+                    })
+            }
+        },
+        aaa(){
+            this.$router.push("/RegisterPage")
+        },
+        bbb(){
+            this.$router.push("/password")
         }
     }
 

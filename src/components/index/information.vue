@@ -15,6 +15,7 @@
   </div>
 </template>
 <script>
+import Bus from '../../router/Bus.js'
 export default {
   props: ["information"],
   data() {
@@ -35,6 +36,7 @@ export default {
         div.style.display = "-webkit-box";
         div.style.WebkitLineClamp = "3";
         div.style.WebkitBoxOrient = "vertical";
+        Bus.$emit('changeTime',"true")
       } else {
         div.style.height = "auto";
         div.style.overflow = "visible";
@@ -42,6 +44,7 @@ export default {
         div.style.display = "block";
         div.style.WebkitLineClamp = "3";
         div.style.WebkitBoxOrient = "vertical";
+        Bus.$emit('changeTime',"false")
       }
       this.flage = !this.flage;
     }

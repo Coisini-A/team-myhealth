@@ -66,11 +66,11 @@ export default {
             // window.console.log(this.searchType, this.searchId);
             break;
           case "goods":
-            this.$router.push({path: "/detail?goods_id=" + this.searchId });
+            this.$router.push({path: "/detail?id=" + this.searchId });
             // window.console.log(this.searchType, this.searchId);
             break;
           case "hospital":
-            this.$router.push({ path: "/detail?h_id=" + this.searchId });
+            this.$router.push({ path: "/inquiry?h_id=" + this.searchId });
             // window.console.log(this.searchType, this.searchId);
             break;
           case "":
@@ -83,12 +83,12 @@ export default {
             } else if (this.search.goods[0] ? true : false) {
               this.searchType = "goods";
               this.searchId = this.search.goods[0].goods_id;
-              this.$router.push({path: "/detail?goods_id=" + this.searchId });
+              this.$router.push({path: "/detail?id=" + this.searchId });
               // window.console.log(this.searchType, this.searchId);
             } else if (this.search.hospital[0] ? true : false) {
               this.searchType = "hospital";
               this.searchId = this.search.hospital[0].h_id;
-              this.$router.push({ path: "/detail?h_id=" + this.searchId });
+              this.$router.push({ path: "/inquiry?h_id=" + this.searchId });
               // window.console.log(this.searchType, this.searchId);
             } else {
               alert("该关键字不存在");

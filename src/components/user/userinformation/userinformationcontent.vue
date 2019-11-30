@@ -139,13 +139,15 @@
                     })
             },
             remove(){
-                var phone=localStorage.getItem(phone)
-                this.$axios.post('http://122.112.231.109:5000/user/logout/',{ u_tel:phone})
+                var haha=localStorage.getItem("user_id")
+                console.log(haha)
+                this.$axios.post('http://122.112.231.109:5000/user/logout/',{ u_id:haha})
                     .then(result=>{
+                      
                         if(result.data.status==200){
                             Notify({ type: 'success', message:'退出成功' });
                             console.log(result.data)
-                            this.$router.push("/user");
+                            this.$router.push("/LoginPage");
                             localStorage.clear()
                         }else{
                             Notify({ type: 'danger', message: '退出失败' });
@@ -296,8 +298,5 @@
   .haha{
     margin-left: 10px;
     margin-top: 10px;
-  }
-  .usertwocontent{
-
   }
 </style>

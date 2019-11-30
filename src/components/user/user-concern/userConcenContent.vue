@@ -61,7 +61,7 @@ export default {
             this.$axios.post('http://122.112.231.109:5000/user/follow_allgoods/',{ u_id:userid})
                 .then(result=>{
                     this.list=result.data.data.followed_goods
-                    console.log(this.list)
+                    // console.log(this.list)
                 })
                 .catch(err=>{
                     console.log(err)
@@ -73,7 +73,6 @@ export default {
             this.$axios.post('http://122.112.231.109:5000/user/follow_alldoctors/',{ u_id:userid})
                 .then(result=>{
                     this.last=result.data.data.followed_doctors
-                    console.log(result.data)
                 })
                 .catch(err=>{
                     console.log(err)
@@ -84,7 +83,7 @@ export default {
             var userid=localStorage.getItem("user_id");
             this.$axios.post('http://122.112.231.109:5000/user/disfollow_goods/',{ u_id:userid,goods_id:id})
                 .then(result=>{
-                    console.log(result.data.status)
+                    // console.log(result.data.status)
                     if(result.data.status==200){
                         this.list.splice(key,1);
                         Notify({ type: 'success', message:'删除成功'});
@@ -109,6 +108,7 @@ export default {
                     }else{
                         Notify({ type: 'success', message:'取消关注失败'});
                     }
+                    
                 })
                 .catch(err=>{
                     console.log(err)
@@ -142,6 +142,7 @@ export default {
 }
 .user-right>div>div>img{
   width: 100%;
+  height: 100%;
   border-radius: 50%;
 }
 .user-right>div{

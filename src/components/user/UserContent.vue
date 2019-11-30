@@ -50,7 +50,7 @@ export default {
           path: "UserAccount"
         },
         {
-          name: "用户消息",
+          name: "系统通知",
           left: "../../../static/user-images/news.png",
           right: "../../../static/user-images/greater.png",
           path: "UserNews"
@@ -60,7 +60,7 @@ export default {
   }
 };
 </script>
-<style lang="">
+<style lang="less" scopde>
     .box>div{
         width:100%;
         border-bottom: 1px solid;
