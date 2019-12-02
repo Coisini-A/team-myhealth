@@ -91,7 +91,7 @@
                     })
             },
         },
-        created() {
+        beforeMount(){
             var query=this.$route.query
             this.query=query
         },

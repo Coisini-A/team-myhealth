@@ -44,12 +44,6 @@ export default {
           path: "UserConen"
         },
         {
-          name: "用户账单",
-          left: "../../../static/user-images/bill.png",
-          right: "../../../static/user-images/greater.png",
-          path: "UserAccount"
-        },
-        {
           name: "系统通知",
           left: "../../../static/user-images/news.png",
           right: "../../../static/user-images/greater.png",

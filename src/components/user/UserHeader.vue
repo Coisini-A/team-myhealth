@@ -5,7 +5,9 @@
       <div  class="UserSettingsHeader-portrait">
         <img :src="headportrait?headportrait:newimg" alt="">
       </div>
-      <span class="name">用户ID:{{msgone?msgone:msgtwo}}</span>
+      <p class="p">
+        <span class="name">用户ID:{{msgone?msgone:msgtwo}}</span>
+      </p>
       <div class="setup" @click="update">
         <img :src="sup" width="60%" alt="">
       </div>
@@ -74,11 +76,12 @@
     border-radius:50%;
     margin-left:1.1rem;
   }
-  .name{
+  .p{
     position:absolute;
     top:1.5rem;
-    left:1.4rem;
     font-weight:900;
+    width:100%;
+    text-align:center;
   }
   .setup{
     width:0.5rem;

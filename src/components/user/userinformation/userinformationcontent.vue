@@ -24,9 +24,6 @@
 
       </van-popup>
     </div>
-    <div>
-      <p class="UserInFormationContent-set" @click="detailedinformation">编辑信息<van-icon name="arrow"  class="color"/></p>
-    </div>
 
 
 
@@ -38,26 +35,12 @@
     </div>
 
     <div>
-      <div class="UserInFormationContent-P5">
-        <span>{{p5name}}<van-icon name="arrow"  class="color-b"/></span>
-      </div>
 
     </div>
     <p class="UserInFormationContent-P7"></p>
     <p class="UserInFormationContent-P6" @click="heer">
       <span>{{p6name}}</span>
     </p>
-
-    <p class="UserInFormationContent-P8">
-      <span>{{p8name}}</span>
-    </p>
-
-    <div>
-      <div class="UserInFormationContent-P9">
-        <span>{{p9name}}</span>
-      </div>
-
-    </div>
 
     <p class="UserInFormationContent-P10"></p>
     <p class="UserInFormationContent-P11" @click="Land">
@@ -87,10 +70,7 @@
             return{
                 HeadSetting:"头像设置",
                 p4name:"修改密码",
-                p5name:"隐私",
                 p6name:"我的收获地址",
-                p8name:"问题反馈",
-                p9name:"关于Myhealth",
                 p11name:"切换账号",
                 p13name:"退出登录",
                 show: false,
@@ -118,9 +98,6 @@
             usernewpassword(){
                 this.$router.push("/usernewpassword");
             },
-            detailedinformation(){
-                this.$router.push("/UserPersonalDetails");
-            },
             afterRead(file) {
                 // 此时可以自行将文件上传至服务器
                 var userid=localStorage.getItem("user_id");
@@ -143,7 +120,7 @@
                 console.log(haha)
                 this.$axios.post('http://122.112.231.109:5000/user/logout/',{ u_id:haha})
                     .then(result=>{
-                      
+
                         if(result.data.status==200){
                             Notify({ type: 'success', message:'退出成功' });
                             console.log(result.data)

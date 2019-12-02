@@ -11,7 +11,6 @@ import UserInFormation from '../pages/userinformation'
 import UserCardPackage from "../pages/usercardpackage"
 import UserNews from '../pages/user-news'
 import UserOrder from '../pages/user-order'
-import UserAccount from '../pages/useraccount'
 import UserConen from '../pages/user-concen'
 import AddressList from '../pages/addresslist'
 import AddressEditor from '../pages/addresseditor'
@@ -111,14 +110,6 @@ let router = new Router({
           path: 'userorder',
           name: 'UserOrder',
           component: UserOrder,
-          meta:{
-            isTabBar:false
-          },
-        },
-        {
-          path: 'UserAccount',
-          name: 'UserAccount',
-          component: UserAccount,
           meta:{
             isTabBar:false
           },

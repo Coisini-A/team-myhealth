@@ -39,7 +39,10 @@ export default {
     }
     .user-box{
         background: white;
-
-      background-image: url("../../../../static/user-images/back.jpg");
+        background-image: url("../../../../static/user-images/back.jpg");
+    }
+    .user-box p{
+      font-weight:900;
+      margin-left:1rem;
     }
 </style>
